@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iOptimo | Integrated Retail</title>
+<meta name="description" content="iOptimo uses AI-powered forecasting and transfer recommendations to help retailers optimise inventory across every store, deployed by Integrated Retail.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1628'/%3E%3Cpolygon points='16,7 25,25 7,25' fill='%23c4181f'/%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="logo"><img src="../assets/img/logo-header.png" alt="Integrated Retail" height="50"></a>
+    <nav class="main-nav">
+      <ul>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../about/index.html" data-i18n="nav.about">About</a>
+          <div class="dropdown">
+            <a href="../about/index.html" data-i18n="nav.aboutCompany">Company</a>
+            <a href="../about/values/index.html" data-i18n="nav.aboutValues">Values &amp; Culture</a>
+            <a href="../about/careers/index.html" data-i18n="nav.aboutCareers">Careers</a>
+            <a href="../about/partners/index.html" data-i18n="nav.aboutPartners">Partners</a>
+          </div>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="../solutions/index.html" data-i18n="nav.solution">Solution</a></li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link active" href="../products/index.html" data-i18n="nav.product">Product</a>
+          <div class="dropdown dropdown-mega">
+            <div class="dropdown-col"><div class="dropdown-group-label">Point of Sale</div><a href="../product-cegid-retail/index.html">Cegid Retail</a><a href="../retailpro-prism/index.html">Retail Pro Prism</a><div class="dropdown-group-label">Traffic & Location</div><a href="../product-footfallcam/index.html">FootfallCam</a></div><div class="dropdown-col"><div class="dropdown-group-label">AI & Merchandising</div><a href="../iposit/index.html">iPosit</a><a href="../ioptimo/index.html">iOptimo</a><div class="dropdown-group-label">Warehouse Management</div><a href="../warewiser/index.html">Warewiser</a></div><div class="dropdown-col"><div class="dropdown-group-label">Unified Commerce & AI</div><a href="../retaillium/index.html">Retaillium</a><div class="dropdown-group-label">Systems Integration</div><a href="../globriq/index.html">Globriq</a></div>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../services/index.html" data-i18n="nav.services">Services</a>
+          <div class="dropdown">
+            <a href="../services/solution-design/index.html" data-i18n="nav.svcSolutionDesign">Solution Design</a>
+            <a href="../services/project-delivery/index.html" data-i18n="nav.svcProjectDelivery">Project Delivery</a>
+            <a href="../services/managed-services/index.html" data-i18n="nav.svcManagedServices">Managed Services</a>
+            <a href="../services/training/index.html" data-i18n="nav.svcTraining">Training</a>
+            <a href="../services/integration/index.html" data-i18n="nav.svcIntegration">Integration</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../industries/index.html" data-i18n="nav.industries">Industries</a>
+          <div class="dropdown">
+            <a href="../industries/fashion-apparel/index.html" data-i18n="nav.indFashion">Fashion &amp; Apparel</a>
+            <a href="../industries/health-beauty/index.html" data-i18n="nav.indHealth">Health &amp; Beauty</a>
+            <a href="../industries/food-beverage/index.html" data-i18n="nav.indFnb">F&amp;B</a>
+            <a href="../industries/shopping-malls/index.html" data-i18n="nav.indMalls">Shopping Malls</a>
+            <a href="../industries/luxury-retail/index.html" data-i18n="nav.indLuxury">Luxury Retail</a>
+            <a href="../industries/groceries/index.html" data-i18n="nav.indGroceries">Groceries</a>
+            <a href="../industries/departmental-stores/index.html" data-i18n="nav.indDept">Department Store</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../resources/index.html" data-i18n="nav.resources">Resources</a>
+          <div class="dropdown">
+            <a href="../clients/index.html" data-i18n="nav.resCaseStudies">Case Studies</a>
+            <a href="../resources/index.html" data-i18n="nav.resBlog">Blog Post</a>
+            <a href="../resources/faq/index.html" data-i18n="nav.resFaq">FAQ</a>
+            <a href="https://kb.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.knowledgeHub">Knowledge Hub</a>
+            <a href="https://helpdesk.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.helpdesk">Helpdesk</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown lang-switcher-item mobile-only">
+          <a class="nav-link lang-switcher-trigger" href="#">🌐 <span class="lang-current">EN</span></a>
+          <div class="dropdown lang-dropdown"><a href="#" class="lang-option" data-lang="en">🇬🇧 English</a><a href="#" class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</a><a href="#" class="lang-option" data-lang="th">🇹🇭 ไทย</a></div>
+        </li>
+        <li class="nav-item mobile-cta-item"><a class="nav-link" href="../contact/index.html" data-i18n="nav.contact">Contact Us</a></li>
+        <li class="nav-item mobile-cta-item"><a class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px;" href="../contact/index.html" data-i18n="nav.bookConsultation">Book a Consultation</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <div class="nav-search">
+        <button type="button" class="nav-search-toggle" id="navSearchToggle" aria-label="Search the site" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-search-panel" id="navSearchPanel" hidden>
+          <div class="nav-search-field">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input type="text" id="navSearchInput" placeholder="Search products, industries, resources&hellip;" autocomplete="off">
+            <button type="button" class="nav-search-close" id="navSearchClose" aria-label="Close search">&times;</button>
+          </div>
+          <div class="nav-search-results" id="navSearchResults"></div>
+        </div>
+      </div>
+      <script>window.__SITE_ROOT_PREFIX = "../";</script>
+      <div class="nav-item has-dropdown lang-switcher-item desktop-only">
+        <a class="nav-link lang-switcher-trigger" href="#">🌐 <span class="lang-current">EN</span></a>
+        <div class="dropdown lang-dropdown"><a href="#" class="lang-option" data-lang="en">🇬🇧 English</a><a href="#" class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</a><a href="#" class="lang-option" data-lang="th">🇹🇭 ไทย</a></div>
+      </div>
+      <a href="../contact/index.html" class="btn btn-primary" data-i18n="nav.bookConsultation">Book a Consultation</a>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </div>
+</header>
+<section class="page-hero">
+  <div class="blob-field"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+  <div class="container">
+    <div class="hero-logo-badge dark-mark"><img src="../assets/img/logo-ioptimo.png" alt="iOptimo" height="48"></div>
+    <div class="breadcrumb"><a href="../index.html">Home</a> / Products / iOptimo</div>
+    <h1>Stuck to <span class="hl-lt">Sold!</span></h1>
+    <p class="lead">iOptimo helps retail teams forecast demand, spot shortage risk, find excess inventory, and decide which units should move between stores &mdash; reducing overstock, preventing stockouts, and moving inventory where it sells best.</p>
+    <div class="hero-actions">
+      <a href="../contact/index.html" class="btn btn-primary">Book a Demo</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="feature-row">
+      <div>
+        <span class="kicker">From Overstock to Opportunity</span>
+        <h2>One store overstocked. Another out of stock. Same inventory, wrong place.</h2>
+        <p>iOptimo spots the mismatch automatically &mdash; placing every product on a live sales-vs-stock quadrant so planners know at a glance what to buy, push, markdown, or redistribute.</p>
+      </div>
+      <div class="feature-media reveal-img" style="padding:0;overflow:hidden;"><img src="../assets/img/ioptimo-real/quadrant.png" alt="iOptimo Product Quadrant showing products grouped into Procure, Sell More, Markdown and Distribute More by sales vs stock" style="width:100%;display:block;" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="container">
+    <div class="section-head left reveal">
+      <span class="kicker">Platform</span>
+      <h2>One operating view for forecast, inventory, and transfers</h2>
+      <p>Retail planning breaks when every team works from a different file. iOptimo connects the moving parts so planners can see what&rsquo;s at risk and what action comes next.</p>
+    </div>
+    <div class="grid grid-4 reveal-stagger">
+      
+      <div class="card reveal-child">
+        <div class="card-media-illo"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16a34a" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#16a34a" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="120" fill="url(#bg)"/>
+  
+  <path d="M36 88l28-14 22 8 30-30" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M116 52l34-22" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="4 5" opacity="0.55"/>
+  <path d="M142 22h14v14" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g opacity="0.18" fill="#16a34a">
+    <rect x="36" y="88" width="10" height="14" rx="1.5"/>
+    <rect x="60" y="80" width="10" height="22" rx="1.5"/>
+    <rect x="84" y="86" width="10" height="16" rx="1.5"/>
+    <rect x="108" y="62" width="10" height="40" rx="1.5"/>
+  </g>
+  <path d="M20 102h160" stroke="#16a34a" stroke-width="1.4" opacity="0.25"/>
+
+</svg></div>
+        <h3>Demand Forecasting</h3>
+        <p>Forecast demand by store, product, size and color so planners can see risk before the selling floor feels it.</p>
+      </div>
+      <div class="card reveal-child">
+        <div class="card-media-illo"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16a34a" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#16a34a" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="120" fill="url(#bg)"/>
+  
+  <rect x="30" y="46" width="40" height="40" rx="5" fill="#ffffff" stroke="#16a34a" stroke-width="2.2"/>
+  <path d="M40 62h20M40 70h14" stroke="#16a34a" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <rect x="130" y="46" width="40" height="40" rx="5" fill="#ffffff" stroke="#16a34a" stroke-width="2.2"/>
+  <path d="M140 62h20M140 70h12" stroke="#16a34a" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M74 54h48" stroke="#16a34a" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M114 47l8 7-8 7" stroke="#16a34a" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M126 80H78" stroke="#16a34a" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.55"/>
+  <path d="M86 73l-8 7 8 7" stroke="#16a34a" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+
+</svg></div>
+        <h3>Transfer Planning</h3>
+        <p>Find which stores have excess, which stores will run short, and what units should move today.</p>
+      </div>
+      <div class="card reveal-child">
+        <div class="card-media-illo"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16a34a" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#16a34a" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="120" fill="url(#bg)"/>
+  
+  <g stroke="#16a34a" stroke-width="2" fill="#ffffff">
+    <rect x="48" y="62" width="30" height="26" rx="2"/>
+    <rect x="82" y="50" width="30" height="38" rx="2"/>
+    <rect x="116" y="66" width="30" height="22" rx="2"/>
+  </g>
+  <path d="M48 70h30M82 60h30M116 74h30" stroke="#16a34a" stroke-width="1.6" opacity="0.55"/>
+  <rect x="55" y="30" width="26" height="8" rx="1.5" fill="#16a34a"/>
+  <rect x="55" y="30" width="3" height="8" fill="#ffffff"/>
+  <rect x="61" y="30" width="2" height="8" fill="#ffffff"/>
+  <rect x="66" y="30" width="4" height="8" fill="#ffffff"/>
+  <rect x="73" y="30" width="2" height="8" fill="#ffffff"/>
+  <path d="M96 22v18M148 46v20" stroke="#16a34a" stroke-width="1.6" stroke-dasharray="3 3" opacity="0.5"/>
+
+</svg></div>
+        <h3>Inventory Analytics</h3>
+        <p>Track stock cover, slow movers, broken size runs, excess inventory, and replenishment pressure in one place.</p>
+      </div>
+      <div class="card reveal-child">
+        <div class="card-media-illo"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16a34a" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#16a34a" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="120" fill="url(#bg)"/>
+  
+  <path d="M34 40a10 10 0 0 1 10-10h84a10 10 0 0 1 10 10v34a10 10 0 0 1-10 10H92l-16 14v-14H44a10 10 0 0 1-10-10z"
+        fill="#ffffff" stroke="#16a34a" stroke-width="2.2"/>
+  <path d="M52 46l3.6 7.4 8.1.9-6 5.6 1.6 8.1-7.3-4-7.3 4 1.6-8.1-6-5.6 8.1-.9z" fill="#16a34a"/>
+  <rect x="76" y="47" width="46" height="4" rx="1.5" fill="#16a34a" fill-opacity="0.4"/>
+  <rect x="76" y="57" width="34" height="4" rx="1.5" fill="#16a34a" fill-opacity="0.4"/>
+  <path d="M150 30l2.4 5 5 2.4-5 2.4-2.4 5-2.4-5-5-2.4 5-2.4z" fill="#16a34a" opacity="0.7"/>
+  <circle cx="166" cy="60" r="3" fill="#16a34a" opacity="0.5"/>
+
+</svg></div>
+        <h3>AI Assistant</h3>
+        <p>Ask plain-language questions about shortage, excess, sales, transfers, and forecast results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="feature-row">
+      <div>
+        <span class="kicker">Demand Forecasting</span>
+        <h3>See demand before stores feel it</h3>
+        <p>The model adapts per SKU and store &mdash; seasonal, intermittent, or trending patterns each get the right algorithm, automatically, with no manual tuning.</p>
+      </div>
+      <div class="feature-media reveal-img" style="padding:0;overflow:hidden;"><img src="../assets/img/ioptimo-real/forecasting-table.png" alt="iOptimo Forecasting screen predicting future demand by store and product category" style="width:100%;display:block;" loading="lazy"></div>
+    </div>
+    <div class="feature-row reverse">
+      <div>
+        <span class="kicker">Transfer Planning</span>
+        <h3>From recommendation to transfer order</h3>
+        <p>AI-generated transfer plans arrive pre-ranked by priority &mdash; review, approve, and complete inter-store stock transfers in one click instead of hours of manual reconciliation.</p>
+      </div>
+      <div class="feature-media reveal-img" style="padding:0;overflow:hidden;"><img src="../assets/img/ioptimo-real/transfers.png" alt="iOptimo Transfers screen reviewing and approving inter-store stock transfer recommendations" style="width:100%;display:block;" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="container">
+    <div class="section-head left reveal">
+      <span class="kicker">Plan Deeper</span>
+      <h2>From purchase orders to size and color mix</h2>
+    </div>
+    <div class="grid grid-2 reveal-stagger">
+      <div class="card reveal-child" style="padding:0;overflow:hidden;">
+        <img src="../assets/img/ioptimo-real/po-planner.png" alt="iOptimo PO Planner turning a forecast and budget into a buy plan" style="width:100%;display:block;" loading="lazy">
+        <div style="padding:20px;"><h3>PO Planner</h3><p>Pick the assortment, turn a forecast and budget into a buy plan, then allocate it &mdash; budget caps, MOQs and safety buffers built in.</p></div>
+      </div>
+      <div class="card reveal-child" style="padding:0;overflow:hidden;">
+        <img src="../assets/img/ioptimo-real/size-color.png" alt="iOptimo Size and Color Curve analytics showing variant-level distribution across the assortment" style="width:100%;display:block;" loading="lazy">
+        <div style="padding:20px;"><h3>Size + Color Curve</h3><p>Analyse variant-level size and colour distribution across your assortment, down to the worst-gap style.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../assets/js/vendor/chart.umd.min.js"></script>
+<section class="alt-bg">
+  <div class="container">
+    <div class="section-head left reveal">
+      <span class="kicker">See It In Action</span>
+      <h2>What the underlying charts look like</h2>
+      <p>A sample forecast curve and a sample stock-cover breakdown &mdash; hover either chart to see the values behind it. Illustrative sample data, not a live customer's figures.</p>
+    </div>
+    <div class="grid grid-2 reveal-stagger">
+      <div class="reveal-child"><div class="chart-card">
+      <div class="chart-card-title">Demand Forecast vs. Actual (sample SKU)</div>
+      <div class="chart-wrap" style="height:260px;"><canvas id="lineChart1"></canvas></div>
+      <div class="chart-card-caption">Illustrative sample data, for demonstration purposes only.</div>
+    </div>
+    <script>
+    (function() {
+      function draw() {
+        var el = document.getElementById("lineChart1");
+        if (!el || typeof Chart === "undefined" || el.getAttribute("data-drawn")) return;
+        el.setAttribute("data-drawn", "1");
+        new Chart(el.getContext("2d"), {
+          type: "line",
+          data: { labels: ["Wk 1", "Wk 2", "Wk 3", "Wk 4", "Wk 5", "Wk 6", "Wk 7", "Wk 8"], datasets: [{"label": "Forecast", "data": [420, 460, 500, 560, 610, 590, 640, 700], "borderColor": "#16a34a", "backgroundColor": "#16a34a", "borderDash": [6, 4], "tension": 0.35, "pointRadius": 3, "pointHoverRadius": 6, "borderWidth": 2.4, "fill": false}, {"label": "Actual", "data": [410, 470, 495, 545, 630, 605, 620, 715], "borderColor": "#0a1628", "backgroundColor": "#0a1628", "borderDash": [], "tension": 0.35, "pointRadius": 3, "pointHoverRadius": 6, "borderWidth": 2.4, "fill": false}] },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: { legend: { display: true, position: "bottom", labels: { color: "#5b6b82", boxWidth: 14, font: { size: 12 } } } },
+            scales: {
+              x: { ticks: { color: "#5b6b82" }, grid: { display: false } },
+              y: { ticks: { color: "#5b6b82" }, grid: { color: "rgba(10,22,40,0.08)" }, beginAtZero: false }
+            }
+          }
+        });
+      }
+      if (document.readyState === "complete" || document.readyState === "interactive") { setTimeout(draw, 0); }
+      else { document.addEventListener("DOMContentLoaded", draw); }
+      window.addEventListener("load", draw);
+    })();
+    </script></div>
+      <div class="reveal-child"><div class="chart-card">
+      <div class="chart-card-title">Stock Cover by Category (sample)</div>
+      <div class="chart-wrap" style="height:260px;"><canvas id="barChart2"></canvas></div>
+      <div class="chart-card-caption">Illustrative sample data, for demonstration purposes only.</div>
+    </div>
+    <script>
+    (function() {
+      function draw() {
+        var el = document.getElementById("barChart2");
+        if (!el || typeof Chart === "undefined" || el.getAttribute("data-drawn")) return;
+        el.setAttribute("data-drawn", "1");
+        new Chart(el.getContext("2d"), {
+          type: "bar",
+          data: { labels: ["Apparel", "Footwear", "Accessories", "Beauty"], datasets: [{"label": "Stock cover (days)", "data": [45, 32, 58, 21], "backgroundColor": "#16a34a", "borderRadius": 6, "maxBarThickness": 44}] },
+          options: {
+            indexAxis: "x",
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false, position: "bottom", labels: { color: "#5b6b82", boxWidth: 14, font: { size: 12 } } } },
+            scales: {
+              x: { ticks: { color: "#5b6b82" }, grid: { color: "transparent", display: false }, beginAtZero: true },
+              y: { ticks: { color: "#5b6b82" }, grid: { color: "rgba(10,22,40,0.08)", display: true }, beginAtZero: true }
+            }
+          }
+        });
+      }
+      if (document.readyState === "complete" || document.readyState === "interactive") { setTimeout(draw, 0); }
+      else { document.addEventListener("DOMContentLoaded", draw); }
+      window.addEventListener("load", draw);
+    })();
+    </script></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="feature-row">
+      <div>
+        <span class="kicker">Workflow</span>
+        <h2>From connected data to recommended action</h2>
+        <p>iOptimo turns retail data into prioritised planning decisions &mdash; your team moves from integrated inputs to recommended transfers in a single connected system, without switching between tools.</p>
+        <ol class="pos-steps" style="margin-top:14px;">
+          <li><strong>Connect retail data</strong> &mdash; Integrate sales, inventory, product master, and store records.</li><li><strong>Forecast demand</strong> &mdash; Model expected sell-through by SKU and store.</li><li><strong>Detect risk</strong> &mdash; Find shortages, excess, broken assortments, and unusual demand.</li><li><strong>Recommend action</strong> &mdash; Review transfer plans, priorities, and expected impact.</li>
+        </ol>
+      </div>
+      <div class="visual-card">
+        <div class="flow-diagram dark" style="--flow-accent:#16a34a;">
+      <svg viewBox="0 0 760 150" class="flow-diagram-svg" role="img" aria-label="Step flow diagram: Connect retail data then Forecast demand then Detect risk then Recommend action">
+        <g class="flow-links">
+          <path class="flow-link" d="M 90.0,65.0 L 248.7,65.0"></path>
+      <path class="flow-link-flow" d="M 90.0,65.0 L 248.7,65.0" style="animation-delay:0.3s;"></path>
+      <path class="flow-link" d="M 300.7,65.0 L 459.3,65.0"></path>
+      <path class="flow-link-flow" d="M 300.7,65.0 L 459.3,65.0" style="animation-delay:0.7s;"></path>
+      <path class="flow-link" d="M 511.3,65.0 L 670.0,65.0"></path>
+      <path class="flow-link-flow" d="M 511.3,65.0 L 670.0,65.0" style="animation-delay:1.0s;"></path>
+        </g>
+        
+      <g class="flow-node" tabindex="0" transform="translate(64.0,65.0)">
+        <title>Connect retail data &mdash; Integrate sales, inventory, product master, and store records.</title>
+        <circle class="flow-circle" r="24"></circle>
+        <text class="flow-num" x="0" y="5">01</text>
+        <text class="flow-label" x="0" y="44">Connect retail data</text>
+      </g>
+      <g class="flow-node" tabindex="0" transform="translate(274.7,65.0)">
+        <title>Forecast demand &mdash; Model expected sell-through by SKU and store.</title>
+        <circle class="flow-circle" r="24"></circle>
+        <text class="flow-num" x="0" y="5">02</text>
+        <text class="flow-label" x="0" y="44">Forecast demand</text>
+      </g>
+      <g class="flow-node" tabindex="0" transform="translate(485.3,65.0)">
+        <title>Detect risk &mdash; Find shortages, excess, broken assortments, and unusual demand.</title>
+        <circle class="flow-circle" r="24"></circle>
+        <text class="flow-num" x="0" y="5">03</text>
+        <text class="flow-label" x="0" y="44">Detect risk</text>
+      </g>
+      <g class="flow-node" tabindex="0" transform="translate(696.0,65.0)">
+        <title>Recommend action &mdash; Review transfer plans, priorities, and expected impact.</title>
+        <circle class="flow-circle" r="24"></circle>
+        <text class="flow-num" x="0" y="5">04</text>
+        <text class="flow-label" x="0" y="44">Recommend action</text>
+      </g>
+      </svg>
+      <p class="flow-hint">Hover or tap a step for details.</p>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="container">
+    <div class="section-head left reveal">
+      <span class="kicker">Let AI Do the Heavy Lifting</span>
+      <h2>Forecasting, anomaly detection, trend insights, transfer recommendations</h2>
+    </div>
+    <ul class="check-list on grid grid-2" style="gap:16px;">
+      <li>Maintain healthier stock coverage across every store</li>
+      <li>Spot shortages before sales suffer, with urgency scoring</li>
+      <li>Find excess before it ages &mdash; flagged with a transfer destination</li>
+      <li>Automate inventory transfer planning with AI</li>
+      <li>Spot unusual sales spikes and drops before they distort replenishment</li>
+      <li>Free up working capital for growth and new assortments</li>
+    </ul>
+  </div>
+</section>
+
+<section class="tight alt-bg">
+  <div class="container">
+    <div class="cta-band" style="background:linear-gradient(120deg, var(--navy-950), var(--navy-700));">
+      <div>
+        <h2>Think AI. Do AI. Get ROI.</h2>
+        <p>Optimise inventory, increase sales &mdash; see iOptimo on your own stock data.</p>
+      </div>
+      <a href="../contact/index.html" class="btn btn-primary">Book a Demo</a>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <span class="footer-logo-badge"><img src="../assets/img/logo.png" alt="Integrated Retail" height="72"></span>
+        <p style="max-width:300px;font-size:0.92rem;" data-i18n="footer.tagline">Integrated Retail &mdash; advanced, unified retail systems for fashion, lifestyle, F&amp;B and CPG businesses across Asia Pacific, from a partner who integrates and builds: POS, CRM, e-commerce, inventory, analytics and AI, as one.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="../index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="../about/index.html" data-i18n="nav.about">About Us</a></li>
+          <li><a href="../solutions/index.html" data-i18n="nav.solution">Solution</a></li>
+          <li><a href="../products/index.html" data-i18n="nav.product">Product</a></li>
+          <li><a href="../industries/index.html" data-i18n="nav.industries">Industries</a></li>
+          <li><a href="../services/index.html" data-i18n="nav.services">Services</a></li>
+          <li><a href="../resources/index.html" data-i18n="nav.resources">Resources</a></li>
+          <li><a href="../contact/index.html" data-i18n="nav.contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.resources">Resources</h4>
+        <ul>
+          <li><a href="../clients/index.html" data-i18n="nav.resCaseStudies">Case Studies</a></li>
+          <li><a href="../resources/index.html" data-i18n="nav.resBlog">Blog Post</a></li>
+          <li><a href="../resources/faq/index.html" data-i18n="nav.resFaq">FAQ</a></li>
+          <li><a href="https://kb.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.knowledgeHub">Knowledge Hub</a></li>
+          <li><a href="https://helpdesk.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.helpdesk">Helpdesk</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.products">Products</h4>
+        <ul>
+          <li><a href="../product-cegid-retail/index.html">Cegid Retail</a></li><li><a href="../retailpro-prism/index.html">Retail Pro Prism</a></li><li><a href="../product-footfallcam/index.html">FootfallCam</a></li><li><a href="../iposit/index.html">iPosit</a></li><li><a href="../ioptimo/index.html">iOptimo</a></li><li><a href="../warewiser/index.html">Warewiser</a></li><li><a href="../retaillium/index.html">Retaillium</a></li><li><a href="../globriq/index.html">Globriq</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.offices">Offices</h4>
+        <ul class="offices-list">
+          <li><svg class="flag-icon" viewBox="0 0 30 20" width="20" height="14" aria-hidden="true"><rect width="30" height="10" fill="#ED2939"/><rect y="10" width="30" height="10" fill="#fff"/><circle cx="8" cy="5" r="3.6" fill="#fff"/><circle cx="9.6" cy="4.3" r="2.9" fill="#ED2939"/><g fill="#fff"><circle cx="12.5" cy="3.2" r="0.55"/><circle cx="14.3" cy="4.6" r="0.55"/><circle cx="13.7" cy="6.7" r="0.55"/><circle cx="11.3" cy="6.7" r="0.55"/><circle cx="10.7" cy="4.6" r="0.55"/></g></svg><span><span data-i18n="footer.singapore">Singapore</span> &mdash; <a href="tel:+6589692150">+65 8969 2150</a></span></li>
+          <li><svg class="flag-icon" viewBox="0 0 30 20" width="20" height="14" aria-hidden="true"><rect width="30" height="10" fill="#CE1126"/><rect y="10" width="30" height="10" fill="#fff"/></svg><span><span data-i18n="footer.indonesia">Indonesia</span> &mdash; <a href="tel:+6287777790575">+62 877 7779 0575</a></span></li>
+          <li><svg class="flag-icon" viewBox="0 0 30 20" width="20" height="14" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect width="30" height="3" fill="#A51931"/><rect y="17" width="30" height="3" fill="#A51931"/><rect y="3" width="30" height="3" fill="#fff"/><rect y="14" width="30" height="3" fill="#fff"/><rect y="6" width="30" height="8" fill="#241D4F"/></svg><span><span data-i18n="footer.thailand">Thailand</span> &mdash; <a href="tel:+66867893013">+66 86 789 3013</a></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.rights">&copy; 2026 Integrated Retail Management Consulting Pte. Ltd. All rights reserved.</span>
+      <a href="mailto:connect@integratedretail.com">connect@integratedretail.com</a>
+    </div>
+  </div>
+</footer>
+<div class="book-modal-overlay" id="bookModalOverlay">
+  <div class="book-modal" role="dialog" aria-modal="true" aria-labelledby="bookModalTitle">
+    <button type="button" class="book-modal-close" id="bookModalClose" aria-label="Close">&times;</button>
+    <span class="kicker">Let&rsquo;s Talk</span>
+    <h3 id="bookModalTitle" style="margin:6px 0 4px;">Book a zero-obligation consultation</h3>
+    <p class="book-modal-sub">Tell us a bit about your business and our team will be in touch shortly.</p>
+    <form class="book-modal-form" id="bookModalForm">
+      <div class="form-grid">
+        <div class="field"><label>Name *</label><input type="text" required></div>
+        <div class="field"><label>Email Address *</label><input type="email" required></div>
+        <div class="field"><label>Contact Number *</label><input type="tel" required></div>
+        <div class="field"><label>Country *</label>
+          <select required><option value="">Select a country</option><optgroup label="Our Offices"><option>Singapore</option><option>Indonesia</option><option>Thailand</option></optgroup><optgroup label="Other Countries"><option>Malaysia</option><option>Vietnam</option><option>Philippines</option><option>Cambodia</option><option>Myanmar</option><option>Laos</option><option>Brunei</option><option>Hong Kong</option><option>China</option><option>Taiwan</option><option>Japan</option><option>South Korea</option><option>India</option><option>Sri Lanka</option><option>Bangladesh</option><option>Pakistan</option><option>Australia</option><option>New Zealand</option><option>United Arab Emirates</option><option>Saudi Arabia</option><option>Qatar</option><option>United Kingdom</option><option>United States</option><option>Canada</option><option>Other</option></optgroup></select>
+        </div>
+        <div class="field full">
+          <label>I&rsquo;m Interested In *</label>
+          <select required>
+            <option value="">Select an area</option>
+            <option>Retail POS Software</option><option>E-Commerce</option><option>CRM</option><option>Staff Productivity</option><option>Consumer Engagement</option><option>Inventory Management</option><option>Reporting and Analytics</option><option>IR Expertise</option><option>Cegid Retail</option><option>Retail Pro Prism</option>
+          </select>
+        </div>
+        <div class="field"><label>How Many Stores Do You Have? *</label><input type="text" required></div>
+        <div class="field">
+          <label>Type of Industry *</label>
+          <select required>
+            <option value="">Select an industry</option>
+            <option>Apparel</option><option>Luxury</option><option>Jewellery</option><option>Electronics</option><option>Beauty</option><option>Footwear</option><option>Sporting Goods</option><option>Gifts</option><option>Franchises</option><option>Venues</option><option>Lifestyle</option><option>Hard Goods</option><option>Independent Retail</option><option>Eyewear</option><option>Cosmetics</option><option>Gourmet</option><option>Home</option><option>Garden</option><option>Wine</option><option>Others</option>
+          </select>
+        </div>
+        <div class="field full"><label>Your Message *</label><textarea rows="3" required></textarea></div>
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin-top:18px;width:100%;justify-content:center;">Submit Request</button>
+    </form>
+    <div class="book-modal-success" id="bookModalSuccess" hidden>
+      <div class="book-modal-success-icon">&check;</div>
+      <h3>Thanks &mdash; we&rsquo;ve got your request.</h3>
+      <p style="color:var(--slate-500);">Our team will reach out within one business day.</p>
+      <button type="button" class="btn btn-outline" id="bookModalDone">Close</button>
+    </div>
+  </div>
+</div>
+<div class="chat-widget">
+  <button type="button" class="chat-widget-btn" id="chatWidgetBtn" aria-label="Open support chat">
+    <svg class="chat-icon-open" viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M4 5h16v11H8l-4 4V5z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><circle cx="9" cy="10.5" r="1" fill="#fff"/><circle cx="12" cy="10.5" r="1" fill="#fff"/><circle cx="15" cy="10.5" r="1" fill="#fff"/></svg>
+    <svg class="chat-icon-close" viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <div class="chat-widget-panel" id="chatWidgetPanel">
+    <div class="chat-widget-header">
+      <span class="chat-widget-avatar"><img src="../assets/img/logo.png" alt="" height="20"></span>
+      <div>
+        <div class="chat-widget-title">Integrated Retail Support Agent</div>
+        <div class="chat-widget-status"><span class="chat-widget-dot"></span>Online</div>
+      </div>
+      <button type="button" class="chat-widget-close" id="chatWidgetClose" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chat-widget-body" id="chatWidgetBody">
+      <div class="chat-msg bot">Hi, I&rsquo;m the Integrated Retail Support Agent. How can I help you today?</div>
+      <div class="chat-quick-replies">
+        <button type="button" class="chat-chip" data-reply="I&rsquo;d like to book a demo">Book a demo</button>
+        <button type="button" class="chat-chip" data-reply="Tell me about your products">Our products</button>
+        <button type="button" class="chat-chip" data-reply="I need help with an existing account">Existing customer support</button>
+      </div>
+    </div>
+    <form class="chat-widget-input-row" id="chatWidgetForm">
+      <input type="text" id="chatWidgetInput" placeholder="Type your message&hellip;" autocomplete="off">
+      <button type="submit" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M4 12L20 4L13 20L11 13L4 12Z" fill="#fff"/></svg>
+      </button>
+    </form>
+    <div class="chat-widget-footer-note">Our team typically replies within one business day.</div>
+  </div>
+</div>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

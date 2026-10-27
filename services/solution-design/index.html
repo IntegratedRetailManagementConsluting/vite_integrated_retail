@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solution Design | Integrated Retail</title>
+<meta name="description" content="Solution Design services from Integrated Retail &mdash; requirements discovery, systems architecture and a deployment roadmap tailored to your retail environment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1628'/%3E%3Cpolygon points='16,7 25,25 7,25' fill='%23c4181f'/%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="../../index.html" class="logo"><img src="../../assets/img/logo-header.png" alt="Integrated Retail" height="50"></a>
+    <nav class="main-nav">
+      <ul>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../../about/index.html" data-i18n="nav.about">About</a>
+          <div class="dropdown">
+            <a href="../../about/index.html" data-i18n="nav.aboutCompany">Company</a>
+            <a href="../../about/values/index.html" data-i18n="nav.aboutValues">Values &amp; Culture</a>
+            <a href="../../about/careers/index.html" data-i18n="nav.aboutCareers">Careers</a>
+            <a href="../../about/partners/index.html" data-i18n="nav.aboutPartners">Partners</a>
+          </div>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="../../solutions/index.html" data-i18n="nav.solution">Solution</a></li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../../products/index.html" data-i18n="nav.product">Product</a>
+          <div class="dropdown dropdown-mega">
+            <div class="dropdown-col"><div class="dropdown-group-label">Point of Sale</div><a href="../../product-cegid-retail/index.html">Cegid Retail</a><a href="../../retailpro-prism/index.html">Retail Pro Prism</a><div class="dropdown-group-label">Traffic & Location</div><a href="../../product-footfallcam/index.html">FootfallCam</a></div><div class="dropdown-col"><div class="dropdown-group-label">AI & Merchandising</div><a href="../../iposit/index.html">iPosit</a><a href="../../ioptimo/index.html">iOptimo</a><div class="dropdown-group-label">Warehouse Management</div><a href="../../warewiser/index.html">Warewiser</a></div><div class="dropdown-col"><div class="dropdown-group-label">Unified Commerce & AI</div><a href="../../retaillium/index.html">Retaillium</a><div class="dropdown-group-label">Systems Integration</div><a href="../../globriq/index.html">Globriq</a></div>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link active" href="../../services/index.html" data-i18n="nav.services">Services</a>
+          <div class="dropdown">
+            <a href="../../services/solution-design/index.html" data-i18n="nav.svcSolutionDesign">Solution Design</a>
+            <a href="../../services/project-delivery/index.html" data-i18n="nav.svcProjectDelivery">Project Delivery</a>
+            <a href="../../services/managed-services/index.html" data-i18n="nav.svcManagedServices">Managed Services</a>
+            <a href="../../services/training/index.html" data-i18n="nav.svcTraining">Training</a>
+            <a href="../../services/integration/index.html" data-i18n="nav.svcIntegration">Integration</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../../industries/index.html" data-i18n="nav.industries">Industries</a>
+          <div class="dropdown">
+            <a href="../../industries/fashion-apparel/index.html" data-i18n="nav.indFashion">Fashion &amp; Apparel</a>
+            <a href="../../industries/health-beauty/index.html" data-i18n="nav.indHealth">Health &amp; Beauty</a>
+            <a href="../../industries/food-beverage/index.html" data-i18n="nav.indFnb">F&amp;B</a>
+            <a href="../../industries/shopping-malls/index.html" data-i18n="nav.indMalls">Shopping Malls</a>
+            <a href="../../industries/luxury-retail/index.html" data-i18n="nav.indLuxury">Luxury Retail</a>
+            <a href="../../industries/groceries/index.html" data-i18n="nav.indGroceries">Groceries</a>
+            <a href="../../industries/departmental-stores/index.html" data-i18n="nav.indDept">Department Store</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../../resources/index.html" data-i18n="nav.resources">Resources</a>
+          <div class="dropdown">
+            <a href="../../clients/index.html" data-i18n="nav.resCaseStudies">Case Studies</a>
+            <a href="../../resources/index.html" data-i18n="nav.resBlog">Blog Post</a>
+            <a href="../../resources/faq/index.html" data-i18n="nav.resFaq">FAQ</a>
+            <a href="https://kb.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.knowledgeHub">Knowledge Hub</a>
+            <a href="https://helpdesk.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.helpdesk">Helpdesk</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown lang-switcher-item mobile-only">
+          <a class="nav-link lang-switcher-trigger" href="#">🌐 <span class="lang-current">EN</span></a>
+          <div class="dropdown lang-dropdown"><a href="#" class="lang-option" data-lang="en">🇬🇧 English</a><a href="#" class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</a><a href="#" class="lang-option" data-lang="th">🇹🇭 ไทย</a></div>
+        </li>
+        <li class="nav-item mobile-cta-item"><a class="nav-link" href="../../contact/index.html" data-i18n="nav.contact">Contact Us</a></li>
+        <li class="nav-item mobile-cta-item"><a class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px;" href="../../contact/index.html" data-i18n="nav.bookConsultation">Book a Consultation</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <div class="nav-search">
+        <button type="button" class="nav-search-toggle" id="navSearchToggle" aria-label="Search the site" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-search-panel" id="navSearchPanel" hidden>
+          <div class="nav-search-field">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input type="text" id="navSearchInput" placeholder="Search products, industries, resources&hellip;" autocomplete="off">
+            <button type="button" class="nav-search-close" id="navSearchClose" aria-label="Close search">&times;</button>
+          </div>
+          <div class="nav-search-results" id="navSearchResults"></div>
+        </div>
+      </div>
+      <script>window.__SITE_ROOT_PREFIX = "../../";</script>
+      <div class="nav-item has-dropdown lang-switcher-item desktop-only">
+        <a class="nav-link lang-switcher-trigger" href="#">🌐 <span class="lang-current">EN</span></a>
+        <div class="dropdown lang-dropdown"><a href="#" class="lang-option" data-lang="en">🇬🇧 English</a><a href="#" class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</a><a href="#" class="lang-option" data-lang="th">🇹🇭 ไทย</a></div>
+      </div>
+      <a href="../../contact/index.html" class="btn btn-primary" data-i18n="nav.bookConsultation">Book a Consultation</a>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </div>
+</header>
+<section class="page-hero with-art">
+  <div class="blob-field"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+  <div class="container">
+    <div>
+      <div class="breadcrumb"><a href="../../index.html">Home</a> / <a href="../../services/index.html">Services</a> / Solution Design</div>
+      <span class="kicker">Solution Design</span>
+      <h1>Design the right retail architecture <span class="hl-lt">before you invest.</span></h1>
+      <p class="lead">We translate business requirements into the right technology architecture &mdash; validated, secure and ready to implement &mdash; before you commit to a platform.</p>
+      <ul class="check-list" style="margin:18px 0 22px;">
+        <li>Business requirements translated into technology</li>
+        <li>Best-fit platform and architecture selection</li>
+        <li>Integration, data and security designed upfront</li>
+        <li>Clear roadmap from concept to implementation</li>
+      </ul>
+      <div class="hero-actions">
+        <a href="../../contact/index.html" class="btn btn-primary">Talk to a Solution Architect</a>
+        <a href="#approach" class="btn btn-outline">See Our Approach</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="visual-card">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;gap:8px;justify-content:space-between;">
+            <div style="flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:8px 4px;text-align:center;font-size:0.68rem;font-weight:700;color:#fff;">Store<br>Operations</div>
+            <div style="flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:8px 4px;text-align:center;font-size:0.68rem;font-weight:700;color:#fff;">Head Office<br>&amp; Analytics</div>
+            <div style="flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:8px 4px;text-align:center;font-size:0.68rem;font-weight:700;color:#fff;">Customer<br>Channels</div>
+            <div style="flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:8px 4px;text-align:center;font-size:0.68rem;font-weight:700;color:#fff;">Partners &amp;<br>Suppliers</div>
+          </div>
+          <div style="text-align:center;color:rgba(255,255,255,0.5);font-size:0.9rem;">&darr;&darr;&darr;&darr;</div>
+          <div style="display:flex;gap:8px;align-items:stretch;">
+            <div style="flex:1;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:10px 6px;text-align:center;font-size:0.66rem;font-weight:700;color:#fff;">ERP<br>POS<br>CRM<br>HR</div>
+            <div style="flex:3;display:flex;flex-direction:column;gap:5px;">
+              <div style="background:linear-gradient(90deg,#c4181f,#9e1319);border-radius:6px;padding:9px 10px;font-size:0.74rem;font-weight:700;color:#fff;">Applications &amp; Analytics</div>
+              <div style="background:rgba(255,255,255,0.14);border-radius:6px;padding:9px 10px;font-size:0.74rem;font-weight:700;color:#fff;">Integration Layer &mdash; Globriq</div>
+              <div style="background:rgba(255,255,255,0.1);border-radius:6px;padding:9px 10px;font-size:0.74rem;font-weight:700;color:rgba(255,255,255,0.85);">Cloud &amp; Infrastructure</div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:6px;padding:9px 10px;font-size:0.74rem;font-weight:700;color:rgba(255,255,255,0.7);">Security &amp; Governance</div>
+            </div>
+            <div style="flex:1;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:10px 6px;text-align:center;font-size:0.64rem;font-weight:700;color:#fff;">3rd-Party<br>Systems<br>&amp; APIs</div>
+          </div>
+        </div>
+        <span class="vc-cap">A layered reference architecture &mdash; connecting store, head-office and partner systems through one governed integration layer.</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Why Solution Design</span>
+      <h2>Getting the architecture right before you invest</h2>
+      <p>We help you make technology decisions in the right order &mdash; business priorities first, platforms second &mdash; so your investment holds up as you grow.</p>
+    </div>
+    <div class="grid grid-5 reveal-stagger">
+      <div class="card reveal-child"><div class="icon" style="background:rgba(196,24,31,0.12);color:#c4181f;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg></div><h3>Align Technology with Business Priorities</h3><p>Every platform and integration choice is anchored to your business goals, not the other way around.</p></div>
+      <div class="card reveal-child"><div class="icon" style="background:rgba(124,58,237,0.12);color:#7c3aed;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M9 4h4v2.2a1.8 1.8 0 1 0 0 3.6V12h3.2a1.8 1.8 0 1 1 0 4H16v4H4v-4h2.2a1.8 1.8 0 1 0 0-4H4V8h4V4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><h3>Reduce System Fragmentation</h3><p>Replace scattered, disconnected tools with one coherent architecture that fits together by design.</p></div>
+      <div class="card reveal-child"><div class="icon" style="background:rgba(13,148,136,0.12);color:#0d9488;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M3 17l6-6 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Build for Future Growth</h3><p>Design an architecture that can absorb new stores, channels and systems without a rebuild.</p></div>
+      <div class="card reveal-child"><div class="icon" style="background:rgba(37,99,235,0.12);color:#2563eb;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Address Security &amp; Governance Early</h3><p>Bake security, data governance and compliance into the architecture from the outset, not as an afterthought.</p></div>
+      <div class="card reveal-child"><div class="icon" style="background:rgba(217,119,6,0.12);color:#d97706;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v10M15 9.5c0-1.4-1.4-2.5-3-2.5s-3 1-3 2.3c0 3 6 1.4 6 4.3 0 1.4-1.4 2.4-3 2.4s-3-1-3-2.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><h3>Protect Technology Investment</h3><p>Make platform and integration decisions that hold their value as the business and technology landscape changes.</p></div>
+    </div>
+  </div>
+</section>
+<section class="dark-bg">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">The Real Question</span>
+      <h2 style="color:#fff;">The right technology is not always the right architecture.</h2>
+      <p>Choosing a platform before the architecture is settled is how integration problems, workarounds and rework happen later.</p>
+    </div>
+    <div class="reveal" style="overflow-x:auto;">
+      <table class="compare-table">
+        <thead><tr><th>Step</th><th>Without Solution Design</th><th>With Solution Design</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="trad">Business requirement</td><td class="gq">Business objective</td></tr>
+          <tr><td>2</td><td class="trad">Vendor product</td><td class="gq">Requirements</td></tr>
+          <tr><td>3</td><td class="trad">Implementation</td><td class="gq">Architecture</td></tr>
+          <tr><td>4</td><td class="trad">Integration problems</td><td class="gq">Technology selection</td></tr>
+          <tr><td>5</td><td class="trad">Manual workarounds</td><td class="gq">Integration plan</td></tr>
+          <tr><td>6</td><td class="trad">Higher cost</td><td class="gq">Controlled implementation</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="value-banner reveal">Good solution design reduces the decisions you have to undo later.</div>
+  </div>
+</section>
+<section class="alt-bg" id="approach">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">How We Work</span>
+      <h2>Our Solution Design Approach</h2>
+      <p>A repeatable, five-step process &mdash; from first conversation to a blueprint your team can build from.</p>
+    </div>
+    <div class="flow-diagram" style="--flow-accent:#c4181f;">
+      <svg viewBox="0 0 760 150" class="flow-diagram-svg" role="img" aria-label="Step flow diagram: Discover then Design then Validate then Build the Roadmap then Handover &amp; Enable">
+        <g class="flow-links">
+      <path class="flow-link" d="M 88.0,77.0 L 198.0,77.0"></path>
+      <path class="flow-link-flow" d="M 88.0,77.0 L 198.0,77.0" style="animation-delay:0.0s;"></path>
+      <path class="flow-link" d="M 246.0,77.0 L 356.0,77.0"></path>
+      <path class="flow-link-flow" d="M 246.0,77.0 L 356.0,77.0" style="animation-delay:0.4s;"></path>
+      <path class="flow-link" d="M 404.0,77.0 L 514.0,77.0"></path>
+      <path class="flow-link-flow" d="M 404.0,77.0 L 514.0,77.0" style="animation-delay:0.8s;"></path>
+      <path class="flow-link" d="M 562.0,77.0 L 672.0,77.0"></path>
+      <path class="flow-link-flow" d="M 562.0,77.0 L 672.0,77.0" style="animation-delay:1.2s;"></path>
+        </g>
+      <g class="flow-node" tabindex="0" transform="translate(64.0,77.0)">
+        <title>Discover &mdash; Understand your business, current systems, challenges and goals.</title>
+        <circle class="flow-circle" r="24"></circle>
+        <text class="flow-num" x="0" y="5">1</text>
+        <text class="flow-label" x="0" y="44">Discover</text>
+      </g>
+      <g class="flow-node" tabindex="0" transform="translate(222.0,77.0)">
+        <title>Design &mdash; Create the solution architecture, technology stack and integration blueprint.</title>
+        <circle class="flow-circle" r="24"></circle>
+        <text class="flow-num" x="0" y="5">2</text>
+        <text class="flow-label" x="0" y="44">Design</text>
+      </g>
+      <g class="flow-node" tabindex="0" transform="translate(380.0,77.0)">
+        <title>Validate &mdash; Review with stakeholders and validate feasibility, security and scalability.</title>
+        <circle class="flow-circle" r="24"></circle>
+        <text class="flow-num" x="0" y="5">3</text>
+        <text class="flow-label" x="0" y="44">Validate</text>
+      </g>
+      <g class="flow-node" tabindex="0" transform="translate(538.0,77.0)">
+        <title>Build the Roadmap &mdash; Turn the blueprint into a sequenced roadmap and implementation plan.</title>
+        <circle class="flow-circle" r="24"></circle>
+        <text class="flow-num" x="0" y="5">4</text>
+        <text class="flow-label" x="0" y="44">Build the Roadmap</text>
+      </g>
+      <g class="flow-node" tabindex="0" transform="translate(696.0,77.0)">
+        <title>Handover &amp; Enable &mdash; Enable your team with knowledge transfer and clear next steps.</title>
+        <circle class="flow-circle" r="24"></circle>
+        <text class="flow-num" x="0" y="5">5</text>
+        <text class="flow-label" x="0" y="44">Handover &amp; Enable</text>
+      </g>
+      </svg>
+      <p class="flow-hint">Hover or tap a step for details.</p>
+    </div>
+    <div class="grid grid-5 reveal-stagger" style="margin-top:32px;">
+      <div class="card reveal-child"><div class="step-num">01</div><h3 style="margin-top:10px;font-size:1rem;">Discover</h3><p style="font-size:0.86rem;">Understand your business, current systems, challenges and goals.</p></div>
+      <div class="card reveal-child"><div class="step-num">02</div><h3 style="margin-top:10px;font-size:1rem;">Design</h3><p style="font-size:0.86rem;">Create the solution architecture, technology stack and integration blueprint.</p></div>
+      <div class="card reveal-child"><div class="step-num">03</div><h3 style="margin-top:10px;font-size:1rem;">Validate</h3><p style="font-size:0.86rem;">Review with stakeholders and validate feasibility, security and scalability.</p></div>
+      <div class="card reveal-child"><div class="step-num">04</div><h3 style="margin-top:10px;font-size:1rem;">Build the Roadmap</h3><p style="font-size:0.86rem;">Turn the blueprint into a sequenced roadmap and implementation plan.</p></div>
+      <div class="card reveal-child"><div class="step-num">05</div><h3 style="margin-top:10px;font-size:1rem;">Handover &amp; Enable</h3><p style="font-size:0.86rem;">Enable your team with knowledge transfer and clear next steps.</p></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="grid grid-2 reveal-stagger">
+      <div class="card reveal-child">
+        <h3>What We Deliver</h3>
+        <ul class="check-list">
+      <li>Business and technology requirements</li>
+      <li>Target solution architecture</li>
+      <li>Application and system landscape</li>
+      <li>Integration and API design</li>
+      <li>Data-flow architecture</li>
+      <li>Security and governance requirements</li>
+      <li>Technology recommendations</li>
+      <li>Implementation roadmap</li>
+      <li>Key risks and dependencies</li>
+    </ul>
+      </div>
+      <div class="card reveal-child">
+        <h3>What This Helps You Achieve</h3>
+        <ul class="check-list">
+      <li>Better investment decisions</li>
+      <li>Less system duplication</li>
+      <li>Lower implementation risk</li>
+      <li>Faster stakeholder alignment</li>
+      <li>Reduced integration complexity</li>
+      <li>Clearer deployment priorities</li>
+      <li>Lower long-term cost of ownership</li>
+      <li>Faster time to value</li>
+    </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="alt-bg">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Designed Around Your Retail Ecosystem</span>
+      <h2>One blueprint across every layer of retail technology</h2>
+      <p>The architecture we design touches every layer of the business &mdash; not just the platform being deployed.</p>
+    </div>
+    <div class="grid grid-5 reveal-stagger">
+      <div class="card reveal-child"><div class="icon" style="background:rgba(37,99,235,0.12);color:#2563eb;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="9" cy="20" r="1.6" fill="currentColor"/><circle cx="18" cy="20" r="1.6" fill="currentColor"/><path d="M2.5 3h2.4l2 12.2a2 2 0 0 0 2 1.7h8.4a2 2 0 0 0 2-1.6l1.4-7.3H6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Commerce &amp; POS</h3><ul class="check-list" style="font-size:0.84rem;"><li>POS Modernisation</li><li>Unified Commerce</li><li>In-store Experience</li><li>Payment Integration</li><li>Order Management</li></ul></div>
+      <div class="card reveal-child"><div class="icon" style="background:rgba(196,24,31,0.12);color:#c4181f;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="17" cy="9" r="2.4" stroke="currentColor" stroke-width="1.5"/><path d="M15.5 13.2c2.6.3 4.5 2.4 4.8 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3>Customer &amp; Store Intelligence</h3><ul class="check-list" style="font-size:0.84rem;"><li>Customer Data Platform</li><li>Loyalty &amp; Personalisation</li><li>Store Analytics</li><li>Workforce Insights</li><li>Customer Experience</li></ul></div>
+      <div class="card reveal-child"><div class="icon" style="background:rgba(22,163,74,0.12);color:#16a34a;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M4 20h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>AI &amp; Merchandising</h3><ul class="check-list" style="font-size:0.84rem;"><li>Demand Forecasting</li><li>Assortment Optimisation</li><li>Price Optimisation</li><li>Generative AI</li><li>Merchandising Insights</li></ul></div>
+      <div class="card reveal-child"><div class="icon" style="background:rgba(217,119,6,0.12);color:#d97706;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5v-9z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div><h3>Inventory &amp; Fulfilment</h3><ul class="check-list" style="font-size:0.84rem;"><li>Inventory Optimisation</li><li>Warehouse &amp; DC</li><li>Order Fulfilment</li><li>Store Replenishment</li><li>Last Mile Integration</li></ul></div>
+      <div class="card reveal-child"><div class="icon" style="background:rgba(124,58,237,0.12);color:#7c3aed;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M9 15l6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 16.5l-1.5 1.5a3 3 0 0 1-4.2-4.2L4 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 7.5l1.5-1.5a3 3 0 0 1 4.2 4.2L20 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><h3>Enterprise Integration</h3><ul class="check-list" style="font-size:0.84rem;"><li>API &amp; Integration Design</li><li>ERP &amp; WMS Integration</li><li>Data Architecture</li><li>Real-time Processing</li><li>Third-party Connectivity</li></ul></div>
+    </div>
+    <div class="value-banner reveal">The objective is not to deploy more systems. It is to make the right systems work together.</div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">When to Engage Us</span>
+      <h2>Engage us before major retail technology decisions</h2>
+    </div>
+    <div class="grid grid-3 reveal-stagger">
+      <div class="card reveal-child"><div class="step-num">1</div><h3 style="margin-top:10px;">Replacing a Legacy POS</h3><p>Moving off an ageing point-of-sale platform is the moment to rethink the architecture around it, not just swap the box.</p></div>
+      <div class="card reveal-child"><div class="step-num">2</div><h3 style="margin-top:10px;">Expanding into New Markets</h3><p>New markets bring new regulatory, payment and localisation requirements that belong in the architecture from day one.</p></div>
+      <div class="card reveal-child"><div class="step-num">3</div><h3 style="margin-top:10px;">Connecting Disconnected Systems</h3><p>When point-to-point integrations have become brittle and hard to maintain, it's time for a governed integration design.</p></div>
+      <div class="card reveal-child"><div class="step-num">4</div><h3 style="margin-top:10px;">Introducing AI</h3><p>AI initiatives need clean, connected data and a clear architecture to plug into &mdash; not a bolt-on afterthought.</p></div>
+      <div class="card reveal-child"><div class="step-num">5</div><h3 style="margin-top:10px;">Building Omnichannel</h3><p>Unifying store, e-commerce and customer data starts with an architecture that ties the channels together.</p></div>
+      <div class="card reveal-child"><div class="step-num">6</div><h3 style="margin-top:10px;">Starting a Transformation Programme</h3><p>Any major, multi-year retail technology programme benefits from an architecture blueprint agreed before work begins.</p></div>
+    </div>
+  </div>
+</section>
+<section class="alt-bg">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Explore Next</span>
+      <h2>Continue your retail transformation journey</h2>
+    </div>
+    <div class="grid grid-3 reveal-stagger">
+      <a href="../../solutions/index.html" class="card reveal-child card-clickable"><div class="icon" style="background:rgba(196,24,31,0.12);color:#c4181f;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><rect x="4" y="5" width="16" height="14" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="16.5" cy="15" r="1.7" stroke="currentColor" stroke-width="1.5"/></svg></div><h3>Our Solutions</h3><p>The five connected solution areas we design around: POS, e-commerce, CRM, inventory and analytics.</p><span class="card-link">Explore &rarr;</span></a>
+      <a href="../../services/integration/index.html" class="card reveal-child card-clickable"><div class="icon" style="background:rgba(124,58,237,0.12);color:#7c3aed;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M9 15l6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 16.5l-1.5 1.5a3 3 0 0 1-4.2-4.2L4 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 7.5l1.5-1.5a3 3 0 0 1 4.2 4.2L20 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><h3>Systems Integration</h3><p>How we connect the architecture we design into one governed, working integration layer.</p><span class="card-link">Explore &rarr;</span></a>
+      <a href="../../clients/index.html" class="card reveal-child card-clickable"><div class="icon" style="background:rgba(13,148,136,0.12);color:#0d9488;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="17" cy="9" r="2.4" stroke="currentColor" stroke-width="1.5"/><path d="M15.5 13.2c2.6.3 4.5 2.4 4.8 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3>Customer Stories</h3><p>See how retailers across the region have put a Solution Design blueprint into production.</p><span class="card-link">Explore &rarr;</span></a>
+    </div>
+  </div>
+</section>
+<section class="tight">
+  <div class="container">
+    <div class="cta-band" style="background:linear-gradient(120deg, var(--navy-950), var(--navy-700));">
+      <div>
+        <h2>Planning a major retail technology decision?</h2>
+        <p>Talk to our architects before you commit to a platform or a project plan.</p>
+      </div>
+      <a href="../../contact/index.html" class="btn btn-primary">Talk to a Solution Architect</a>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <span class="footer-logo-badge"><img src="../../assets/img/logo.png" alt="Integrated Retail" height="72"></span>
+        <p style="max-width:300px;font-size:0.92rem;" data-i18n="footer.tagline">Integrated Retail &mdash; advanced, unified retail systems for fashion, lifestyle, F&amp;B and CPG businesses across Asia Pacific, from a partner who integrates and builds: POS, CRM, e-commerce, inventory, analytics and AI, as one.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="../../index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="../../about/index.html" data-i18n="nav.about">About Us</a></li>
+          <li><a href="../../solutions/index.html" data-i18n="nav.solution">Solution</a></li>
+          <li><a href="../../products/index.html" data-i18n="nav.product">Product</a></li>
+          <li><a href="../../industries/index.html" data-i18n="nav.industries">Industries</a></li>
+          <li><a href="../../services/index.html" data-i18n="nav.services">Services</a></li>
+          <li><a href="../../resources/index.html" data-i18n="nav.resources">Resources</a></li>
+          <li><a href="../../contact/index.html" data-i18n="nav.contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.resources">Resources</h4>
+        <ul>
+          <li><a href="../../clients/index.html" data-i18n="nav.resCaseStudies">Case Studies</a></li>
+          <li><a href="../../resources/index.html" data-i18n="nav.resBlog">Blog Post</a></li>
+          <li><a href="../../resources/faq/index.html" data-i18n="nav.resFaq">FAQ</a></li>
+          <li><a href="https://kb.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.knowledgeHub">Knowledge Hub</a></li>
+          <li><a href="https://helpdesk.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.helpdesk">Helpdesk</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.products">Products</h4>
+        <ul>
+          <li><a href="../../product-cegid-retail/index.html">Cegid Retail</a></li><li><a href="../../retailpro-prism/index.html">Retail Pro Prism</a></li><li><a href="../../product-footfallcam/index.html">FootfallCam</a></li><li><a href="../../iposit/index.html">iPosit</a></li><li><a href="../../ioptimo/index.html">iOptimo</a></li><li><a href="../../warewiser/index.html">Warewiser</a></li><li><a href="../../retaillium/index.html">Retaillium</a></li><li><a href="../../globriq/index.html">Globriq</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.offices">Offices</h4>
+        <ul class="offices-list">
+          <li><svg class="flag-icon" viewBox="0 0 30 20" width="20" height="14" aria-hidden="true"><rect width="30" height="10" fill="#ED2939"/><rect y="10" width="30" height="10" fill="#fff"/><circle cx="8" cy="5" r="3.6" fill="#fff"/><circle cx="9.6" cy="4.3" r="2.9" fill="#ED2939"/><g fill="#fff"><circle cx="12.5" cy="3.2" r="0.55"/><circle cx="14.3" cy="4.6" r="0.55"/><circle cx="13.7" cy="6.7" r="0.55"/><circle cx="11.3" cy="6.7" r="0.55"/><circle cx="10.7" cy="4.6" r="0.55"/></g></svg><span><span data-i18n="footer.singapore">Singapore</span> &mdash; <a href="tel:+6589692150">+65 8969 2150</a></span></li>
+          <li><svg class="flag-icon" viewBox="0 0 30 20" width="20" height="14" aria-hidden="true"><rect width="30" height="10" fill="#CE1126"/><rect y="10" width="30" height="10" fill="#fff"/></svg><span><span data-i18n="footer.indonesia">Indonesia</span> &mdash; <a href="tel:+6287777790575">+62 877 7779 0575</a></span></li>
+          <li><svg class="flag-icon" viewBox="0 0 30 20" width="20" height="14" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect width="30" height="3" fill="#A51931"/><rect y="17" width="30" height="3" fill="#A51931"/><rect y="3" width="30" height="3" fill="#fff"/><rect y="14" width="30" height="3" fill="#fff"/><rect y="6" width="30" height="8" fill="#241D4F"/></svg><span><span data-i18n="footer.thailand">Thailand</span> &mdash; <a href="tel:+66867893013">+66 86 789 3013</a></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.rights">&copy; 2026 Integrated Retail Management Consulting Pte. Ltd. All rights reserved.</span>
+      <a href="mailto:connect@integratedretail.com">connect@integratedretail.com</a>
+    </div>
+  </div>
+</footer>
+<div class="book-modal-overlay" id="bookModalOverlay">
+  <div class="book-modal" role="dialog" aria-modal="true" aria-labelledby="bookModalTitle">
+    <button type="button" class="book-modal-close" id="bookModalClose" aria-label="Close">&times;</button>
+    <span class="kicker">Let&rsquo;s Talk</span>
+    <h3 id="bookModalTitle" style="margin:6px 0 4px;">Book a zero-obligation consultation</h3>
+    <p class="book-modal-sub">Tell us a bit about your business and our team will be in touch shortly.</p>
+    <form class="book-modal-form" id="bookModalForm">
+      <div class="form-grid">
+        <div class="field"><label>Name *</label><input type="text" required></div>
+        <div class="field"><label>Email Address *</label><input type="email" required></div>
+        <div class="field"><label>Contact Number *</label><input type="tel" required></div>
+        <div class="field"><label>Country *</label>
+          <select required><option value="">Select a country</option><optgroup label="Our Offices"><option>Singapore</option><option>Indonesia</option><option>Thailand</option></optgroup><optgroup label="Other Countries"><option>Malaysia</option><option>Vietnam</option><option>Philippines</option><option>Cambodia</option><option>Myanmar</option><option>Laos</option><option>Brunei</option><option>Hong Kong</option><option>China</option><option>Taiwan</option><option>Japan</option><option>South Korea</option><option>India</option><option>Sri Lanka</option><option>Bangladesh</option><option>Pakistan</option><option>Australia</option><option>New Zealand</option><option>United Arab Emirates</option><option>Saudi Arabia</option><option>Qatar</option><option>United Kingdom</option><option>United States</option><option>Canada</option><option>Other</option></optgroup></select>
+        </div>
+        <div class="field full">
+          <label>I&rsquo;m Interested In *</label>
+          <select required>
+            <option value="">Select an area</option>
+            <option>Retail POS Software</option><option>E-Commerce</option><option>CRM</option><option>Staff Productivity</option><option>Consumer Engagement</option><option>Inventory Management</option><option>Reporting and Analytics</option><option>IR Expertise</option><option>Cegid Retail</option><option>Retail Pro Prism</option>
+          </select>
+        </div>
+        <div class="field"><label>How Many Stores Do You Have? *</label><input type="text" required></div>
+        <div class="field">
+          <label>Type of Industry *</label>
+          <select required>
+            <option value="">Select an industry</option>
+            <option>Apparel</option><option>Luxury</option><option>Jewellery</option><option>Electronics</option><option>Beauty</option><option>Footwear</option><option>Sporting Goods</option><option>Gifts</option><option>Franchises</option><option>Venues</option><option>Lifestyle</option><option>Hard Goods</option><option>Independent Retail</option><option>Eyewear</option><option>Cosmetics</option><option>Gourmet</option><option>Home</option><option>Garden</option><option>Wine</option><option>Others</option>
+          </select>
+        </div>
+        <div class="field full"><label>Your Message *</label><textarea rows="3" required></textarea></div>
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin-top:18px;width:100%;justify-content:center;">Submit Request</button>
+    </form>
+    <div class="book-modal-success" id="bookModalSuccess" hidden>
+      <div class="book-modal-success-icon">&check;</div>
+      <h3>Thanks &mdash; we&rsquo;ve got your request.</h3>
+      <p style="color:var(--slate-500);">Our team will reach out within one business day.</p>
+      <button type="button" class="btn btn-outline" id="bookModalDone">Close</button>
+    </div>
+  </div>
+</div>
+<div class="chat-widget">
+  <button type="button" class="chat-widget-btn" id="chatWidgetBtn" aria-label="Open support chat">
+    <svg class="chat-icon-open" viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M4 5h16v11H8l-4 4V5z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><circle cx="9" cy="10.5" r="1" fill="#fff"/><circle cx="12" cy="10.5" r="1" fill="#fff"/><circle cx="15" cy="10.5" r="1" fill="#fff"/></svg>
+    <svg class="chat-icon-close" viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <div class="chat-widget-panel" id="chatWidgetPanel">
+    <div class="chat-widget-header">
+      <span class="chat-widget-avatar"><img src="../../assets/img/logo.png" alt="" height="20"></span>
+      <div>
+        <div class="chat-widget-title">Integrated Retail Support Agent</div>
+        <div class="chat-widget-status"><span class="chat-widget-dot"></span>Online</div>
+      </div>
+      <button type="button" class="chat-widget-close" id="chatWidgetClose" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chat-widget-body" id="chatWidgetBody">
+      <div class="chat-msg bot">Hi, I&rsquo;m the Integrated Retail Support Agent. How can I help you today?</div>
+      <div class="chat-quick-replies">
+        <button type="button" class="chat-chip" data-reply="I&rsquo;d like to book a demo">Book a demo</button>
+        <button type="button" class="chat-chip" data-reply="Tell me about your products">Our products</button>
+        <button type="button" class="chat-chip" data-reply="I need help with an existing account">Existing customer support</button>
+      </div>
+    </div>
+    <form class="chat-widget-input-row" id="chatWidgetForm">
+      <input type="text" id="chatWidgetInput" placeholder="Type your message&hellip;" autocomplete="off">
+      <button type="submit" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M4 12L20 4L13 20L11 13L4 12Z" fill="#fff"/></svg>
+      </button>
+    </form>
+    <div class="chat-widget-footer-note">Our team typically replies within one business day.</div>
+  </div>
+</div>
+<script src="../../assets/js/i18n.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/search-index.js"></script>
+<script src="../../assets/js/search.js"></script>
+</body>
+</html>
