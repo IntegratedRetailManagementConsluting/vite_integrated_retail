@@ -1,8 +1,9 @@
 import { defineConfig, type Plugin } from 'vite';
 import { cpSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = __dirname;
+const ROOT = fileURLToPath(new URL('.', import.meta.url));
 
 // Collect every index.html in the tree so `vite build` emits all pages.
 function collectHtmlPages(dir: string, entries: Record<string, string> = {}) {
