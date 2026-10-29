@@ -46,7 +46,7 @@ PARTIALS_DIR = os.path.join(SITE_ROOT, "partials")
 # Directories that are not part of the deployed site and must never be
 # touched by the build (scratch/preview files Denise or Claude left
 # alongside the real pages).
-EXCLUDE_DIRS = {"partials", "Claude outputs"}
+EXCLUDE_DIRS = {"partials", "Claude outputs", "dist", "node_modules", ".git", ".wrangler", ".dyad"}
 
 # Top-level folder -> nav section name used in the __ACTIVE_<NAME>__
 # placeholders in partials/header.html.
@@ -73,6 +73,11 @@ HEADER_RE = re.compile(r'<header class="site-header">.*?</header>', re.S)
 FOOTER_RE = re.compile(r'<footer class="site-footer">.*?</footer>', re.S)
 
 
+GTAG_RE = re.compile(r'<!-- Google tag \(gtag\.js\) -->.*?</script>\s*(?=\n*</head>)', re.DOTALL)
+BOTPRESS_RE = re.compile(r'<div id="webchat"></div>.*?window\.botpress\.sendEvent\(.*?\}\);\s*</script>\s*', re.DOTALL)
+CHAT_WIDGET_RE = re.compile(r'<div class="chat-widget">.*?<div class="chat-widget-footer-note">.*?</div>\s*</div>\s*</div>', re.DOTALL)
+
+
 def load_partials():
     with open(os.path.join(PARTIALS_DIR, "header.html"), encoding="utf-8") as f:
         header_tpl = f.read()
@@ -80,7 +85,11 @@ def load_partials():
         footer_tpl = f.read()
     with open(os.path.join(PARTIALS_DIR, "footer-newsletter.html"), encoding="utf-8") as f:
         newsletter_html = f.read()
-    return header_tpl, footer_tpl, newsletter_html
+    gtag_path = os.path.join(PARTIALS_DIR, "gtag.html")
+    gtag_html = open(gtag_path, encoding="utf-8").read().strip() if os.path.exists(gtag_path) else None
+    botpress_path = os.path.join(PARTIALS_DIR, "botpress.html")
+    botpress_html = open(botpress_path, encoding="utf-8").read().strip() if os.path.exists(botpress_path) else None
+    return header_tpl, footer_tpl, newsletter_html, gtag_html, botpress_html
 
 
 def site_pages():
@@ -124,7 +133,7 @@ def render_footer(footer_tpl, newsletter_html, root_prefix, is_homepage):
 
 
 def build(check_only=False):
-    header_tpl, footer_tpl, newsletter_html = load_partials()
+    header_tpl, footer_tpl, newsletter_html, gtag_html, botpress_html = load_partials()
     pages = site_pages()
 
     changed = []
@@ -153,6 +162,22 @@ def build(check_only=False):
         # backslash/group-reference processing.
         new_content = HEADER_RE.sub(lambda m: new_header, content, count=1)
         new_content = FOOTER_RE.sub(lambda m: new_footer, new_content, count=1)
+
+        # Sync Google Tag in <head>
+        if gtag_html:
+            if GTAG_RE.search(new_content):
+                new_content = GTAG_RE.sub(lambda m: gtag_html, new_content, count=1)
+            elif "</head>" in new_content and "G-N6ZQPDCEX1" not in new_content:
+                new_content = new_content.replace("</head>", f"{gtag_html}\n</head>", 1)
+
+        # Sync Botpress before </body>
+        if botpress_html:
+            if BOTPRESS_RE.search(new_content):
+                new_content = BOTPRESS_RE.sub(lambda m: botpress_html, new_content, count=1)
+            elif CHAT_WIDGET_RE.search(new_content):
+                new_content = CHAT_WIDGET_RE.sub(lambda m: botpress_html, new_content, count=1)
+            elif "</body>" in new_content and "botpress.cloud" not in new_content:
+                new_content = new_content.replace("</body>", f"{botpress_html}\n</body>", 1)
 
         if new_content != content:
             changed.append(rel)

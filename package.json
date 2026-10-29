@@ -4,10 +4,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "build:partials": "python3 build_site.py",
+    "dev": "python3 build_site.py && vite",
+    "build": "python3 build_site.py && vite build",
     "preview": "vite preview",
-    "deploy": "vite build && wrangler pages deploy dist --project-name=integratedretail-site --branch=main"
+    "deploy": "python3 build_site.py && vite build && wrangler pages deploy dist --project-name=integratedretail-site --branch=main"
   },
   "dependencies": {
     "vite": "^8.3.5"
