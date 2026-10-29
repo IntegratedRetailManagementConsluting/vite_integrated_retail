@@ -78,12 +78,99 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && bookOverlay.classList.contains('open')) closeBookModal();
     });
+    function serializeForm(form) {
+      var inputs = form.querySelectorAll('input, select, textarea');
+      var data = {};
+      inputs.forEach(function(el) {
+        var key = el.name;
+        if (!key) {
+          var label = el.closest('.field') ? el.closest('.field').querySelector('label') : null;
+          if (label) {
+            var txt = label.textContent.replace(/\*/g, '').trim().toLowerCase();
+            if (txt.indexOf('name') !== -1) key = 'name';
+            else if (txt.indexOf('email') !== -1) key = 'email';
+            else if (txt.indexOf('contact') !== -1 || txt.indexOf('number') !== -1 || txt.indexOf('phone') !== -1) key = 'phone';
+            else if (txt.indexOf('country') !== -1) key = 'country';
+            else if (txt.indexOf('interested') !== -1) key = 'interest';
+            else if (txt.indexOf('store') !== -1) key = 'stores';
+            else if (txt.indexOf('industry') !== -1) key = 'industry';
+            else if (txt.indexOf('message') !== -1) key = 'message';
+            else key = txt;
+          }
+        }
+        if (key) {
+          data[key] = el.value;
+        }
+      });
+      return data;
+    }
+
+    function sendFormToApi(form, source, onSuccess, onError) {
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var origText = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+      }
+
+      var payload = serializeForm(form);
+      payload.source = source || window.location.pathname;
+
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(res) {
+        return res.json().catch(function() { return {}; });
+      })
+      .then(function(result) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = origText;
+        }
+        if (onSuccess) onSuccess(result);
+      })
+      .catch(function(err) {
+        console.error('Submission error:', err);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = origText;
+        }
+        if (onError) onError(err);
+        else if (onSuccess) onSuccess();
+      });
+    }
+
     if (bookForm) {
       bookForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        bookForm.hidden = true;
-        if (bookSuccess) bookSuccess.hidden = false;
+        sendFormToApi(bookForm, 'Book Modal (' + window.location.pathname + ')', function() {
+          bookForm.hidden = true;
+          if (bookSuccess) bookSuccess.hidden = false;
+        });
       });
+    }
+
+    // Contact page standalone form
+    var contactPageForm = document.getElementById('contactPageForm');
+    var contactSuccess = document.getElementById('contactSuccess');
+    var contactResetBtn = document.getElementById('contactResetBtn');
+    if (contactPageForm) {
+      contactPageForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        sendFormToApi(contactPageForm, 'Contact Page', function() {
+          contactPageForm.hidden = true;
+          if (contactSuccess) contactSuccess.hidden = false;
+        });
+      });
+      if (contactResetBtn) {
+        contactResetBtn.addEventListener('click', function() {
+          contactPageForm.hidden = false;
+          contactPageForm.reset();
+          if (contactSuccess) contactSuccess.hidden = true;
+        });
+      }
     }
   }
 

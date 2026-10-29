@@ -215,17 +215,18 @@
       <span class="kicker">Let&rsquo;s Talk</span>
       <h2>Book a zero-obligation consultation on technical transformation</h2>
     </div>
-    <form class="form-card">
+    <form class="form-card" id="contactPageForm">
+      <input type="text" name="website_url" style="display:none !important;" tabindex="-1" autocomplete="off">
       <div class="form-grid">
-        <div class="field"><label>Name *</label><input type="text" required></div>
-        <div class="field"><label>Email Address *</label><input type="email" required></div>
-        <div class="field"><label>Contact Number *</label><input type="tel" required></div>
+        <div class="field"><label>Name *</label><input type="text" name="name" required></div>
+        <div class="field"><label>Email Address *</label><input type="email" name="email" required></div>
+        <div class="field"><label>Contact Number *</label><input type="tel" name="phone" required></div>
         <div class="field"><label>Country *</label>
-          <select required><option value="">Select a country</option><optgroup label="Our Offices"><option>Singapore</option><option>Indonesia</option><option>Thailand</option></optgroup><optgroup label="Other Countries"><option>Malaysia</option><option>Vietnam</option><option>Philippines</option><option>Cambodia</option><option>Myanmar</option><option>Laos</option><option>Brunei</option><option>Hong Kong</option><option>China</option><option>Taiwan</option><option>Japan</option><option>South Korea</option><option>India</option><option>Sri Lanka</option><option>Bangladesh</option><option>Pakistan</option><option>Australia</option><option>New Zealand</option><option>United Arab Emirates</option><option>Saudi Arabia</option><option>Qatar</option><option>United Kingdom</option><option>United States</option><option>Canada</option><option>Other</option></optgroup></select>
+          <select name="country" required><option value="">Select a country</option><optgroup label="Our Offices"><option>Singapore</option><option>Indonesia</option><option>Thailand</option></optgroup><optgroup label="Other Countries"><option>Malaysia</option><option>Vietnam</option><option>Philippines</option><option>Cambodia</option><option>Myanmar</option><option>Laos</option><option>Brunei</option><option>Hong Kong</option><option>China</option><option>Taiwan</option><option>Japan</option><option>South Korea</option><option>India</option><option>Sri Lanka</option><option>Bangladesh</option><option>Pakistan</option><option>Australia</option><option>New Zealand</option><option>United Arab Emirates</option><option>Saudi Arabia</option><option>Qatar</option><option>United Kingdom</option><option>United States</option><option>Canada</option><option>Other</option></optgroup></select>
         </div>
         <div class="field full">
           <label>I&rsquo;m Interested In *</label>
-          <select required>
+          <select name="interest" required>
             <option value="">Select an area</option>
             <option>Retail POS Software</option>
             <option>E-Commerce</option>
@@ -239,18 +240,24 @@
             <option>Retail Pro Prism</option>
           </select>
         </div>
-        <div class="field"><label>How Many Stores Do You Have? *</label><input type="text" required></div>
+        <div class="field"><label>How Many Stores Do You Have? *</label><input type="text" name="stores" required></div>
         <div class="field">
           <label>Type of Industry *</label>
-          <select required>
+          <select name="industry" required>
             <option value="">Select an industry</option>
             <option>Apparel</option><option>Luxury</option><option>Jewellery</option><option>Electronics</option><option>Beauty</option><option>Footwear</option><option>Sporting Goods</option><option>Gifts</option><option>Franchises</option><option>Venues</option><option>Lifestyle</option><option>Hard Goods</option><option>Independent Retail</option><option>Eyewear</option><option>Cosmetics</option><option>Gourmet</option><option>Home</option><option>Garden</option><option>Wine</option><option>Others</option>
           </select>
         </div>
-        <div class="field full"><label>Your Message *</label><textarea rows="4" required></textarea></div>
+        <div class="field full"><label>Your Message *</label><textarea name="message" rows="4" required></textarea></div>
       </div>
       <button type="submit" class="btn btn-primary" style="margin-top:20px;">Book My Consultation</button>
     </form>
+    <div class="form-card-success" id="contactSuccess" hidden style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:48px 24px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.04);margin-top:20px;">
+      <div style="width:60px;height:60px;background:#e0f2fe;color:#0284c7;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:16px;">&check;</div>
+      <h3 style="margin-bottom:8px;font-size:22px;">Thank you &mdash; we&rsquo;ve received your request!</h3>
+      <p style="color:#64748b;max-width:460px;margin:0 auto 24px;line-height:1.6;">Our team of retail technology specialists will review your requirements and reach out within one business day.</p>
+      <button type="button" class="btn btn-outline" id="contactResetBtn">Send Another Inquiry</button>
+    </div>
   </div>
 </section>
 <footer class="site-footer">

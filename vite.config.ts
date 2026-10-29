@@ -8,7 +8,14 @@ const ROOT = fileURLToPath(new URL('.', import.meta.url));
 // Collect every index.html in the tree so `vite build` emits all pages.
 function collectHtmlPages(dir: string, entries: Record<string, string> = {}) {
   for (const name of readdirSync(dir)) {
-    if (name === 'node_modules' || name === 'dist' || name === '.git') continue;
+    if (
+      name === 'node_modules' ||
+      name === 'dist' ||
+      name === '.git' ||
+      name === 'Claude outputs' ||
+      name === '.dyad' ||
+      name === 'partials'
+    ) continue;
     const full = join(dir, name);
     if (statSync(full).isDirectory()) {
       collectHtmlPages(full, entries);

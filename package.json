@@ -6,9 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "vite build && wrangler pages deploy dist --project-name=integratedretail-site --branch=main"
   },
   "dependencies": {
     "vite": "^8.3.5"
+  },
+  "devDependencies": {
+    "wrangler": "^4.153.0"
   }
 }

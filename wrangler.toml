@@ -1,3 +1,8 @@
 name = "integratedretail-site"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "dist"
+
+[vars]
+RESEND_API_KEY = "re_VbtwkioN_6ffuTywdZqYJrGxFXqu12mgD"
+CONTACT_RECIPIENT = "connect@integratedretail.com"
+FROM_EMAIL = "Integrated Retail <website@integratedretail.com>"
