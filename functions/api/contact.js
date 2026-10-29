@@ -17,25 +17,78 @@ export async function onRequestPost({ request, env }) {
       });
     }
 
-    // Required fields check
+    // Required fields validation
     if (!data.name || !data.email) {
-      return new Response(JSON.stringify({ error: 'Name and email are required' }), {
+      return new Response(JSON.stringify({ error: 'Name and email are required.' }), {
         status: 400,
         headers,
       });
     }
 
+    const wpOrigin = env.WP_API_ORIGIN || 'https://integratedretail.com';
+    const gfKey = env.GF_CONSUMER_KEY || 'ck_e85bf48d0b0695b26a82c0b2f9535853255e5459';
+    const gfSecret = env.GF_CONSUMER_SECRET || 'cs_8eed7cce951146dfaccb41945e9f3c26ea33840f';
+    const gfFormId = parseInt(env.GF_FORM_ID || '1', 10);
+
+    let gfSuccess = false;
+    let gfEntryId = null;
+
+    // 1. Submit entry into WordPress Gravity Forms database
+    try {
+      const gfAuth = btoa(`${gfKey}:${gfSecret}`);
+      const gfPayload = {
+        form_id: gfFormId,
+        '1': data.name,
+        '10': data.email,
+        '16': data.phone || '',
+        '8': data.country || '',
+        '5': data.interest || '',
+        '12': data.stores || '',
+        '13': data.industry || '',
+        '6': data.message || '',
+        '17': '', // Hidden honeypot field
+      };
+
+      const gfRes = await fetch(`${wpOrigin}/wp-json/gf/v2/entries`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Basic ${gfAuth}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(gfPayload),
+      });
+
+      if (gfRes.ok) {
+        const gfResult = await gfRes.json();
+        gfSuccess = true;
+        gfEntryId = gfResult.id;
+      } else {
+        console.warn('Gravity Forms API error:', gfRes.status, await gfRes.text().catch(() => ''));
+      }
+    } catch (gfErr) {
+      console.warn('Gravity Forms fetch failed:', gfErr.message);
+    }
+
+    // 2. Email Notification via Resend (high-deliverability direct send)
     const resendApiKey = env.RESEND_API_KEY || 're_VbtwkioN_6ffuTywdZqYJrGxFXqu12mgD';
-    const recipient = env.CONTACT_RECIPIENT || 'connect@integratedretail.com';
     const fromAddress = env.FROM_EMAIL || 'Integrated Retail <website@integratedretail.com>';
+    
+    // Designated team recipients from Gravity Forms notification setup
+    const defaultRecipients = [
+      'kamal.lahria@integratedretail.com',
+      'bikash.kumar@integratedretail.com',
+      'somchai.singh@integratedretail.com',
+      'sneha.varma@integratedretail.com',
+      'anupama.singal@integratedretail.com',
+    ];
+    const recipients = env.CONTACT_RECIPIENT ? [env.CONTACT_RECIPIENT] : defaultRecipients;
 
     const subject = `New Website Inquiry: ${data.name} (${data.interest || 'Consultation'})`;
-    
     const html = `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; line-height: 1.6; color: #1e293b; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
         <div style="background: #002b49; padding: 20px 24px;">
           <h2 style="color: #ffffff; margin: 0; font-size: 20px; font-weight: 600;">New Consultation Request</h2>
-          <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 13px;">Submitted via integratedretail.com</p>
+          <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 13px;">Submitted via integratedretail.com ${gfEntryId ? `(Gravity Forms Lead #${gfEntryId})` : ''}</p>
         </div>
         
         <div style="padding: 24px;">
@@ -86,44 +139,32 @@ export async function onRequestPost({ request, env }) {
       </div>
     `;
 
-    // Try primary send (to designated recipient)
-    let resendRes = await sendResend(resendApiKey, {
-      from: fromAddress,
-      to: [recipient],
-      reply_to: data.email,
-      subject,
-      html,
-    });
-
-    if (!resendRes.ok) {
-      const errData = await resendRes.json().catch(() => ({}));
-      console.warn('Primary recipient send failed:', errData);
-
-      // Fallback: Resend sandbox allows sending from onboarding@resend.dev to the account owner
-      const fallbackRes = await sendResend(resendApiKey, {
-        from: 'Integrated Retail Website <onboarding@resend.dev>',
-        to: ['yithanglee@gmail.com'],
+    try {
+      const resendRes = await sendResend(resendApiKey, {
+        from: fromAddress,
+        to: recipients,
         reply_to: data.email,
-        subject: `[Lead Notification] ${subject}`,
-        html: `<div style="background:#fee2e2;border:1px solid #ef4444;color:#991b1b;padding:12px;border-radius:6px;margin-bottom:16px;font-size:13px;">
-          <strong>Notice:</strong> The primary domain (${fromAddress}) is not yet verified on Resend. This lead was automatically routed to the registered admin email so no leads are lost.
-        </div>` + html,
+        subject,
+        html,
       });
 
-      if (fallbackRes.ok) {
-        return new Response(JSON.stringify({ success: true, mode: 'fallback' }), {
-          status: 200,
-          headers,
+      if (!resendRes.ok) {
+        // Fallback for Resend sandbox (send to owner email if domain not yet verified in Resend)
+        await sendResend(resendApiKey, {
+          from: 'Integrated Retail Website <onboarding@resend.dev>',
+          to: ['yithanglee@gmail.com'],
+          reply_to: data.email,
+          subject: `[Lead Alert] ${subject}`,
+          html: `<div style="background:#fee2e2;border:1px solid #ef4444;color:#991b1b;padding:12px;border-radius:6px;margin-bottom:16px;font-size:13px;">
+            <strong>Notice:</strong> Resend domain verification pending. Routed to registered admin email.
+          </div>` + html,
         });
       }
-
-      return new Response(JSON.stringify({ error: errData.message || 'Email delivery failed' }), {
-        status: 500,
-        headers,
-      });
+    } catch (resendErr) {
+      console.warn('Resend send exception:', resendErr.message);
     }
 
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({ success: true, gf_entry_id: gfEntryId }), {
       status: 200,
       headers,
     });

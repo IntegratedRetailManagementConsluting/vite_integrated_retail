@@ -83,7 +83,7 @@
     if (post.featured_image) {
       thumbHtml = [
         '<div class="thumb has-photo">',
-        '  <img src="' + post.featured_image + '" alt="' + (post.featured_image_alt || rawTitle).replace(/"/g, '&quot;') + '" loading="lazy">',
+        '  <img src="' + post.featured_image + '" alt="' + (post.featured_image_alt || rawTitle).replace(/"/g, '&quot;') + '" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove(\'has-photo\'); this.remove();">',
         '</div>',
       ].join('');
     } else {

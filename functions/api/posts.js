@@ -80,9 +80,11 @@ export async function onRequestGet({ request, env }) {
   };
 
   try {
+    const wpOrigin = env.WP_API_ORIGIN || WP_ORIGIN;
+
     // 1. Single Post by Slug
     if (slug) {
-      const wpUrl = new URL(`${WP_ORIGIN}/wp-json/wp/v2/posts`);
+      const wpUrl = new URL(`${wpOrigin}/wp-json/wp/v2/posts`);
       wpUrl.searchParams.set('slug', slug);
       wpUrl.searchParams.set('_embed', '1');
 
@@ -116,7 +118,7 @@ export async function onRequestGet({ request, env }) {
     }
 
     // 2. Listing of Posts
-    const wpUrl = new URL(`${WP_ORIGIN}/wp-json/wp/v2/posts`);
+    const wpUrl = new URL(`${wpOrigin}/wp-json/wp/v2/posts`);
     wpUrl.searchParams.set('_embed', '1');
     wpUrl.searchParams.set('page', String(page));
     wpUrl.searchParams.set('per_page', String(perPage));
