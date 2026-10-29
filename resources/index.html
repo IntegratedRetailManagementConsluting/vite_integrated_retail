@@ -181,57 +181,7 @@
       <button data-filter="blog">Articles</button>
       <button data-filter="event">Events</button>
     </div>
-    <div class="grid grid-3 reveal-stagger">
-      
-      <a href="modern-retail-platforms-multi-store/index.html" class="post-card card reveal-child" data-type="blog">
-        <div class="thumb has-photo"><img src="../assets/img/resources/modern-retail-platforms.jpg" alt="Why Multi-Store Retailers Are Moving to Modern Retail Platforms" loading="lazy"></div>
-        <div class="meta">Retail Technology</div>
-        <h3>Why Multi-Store Retailers Are Moving to Modern Retail Platforms</h3>
-        <p class="post-excerpt">Legacy POS and inventory tools that worked fine for one flagship store start to buckle at twenty, fifty, or a hundred locations. Here's what's actually driving the shift.</p>
-        <span class="card-link">Read more &rarr;</span>
-      </a>
-      <a href="practical-ai-use-cases-retail-decisions/index.html" class="post-card card reveal-child" data-type="blog">
-        <div class="thumb" style="background:linear-gradient(135deg, #7c3aed, #c026d3);"><span class="thumb-icon"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2"><circle cx="24" cy="24" r="9"/><path d="M24 4v7M24 37v7M4 24h7M37 24h7M9.8 9.8l5 5M33.2 33.2l5 5M38.2 9.8l-5 5M14.8 33.2l-5 5"/></svg></span></div>
-        <div class="meta">AI & Retail</div>
-        <h3>Practical AI Use Cases That Improve Retail Decision-Making</h3>
-        <p class="post-excerpt">AI in retail doesn't have to mean a moonshot project. Some of the highest-return use cases are quiet, practical, and deployable today.</p>
-        <span class="card-link">Read more &rarr;</span>
-      </a>
-      <a href="zero-trust-security-retail-networks/index.html" class="post-card card reveal-child" data-type="blog">
-        <div class="thumb has-photo"><img src="../assets/img/resources/zero-trust-security.jpg" alt="Zero-Trust Security for Modern Retail Networks" loading="lazy"></div>
-        <div class="meta">Security</div>
-        <h3>Zero-Trust Security for Modern Retail Networks</h3>
-        <p class="post-excerpt">Retail networks span head office, warehouses and hundreds of point-of-sale terminals — each one a potential entry point. Zero-trust flips the default assumption.</p>
-        <span class="card-link">Read more &rarr;</span>
-      </a>
-      <a href="ransomware-protection-retail-operations/index.html" class="post-card card reveal-child" data-type="blog">
-        <div class="thumb" style="background:linear-gradient(135deg, #b91c1c, #7c2d12);"><span class="thumb-icon"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2"><path d="M24 5l16 6v11c0 10-7 17.5-16 21C15 39.5 8 32 8 22V11l16-6z"/><path d="M17 24l5 5 9-10"/></svg></span></div>
-        <div class="meta">Security</div>
-        <h3>Ransomware Protection for Retail Operations: What Retail Leaders Must Know</h3>
-        <p class="post-excerpt">Retail is a disproportionately attractive ransomware target — POS downtime means immediate, visible revenue loss. Here's what actually reduces the risk.</p>
-        <span class="card-link">Read more &rarr;</span>
-      </a>
-      <a href="change-management-large-scale-digital-initiatives/index.html" class="post-card card reveal-child" data-type="blog">
-        <div class="thumb has-photo"><img src="../assets/img/resources/change-management.jpg" alt="Change Management for Large-Scale Digital Initiatives: A Strategic Imperative for Retail Leaders" loading="lazy"></div>
-        <div class="meta">Digital Transformation</div>
-        <h3>Change Management for Large-Scale Digital Initiatives: A Strategic Imperative for Retail Leaders</h3>
-        <p class="post-excerpt">Most technology rollouts don't fail because of the software. They fail because the people running the stores were never brought along.</p>
-        <span class="card-link">Read more &rarr;</span>
-      </a>
-      <a href="digital-twin-technology-retail-store-layouts/index.html" class="post-card card reveal-child" data-type="blog">
-        <div class="thumb has-photo"><img src="../assets/img/resources/digital-twin.jpg" alt="Digital Twin Technology: Transforming Retail Store Layouts for Growth" loading="lazy"></div>
-        <div class="meta">Retail Technology</div>
-        <h3>Digital Twin Technology: Transforming Retail Store Layouts for Growth</h3>
-        <p class="post-excerpt">An emerging capability worth watching: virtual models of a store that let retailers test layout changes before committing to a physical reset.</p>
-        <span class="card-link">Read more &rarr;</span>
-      </a>
-      <a href="automating-financial-reconciliation-across-channels/index.html" class="post-card card reveal-child" data-type="blog">
-        <div class="thumb has-photo"><img src="../assets/img/resources/financial-reconciliation.jpg" alt="Automating Financial Reconciliation Across Channels" loading="lazy"></div>
-        <div class="meta">Operations & Finance</div>
-        <h3>Automating Financial Reconciliation Across Channels</h3>
-        <p class="post-excerpt">POS, e-commerce, marketplaces and payment gateways each produce their own numbers. Getting them to agree shouldn't take a finance team a week every month.</p>
-        <span class="card-link">Read more &rarr;</span>
-      </a>
+    <div class="grid grid-3 reveal-stagger" id="blogGrid">
       <a href="indonesia-retail-summit-expo-2025/index.html" class="post-card card reveal-child" data-type="event">
         <div class="thumb has-illo">
           <span class="event-badge"><span class="event-badge-mark" style="background:#c4181f;">IR</span>IRSE 2025</span>
@@ -383,6 +333,10 @@
         <span class="card-link">Read more &rarr;</span>
       </a>
     </div>
+    <div class="load-more-wrap" id="loadMoreWrap">
+      <button type="button" class="btn btn-outline" id="loadMoreBtn">Load More Articles &darr;</button>
+      <div class="load-more-status" id="loadMoreStatus"></div>
+    </div>
   </div>
 </section>
 
@@ -522,5 +476,6 @@
 </div>
 <script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/main.js"></script>
+<script src="../assets/js/blog.js"></script>
 </body>
 </html>

@@ -43,8 +43,37 @@ function copyStaticAssets(): Plugin {
   };
 }
 
+// Dev server proxy plugin for Cloudflare Pages Functions
+function devApiProxy(): Plugin {
+  return {
+    name: 'dev-api-proxy',
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        if (!req.url?.startsWith('/api/posts')) return next();
+        try {
+          const { onRequestGet } = await import('./functions/api/posts.js');
+          const fullUrl = `http://${req.headers.host || 'localhost'}${req.url}`;
+          const webReq = new Request(fullUrl, {
+            method: req.method || 'GET',
+            headers: req.headers as Record<string, string>,
+          });
+          const response = await onRequestGet({ request: webReq, env: {} });
+          res.statusCode = response.status;
+          response.headers.forEach((v, k) => {
+            res.setHeader(k, v);
+          });
+          const body = await response.text();
+          res.end(body);
+        } catch (err) {
+          next(err);
+        }
+      });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [copyStaticAssets()],
+  plugins: [copyStaticAssets(), devApiProxy()],
   build: {
     assetsDir: 'static',
     rollupOptions: {
