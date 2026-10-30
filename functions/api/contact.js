@@ -17,8 +17,17 @@ export async function onRequestPost({ request, env }) {
       });
     }
 
+    // Form ID detection
+    const gfFormId = parseInt(data.form_id || env.GF_FORM_ID || '1', 10);
+
     // Required fields validation
-    if (!data.name || !data.email) {
+    if (!data.email) {
+      return new Response(JSON.stringify({ error: 'Email is required.' }), {
+        status: 400,
+        headers,
+      });
+    }
+    if (gfFormId !== 100 && !data.name) {
       return new Response(JSON.stringify({ error: 'Name and email are required.' }), {
         status: 400,
         headers,
@@ -28,7 +37,6 @@ export async function onRequestPost({ request, env }) {
     const wpOrigin = env.WP_API_ORIGIN || 'https://integratedretail.com';
     const gfKey = env.GF_CONSUMER_KEY || 'ck_e85bf48d0b0695b26a82c0b2f9535853255e5459';
     const gfSecret = env.GF_CONSUMER_SECRET || 'cs_8eed7cce951146dfaccb41945e9f3c26ea33840f';
-    const gfFormId = parseInt(env.GF_FORM_ID || '1', 10);
 
     let gfSuccess = false;
     let gfEntryId = null;
@@ -36,18 +44,54 @@ export async function onRequestPost({ request, env }) {
     // 1. Submit entry into WordPress Gravity Forms database
     try {
       const gfAuth = btoa(`${gfKey}:${gfSecret}`);
-      const gfPayload = {
-        form_id: gfFormId,
-        '1': data.name,
-        '10': data.email,
-        '16': data.phone || '',
-        '8': data.country || '',
-        '5': data.interest || '',
-        '12': data.stores || '',
-        '13': data.industry || '',
-        '6': data.message || '',
-        '17': '', // Hidden honeypot field
-      };
+      let gfPayload;
+
+      if (gfFormId === 100) {
+        // Form 100: Subscribe
+        gfPayload = {
+          form_id: 100,
+          '1': data.name || (data.email ? data.email.split('@')[0] : 'Subscriber'),
+          '10': data.email,
+          '14': '',
+          '17': data.company || '',
+        };
+      } else if (gfFormId === 91) {
+        // Form 91: Cegid White Paper Response
+        gfPayload = {
+          form_id: 91,
+          '3': data.name,
+          '5': data.phone || '',
+          '6': data.email,
+          '7': data.message || data.remarks || 'Requested White Paper: Retail Stores in 2025',
+          '8': '',
+        };
+      } else if (gfFormId === 98) {
+        // Form 98: Aug 2025 ID Retail Summit
+        gfPayload = {
+          form_id: 98,
+          '1': data.name,
+          '5': data.phone || '',
+          '6': data.email,
+          '15': data.stores || '',
+          '13': data.budget || '',
+          '8': data.message || 'Retail Summit RSVP',
+          '10': '',
+        };
+      } else {
+        // Form 1 (and general consultation): Contact us / Demo Request
+        gfPayload = {
+          form_id: gfFormId,
+          '1': data.name,
+          '10': data.email,
+          '16': data.phone || '',
+          '8': data.country || '',
+          '5': data.interest || '',
+          '12': data.stores || '',
+          '13': data.industry || '',
+          '6': data.message || '',
+          '17': '', // Hidden honeypot field
+        };
+      }
 
       const gfRes = await fetch(`${wpOrigin}/wp-json/gf/v2/entries`, {
         method: 'POST',
@@ -83,12 +127,25 @@ export async function onRequestPost({ request, env }) {
     ];
     const recipients = env.CONTACT_RECIPIENT ? [env.CONTACT_RECIPIENT] : defaultRecipients;
 
-    const subject = `New Website Inquiry: ${data.name} (${data.interest || 'Consultation'})`;
+    let subject = `New Website Inquiry: ${data.name || data.email} (${data.interest || 'Consultation'})`;
+    let formTitle = 'New Consultation Request';
+
+    if (gfFormId === 100) {
+      subject = `[Newsletter] New Subscription: ${data.email}`;
+      formTitle = 'New Newsletter Subscription';
+    } else if (gfFormId === 91) {
+      subject = `[White Paper Request] Cegid Retail 2025: ${data.name} (${data.email})`;
+      formTitle = 'Cegid White Paper Request';
+    } else if (gfFormId === 98) {
+      subject = `[Event RSVP] Indonesia Retail Summit 2025: ${data.name}`;
+      formTitle = 'Indonesia Retail Summit 2025 RSVP';
+    }
+
     const html = `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; line-height: 1.6; color: #1e293b; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
         <div style="background: #002b49; padding: 20px 24px;">
-          <h2 style="color: #ffffff; margin: 0; font-size: 20px; font-weight: 600;">New Consultation Request</h2>
-          <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 13px;">Submitted via integratedretail.com ${gfEntryId ? `(Gravity Forms Lead #${gfEntryId})` : ''}</p>
+          <h2 style="color: #ffffff; margin: 0; font-size: 20px; font-weight: 600;">${formTitle}</h2>
+          <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 13px;">Submitted via integratedretail.com ${gfEntryId ? `(Gravity Forms #${gfFormId} Entry #${gfEntryId})` : `(Form #${gfFormId})`}</p>
         </div>
         
         <div style="padding: 24px;">

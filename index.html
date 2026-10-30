@@ -609,20 +609,7 @@
     </div>
   </div>
 </footer>
-<script>
-(function(){
-  var form = document.getElementById("footerNewsletterForm");
-  if (!form) return;
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    var email = document.getElementById("footerNewsletterEmail");
-    var consent = document.getElementById("footerNewsletterConsent");
-    if (!email || !email.value || !consent || !consent.checked) return;
-    form.hidden = true;
-    document.getElementById("footerNewsletterSuccess").hidden = false;
-  });
-})();
-</script>
+
 <div class="book-modal-overlay" id="bookModalOverlay">
   <div class="book-modal" role="dialog" aria-modal="true" aria-labelledby="bookModalTitle">
     <button type="button" class="book-modal-close" id="bookModalClose" aria-label="Close">&times;</button>

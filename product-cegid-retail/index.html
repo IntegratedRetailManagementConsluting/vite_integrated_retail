@@ -114,7 +114,7 @@
     <p class="lead">Elevate Your Retail Experience &mdash; Cegid Retail's cloud-native POS and unified commerce platform for specialty retailers and luxury brands, deployed and supported by Integrated Retail.</p>
     <div class="hero-actions">
       <a href="../contact/index.html" class="btn btn-primary">Book a Demo</a>
-      <a href="../contact/index.html" class="btn btn-ghost-light">Request the White Paper</a>
+      <a href="#whitepaper" class="btn btn-ghost-light btn-whitepaper">Request the White Paper</a>
     </div>
   </div>
 </section>
@@ -278,7 +278,7 @@
         <h2>Get your company AI-ready for 2025</h2>
         <p>Download Cegid&rsquo;s exclusive white paper: &lsquo;Retail Stores in 2025 &mdash; Powered by AI?&rsquo;</p>
       </div>
-      <a href="../contact/index.html" class="btn btn-primary">Request the White Paper</a>
+      <a href="#whitepaper" class="btn btn-primary btn-whitepaper">Request the White Paper</a>
     </div>
   </div>
 </section>
@@ -371,6 +371,29 @@
       <h3>Thanks &mdash; we&rsquo;ve got your request.</h3>
       <p style="color:var(--slate-500);">Our team will reach out within one business day.</p>
       <button type="button" class="btn btn-outline" id="bookModalDone">Close</button>
+    </div>
+  </div>
+</div>
+<div class="book-modal-overlay" id="whitepaperModalOverlay">
+  <div class="book-modal" role="dialog" aria-modal="true" aria-labelledby="whitepaperModalTitle">
+    <button type="button" class="book-modal-close" id="whitepaperModalClose" aria-label="Close">&times;</button>
+    <span class="kicker">White Paper Download</span>
+    <h3 id="whitepaperModalTitle" style="margin:6px 0 4px;">Download Cegid&rsquo;s Exclusive White Paper</h3>
+    <p class="book-modal-sub">&lsquo;Retail Stores in 2025 &mdash; Powered by AI?&rsquo; &mdash; Insights on cloud unified commerce, in-store AI, and modern retail transformation.</p>
+    <form class="book-modal-form" id="whitepaperModalForm" data-form-id="91">
+      <div class="form-grid">
+        <div class="field full"><label>Full Name *</label><input type="text" name="name" required placeholder="Your full name"></div>
+        <div class="field"><label>Business Email *</label><input type="email" name="email" required placeholder="name@company.com"></div>
+        <div class="field"><label>Contact Number *</label><input type="tel" name="phone" required placeholder="+65 ..."></div>
+        <div class="field full"><label>Enquiry / Remarks (Optional)</label><textarea name="message" rows="2" placeholder="Tell us about your brand or specific interests"></textarea></div>
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin-top:18px;width:100%;justify-content:center;">Download White Paper</button>
+    </form>
+    <div class="book-modal-success" id="whitepaperModalSuccess" hidden>
+      <div class="book-modal-success-icon">&check;</div>
+      <h3>Thank you! Your request has been received.</h3>
+      <p style="color:var(--slate-500);">We have recorded your details and our team will email the white paper directly to your inbox shortly.</p>
+      <button type="button" class="btn btn-outline" id="whitepaperModalDone">Close</button>
     </div>
   </div>
 </div>

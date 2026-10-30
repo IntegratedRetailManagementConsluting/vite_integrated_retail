@@ -114,6 +114,9 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       var payload = serializeForm(form);
+      if (form.dataset && form.dataset.formId) {
+        payload.form_id = parseInt(form.dataset.formId, 10);
+      }
       payload.source = source || window.location.pathname;
 
       fetch('/api/contact', {
@@ -171,6 +174,101 @@ document.addEventListener('DOMContentLoaded', function () {
           if (contactSuccess) contactSuccess.hidden = true;
         });
       }
+    }
+
+    // White Paper Modal (e.g. Cegid Retail Form 91)
+    var wpOverlay = document.getElementById('whitepaperModalOverlay');
+    if (wpOverlay) {
+      var wpForm = document.getElementById('whitepaperModalForm');
+      var wpSuccess = document.getElementById('whitepaperModalSuccess');
+      var wpClose = document.getElementById('whitepaperModalClose');
+      var wpDone = document.getElementById('whitepaperModalDone');
+
+      var openWpModal = function () {
+        wpOverlay.classList.add('open');
+        document.body.classList.add('modal-open');
+      };
+      var closeWpModal = function () {
+        wpOverlay.classList.remove('open');
+        document.body.classList.remove('modal-open');
+        if (wpForm) { wpForm.hidden = false; wpForm.reset(); }
+        if (wpSuccess) { wpSuccess.hidden = true; }
+      };
+
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest('.btn-whitepaper, a[href="#whitepaper"]');
+        if (!a) return;
+        e.preventDefault();
+        openWpModal();
+      });
+
+      if (wpClose) wpClose.addEventListener('click', closeWpModal);
+      if (wpDone) wpDone.addEventListener('click', closeWpModal);
+      wpOverlay.addEventListener('click', function (e) {
+        if (e.target === wpOverlay) closeWpModal();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && wpOverlay.classList.contains('open')) closeWpModal();
+      });
+
+      if (wpForm) {
+        wpForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          sendFormToApi(wpForm, 'Cegid White Paper Request', function() {
+            wpForm.hidden = true;
+            if (wpSuccess) wpSuccess.hidden = false;
+          });
+        });
+      }
+    }
+
+    // Footer Newsletter signup (Gravity Form 100)
+    var newsletterForm = document.getElementById('footerNewsletterForm');
+    var newsletterSuccess = document.getElementById('footerNewsletterSuccess');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var emailInput = document.getElementById('footerNewsletterEmail');
+        var consentInput = document.getElementById('footerNewsletterConsent');
+        if (!emailInput || !emailInput.value || (consentInput && !consentInput.checked)) return;
+
+        var submitBtn = newsletterForm.querySelector('button[type="submit"]');
+        var origText = submitBtn ? submitBtn.textContent : '';
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Subscribing...';
+        }
+
+        var payload = {
+          form_id: 100,
+          email: emailInput.value.trim(),
+          name: emailInput.value.split('@')[0],
+          source: 'Newsletter Footer (' + window.location.pathname + ')'
+        };
+
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        .then(function() {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = origText;
+          }
+          newsletterForm.hidden = true;
+          if (newsletterSuccess) newsletterSuccess.hidden = false;
+        })
+        .catch(function(err) {
+          console.error('Newsletter error:', err);
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = origText;
+          }
+          newsletterForm.hidden = true;
+          if (newsletterSuccess) newsletterSuccess.hidden = false;
+        });
+      });
     }
   }
 
