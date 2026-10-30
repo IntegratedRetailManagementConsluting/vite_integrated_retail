@@ -1,0 +1,15 @@
+Merge of Denise's revisions onto the developer's GitHub version
+================================================================
+Base: developer's repo (contact-form backend, dynamic FAQ/blog, newer mobile menu, Botpress, Google tag, build number).
+Not touched: functions/api/*, assets/js/main.js, assets/js/faq.js, partials/header.html, partials/footer.html, wrangler/.env files.
+
+Added on top:
+- Case Studies block removed from the 7 industry pages; Clients page and About page revamp; About team photo
+- Contact page: Bikash as contact + clickable email links; form fields now have labels, autocomplete, 16px text (keeps developer's working form)
+- Globriq button -> globriq.com; Managed Services SLA table styling
+- Footer highlights the current page (build_site.py)
+- Indonesian / Thai translation of all page copy (build_i18n.py, i18n/, assets/js/lang/, patched assets/js/i18n.js)
+- Mobile/browser fixes in style.css: Safari backdrop-filter, 44px menu button and carousel arrows, bigger dots tap area, 16px form fields on phones, larger footer/breadcrumb tap targets
+- Home carousel: swipe left/right, and hidden slides' images pre-load
+
+After editing any page text: python3 build_site.py, then python3 build_i18n.py tag, then python3 build_i18n.py bundle.

@@ -8,3 +8,7 @@ dist/
 .env.*
 !.env.example
 wrangler.toml
+
+# Python
+__pycache__/
+*.pyc

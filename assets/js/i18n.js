@@ -260,6 +260,47 @@
 
   var LANG_LABELS = { en: 'EN', id: 'ID', th: 'TH' };
 
+  // Folder this script was loaded from (…/assets/js/). Page-copy translations
+  // for every page live in lang/<code>.js next to it and are fetched the first
+  // time a visitor picks that language, so English visitors download nothing extra.
+  var SCRIPT_BASE = (function () {
+    var cs = document.currentScript;
+    if (cs && cs.src) { return cs.src.replace(/[^\/]*$/, ''); }
+    var all = document.getElementsByTagName('script');
+    for (var i = 0; i < all.length; i++) {
+      if (/\/i18n\.js(\?|$)/.test(all[i].src)) { return all[i].src.replace(/[^\/]*$/, ''); }
+    }
+    return '';
+  })();
+  var loadState = {};   // lang -> 'loading' | 'done'
+  var loadWaiters = {}; // lang -> [callbacks]
+
+  function ensureLang(lang, cb) {
+    if (lang === DEFAULT_LANG || loadState[lang] === 'done') { cb(); return; }
+    (loadWaiters[lang] = loadWaiters[lang] || []).push(cb);
+    if (loadState[lang] === 'loading') { return; }
+    loadState[lang] = 'loading';
+    function finish() {
+      var extra = (window.IR_LANG_PAGES || {})[lang];
+      if (extra) {
+        DICT[lang] = DICT[lang] || {};
+        for (var k in extra) {
+          if (Object.prototype.hasOwnProperty.call(extra, k)) { DICT[lang][k] = extra[k]; }
+        }
+      }
+      loadState[lang] = 'done';
+      var q = loadWaiters[lang] || [];
+      loadWaiters[lang] = [];
+      q.forEach(function (fn) { fn(); });
+    }
+    var tag = document.createElement('script');
+    tag.src = SCRIPT_BASE + 'lang/' + lang + '.js';
+    tag.async = true;
+    tag.onload = finish;
+    tag.onerror = finish; // nav/footer still translate from the built-in dictionary
+    document.head.appendChild(tag);
+  }
+
   function getSavedLang() {
     try {
       return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
@@ -276,6 +317,11 @@
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       if (el.dataset.i18nOriginal === undefined) {
         el.dataset.i18nOriginal = el.innerHTML;
+      }
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+      if (el.dataset.i18nPhOriginal === undefined) {
+        el.dataset.i18nPhOriginal = el.getAttribute('placeholder') || '';
       }
     });
   }
@@ -296,7 +342,13 @@
         el.innerHTML = el.dataset.i18nOriginal;
       }
     });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-ph');
+      var has = dict && Object.prototype.hasOwnProperty.call(dict, key);
+      el.setAttribute('placeholder', (lang !== DEFAULT_LANG && has) ? dict[key] : (el.dataset.i18nPhOriginal || ''));
+    });
     document.documentElement.setAttribute('lang', lang);
+    try { document.dispatchEvent(new CustomEvent('ir:langchange', { detail: { lang: lang } })); } catch (e) { /* old browsers */ }
     document.querySelectorAll('.lang-current').forEach(function (el) {
       el.textContent = LANG_LABELS[lang] || lang.toUpperCase();
     });
@@ -308,7 +360,8 @@
   function init() {
     captureOriginals();
     var lang = getSavedLang();
-    applyLang(lang);
+    applyLang(lang);                                  // nav + footer straight away
+    if (lang !== DEFAULT_LANG) { ensureLang(lang, function () { applyLang(lang); }); }
 
     document.querySelectorAll('.lang-option').forEach(function (el) {
       el.addEventListener('click', function (e) {
@@ -316,6 +369,7 @@
         var lang = el.getAttribute('data-lang');
         saveLang(lang);
         applyLang(lang);
+        ensureLang(lang, function () { applyLang(lang); });
         // Close any open mobile dropdown after picking a language
         var item = el.closest('.nav-item.has-dropdown');
         if (item) { item.classList.remove('open'); }

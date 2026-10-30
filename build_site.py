@@ -39,6 +39,7 @@ import re
 import sys
 import glob
 import os
+import posixpath
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 PARTIALS_DIR = os.path.join(SITE_ROOT, "partials")
@@ -155,6 +156,55 @@ def render_footer(footer_tpl, newsletter_html, root_prefix, is_homepage, build_n
     return out
 
 
+FOOTER_LINK_RE = re.compile(r'<a href="([^"]+)"')
+
+
+def mark_current_footer_link(footer_html, rel_path):
+    """Add class="is-current" aria-current="page" to the footer link(s) for
+    the page being built, so the visitor can see where they are.
+
+    Matching is by folder: the link whose target folder is the page's own
+    folder, or the closest parent folder, wins (so a blog post highlights
+    "Resources", and /resources/faq/ highlights "FAQ"). Home only matches
+    on the homepage itself. External, mailto and in-page links are ignored.
+    """
+    page_dir = posixpath.dirname(rel_path.replace(os.sep, "/"))
+
+    def target_dir(href):
+        if href.startswith(("http:", "https:", "mailto:", "tel:", "#", "javascript:")):
+            return None
+        t = posixpath.normpath(posixpath.join(page_dir, href.split("#")[0].split("?")[0]))
+        if t.endswith("index.html"):
+            t = posixpath.dirname(t)
+        return "" if t == "." else t
+
+    best, best_score = None, -1
+    for m in FOOTER_LINK_RE.finditer(footer_html):
+        t = target_dir(m.group(1))
+        if t is None:
+            continue
+        if t == "":
+            score = 0 if page_dir == "" else -1
+            if page_dir == "":
+                score = 1000
+        elif page_dir == t or page_dir.startswith(t + "/"):
+            score = len(t)
+        else:
+            score = -1
+        if score > best_score:
+            best, best_score = t, score
+    if best is None or best_score < 0:
+        return footer_html
+
+    def repl(m):
+        t = target_dir(m.group(1))
+        if t == best:
+            return '<a class="is-current" aria-current="page" href="%s"' % m.group(1)
+        return m.group(0)
+
+    return FOOTER_LINK_RE.sub(repl, footer_html)
+
+
 def build(check_only=False):
     header_tpl, footer_tpl, newsletter_html, gtag_html, botpress_html = load_partials()
     pages = site_pages()
@@ -180,6 +230,7 @@ def build(check_only=False):
 
         new_header = render_header(header_tpl, root_prefix, active_section)
         new_footer = render_footer(footer_tpl, newsletter_html, root_prefix, is_homepage, build_num)
+        new_footer = mark_current_footer_link(new_footer, rel)
 
         # Using a lambda replacement (rather than a plain string) means
         # re.sub inserts new_header/new_footer literally, with no
