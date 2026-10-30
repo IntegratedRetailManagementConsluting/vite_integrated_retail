@@ -79,7 +79,7 @@
         <div class="dropdown lang-dropdown"><a href="#" class="lang-option" data-lang="en">🇬🇧 English</a><a href="#" class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</a><a href="#" class="lang-option" data-lang="th">🇹🇭 ไทย</a></div>
       </div>
       <a href="__ROOT__contact/index.html" class="btn btn-primary header-desktop-cta" data-i18n="nav.bookConsultation">Book a Consultation</a>
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav" onclick="window.toggleMobileNav ? window.toggleMobileNav() : (function(b){document.body.classList.toggle('nav-open');b.setAttribute('aria-expanded',document.body.classList.contains('nav-open'));})(this)">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>

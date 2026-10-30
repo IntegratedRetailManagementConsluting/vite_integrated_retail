@@ -224,11 +224,20 @@ p { margin: 0 0 1em; }
 @media (max-width: 1024px) {
   /* Header layout on mobile & tablet */
   .site-header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+    transform: none !important;
+    perspective: none !important;
+    contain: none !important;
+    background: #ffffff;
+    overflow: visible !important;
     transition: background 0.2s ease;
   }
   .site-header .container {
     height: 68px;
     padding: 0 16px;
+    overflow: visible !important;
   }
   .logo {
     margin-right: 12px;
@@ -330,10 +339,16 @@ p { margin: 0 0 1em; }
     left: 0;
     right: 0;
     bottom: 0;
+    width: 100%;
+    width: 100vw;
+    width: 100dvw;
+    height: calc(100vh - 68px);
+    height: calc(100dvh - 68px);
+    max-height: calc(100dvh - 68px);
     background: #ffffff;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 16px 20px 50px;
+    padding: 16px 20px 60px;
     box-shadow: 0 20px 30px rgba(10, 22, 40, 0.08);
     opacity: 0;
     visibility: hidden;
@@ -341,12 +356,14 @@ p { margin: 0 0 1em; }
     transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
                 visibility 0.22s ease;
-    z-index: 1000;
+    z-index: 99999 !important;
+    pointer-events: none;
   }
   body.nav-open .main-nav {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    pointer-events: auto;
   }
   .main-nav > ul {
     flex-direction: column;
@@ -523,14 +540,14 @@ p { margin: 0 0 1em; }
 
 /* Background scrolling and header state when mobile nav is open */
 body.nav-open {
-  overflow: hidden;
+  overflow: hidden !important;
   touch-action: none;
 }
 body.nav-open .site-header {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  background: #ffffff;
-  z-index: 1001;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: #ffffff !important;
+  z-index: 100000 !important;
 }
 body.nav-open .chat-widget,
 body.nav-open #webchat,

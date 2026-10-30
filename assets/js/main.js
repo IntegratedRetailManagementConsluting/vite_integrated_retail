@@ -2,60 +2,56 @@
 // Proprietary and confidential — unauthorised copying or redistribution of
 // this script, in whole or in part, is prohibited.
 //
+// Expose global mobile nav toggler for instant click handling
+window.toggleMobileNav = function (force) {
+  var toggle = document.querySelector('.nav-toggle') || document.getElementById('navToggle');
+  var searchToggle = document.getElementById('navSearchToggle');
+  var searchPanel = document.getElementById('navSearchPanel');
+  var shouldOpen = typeof force === 'boolean' ? force : !document.body.classList.contains('nav-open');
+
+  if (shouldOpen) {
+    document.body.classList.add('nav-open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+    if (searchPanel && !searchPanel.hidden) {
+      searchPanel.hidden = true;
+      if (searchToggle) searchToggle.setAttribute('aria-expanded', 'false');
+    }
+  } else {
+    document.body.classList.remove('nav-open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  }
+};
+
 // Mobile nav toggle + dropdown handling for touch/small screens
 document.addEventListener('DOMContentLoaded', function () {
   var toggle = document.querySelector('.nav-toggle');
   var mainNav = document.getElementById('mainNav') || document.querySelector('.main-nav');
   var searchToggle = document.getElementById('navSearchToggle');
-  var searchPanel = document.getElementById('navSearchPanel');
-
-  function openNav() {
-    document.body.classList.add('nav-open');
-    if (toggle) {
-      toggle.setAttribute('aria-expanded', 'true');
-    }
-    // Close search panel if open
-    if (searchPanel && !searchPanel.hidden) {
-      searchPanel.hidden = true;
-      if (searchToggle) searchToggle.setAttribute('aria-expanded', 'false');
-    }
-  }
-
-  function closeNav() {
-    document.body.classList.remove('nav-open');
-    if (toggle) {
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-  }
 
   if (toggle) {
     toggle.addEventListener('click', function (e) {
       e.stopPropagation();
-      if (document.body.classList.contains('nav-open')) {
-        closeNav();
-      } else {
-        openNav();
-      }
+      window.toggleMobileNav();
     });
   }
 
   if (searchToggle) {
     searchToggle.addEventListener('click', function () {
-      closeNav();
+      window.toggleMobileNav(false);
     });
   }
 
   // Close nav on Escape key
   document.addEventListener('keydown', function (e) {
     if ((e.key === 'Escape' || e.key === 'Esc') && document.body.classList.contains('nav-open')) {
-      closeNav();
+      window.toggleMobileNav(false);
     }
   });
 
   // Close mobile nav when window is resized past mobile breakpoint
   window.addEventListener('resize', function () {
     if (window.innerWidth > 1024 && document.body.classList.contains('nav-open')) {
-      closeNav();
+      window.toggleMobileNav(false);
     }
   });
 
@@ -87,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!link.parentElement.classList.contains('has-dropdown') || link.parentElement.tagName.toLowerCase() !== 'li' || link.closest('.dropdown')) {
         link.addEventListener('click', function () {
           if (window.innerWidth <= 1024 && !this.classList.contains('lang-switcher-trigger')) {
-            closeNav();
+            window.toggleMobileNav(false);
           }
         });
       }

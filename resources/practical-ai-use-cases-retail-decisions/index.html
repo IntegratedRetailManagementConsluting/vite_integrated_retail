@@ -100,7 +100,7 @@
         <div class="dropdown lang-dropdown"><a href="#" class="lang-option" data-lang="en">🇬🇧 English</a><a href="#" class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</a><a href="#" class="lang-option" data-lang="th">🇹🇭 ไทย</a></div>
       </div>
       <a href="../../contact/index.html" class="btn btn-primary header-desktop-cta" data-i18n="nav.bookConsultation">Book a Consultation</a>
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav" onclick="window.toggleMobileNav ? window.toggleMobileNav() : (function(b){document.body.classList.toggle('nav-open');b.setAttribute('aria-expanded',document.body.classList.contains('nav-open'));})(this)">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -195,7 +195,7 @@
     </div>
     <div class="footer-bottom">
       <span data-i18n="footer.rights">&copy; 2026 Integrated Retail Management Consulting Pte. Ltd. All rights reserved.</span>
-      <span class="footer-build">Build 20261030.8dfe76b</span>
+      <span class="footer-build">Build 20261030.ad46d25</span>
       <a href="mailto:connect@integratedretail.com">connect@integratedretail.com</a>
     </div>
   </div>
@@ -246,182 +246,137 @@
 <script src="https://cdn.botpress.cloud/webchat/v2.2/shareable.js"></script>
 <script src="https://files.bpcontent.cloud/2024/07/02/10/20240702103328-76YQ662I.js"></script>
 <script>
-	function safeRedirect(targetUrl) {
-    if (!targetUrl || targetUrl === '#' || targetUrl.startsWith('javascript')) return;
+function initBotpressSafe() {
+  if (!window.botpress) return;
+  try {
+    function safeRedirect(targetUrl) {
+      if (!targetUrl || targetUrl === '#' || targetUrl.startsWith('javascript')) return;
 
-    try {
-        // --- 核心修复：清理末尾的 JSON 干扰符 ---
-        // 只要遇到引号、括号、大括号，就立刻切断，只留前面的网址
-        let cleanUrl = targetUrl.replace(/\\/g, ''); // 先去反斜杠
+      try {
+        let cleanUrl = targetUrl.replace(/\\/g, '');
         const urlMatch = cleanUrl.match(/https?:\/\/[^\s"“'”’\}）\]]+/); 
         if (urlMatch) {
-            cleanUrl = urlMatch[0];
+          cleanUrl = urlMatch[0];
         }
 
         const currentParams = new URLSearchParams(window.location.search);
         const newUrl = new URL(cleanUrl);
 
-        // 核心：把当前的 firstname, email 等参数带过去
         currentParams.forEach((value, key) => {
-            newUrl.searchParams.set(key, value);
+          newUrl.searchParams.set(key, value);
         });
 
         console.log("🚀 最终跳转地址:", newUrl.toString());
-        // 覆盖整个浏览器标签页
         window.top.location.href = newUrl.toString();
-    } catch (e) {
+      } catch (e) {
         console.error("Redirect Error:", e);
-        // 兜底：如果解析失败，暴力去掉非网址字符后跳转
         window.top.location.href = targetUrl.replace(/[^\x21-\x7E]+/g, '').split(/[算法"'}）]/)[0];
+      }
     }
-} 
-  window.botpress.on("webchat:ready", () => {
-    window.botpress.open();
-  });
 
-
-
-// --- 逻辑 A: 获取 URL 参数 (来自 Botpress 的传值) ---
     const urlParams = new URLSearchParams(window.location.search);
     const firstName = urlParams.get('firstname') || '';
-    const lastName = urlParams.get('lastname') || '';
-    const email = urlParams.get('email') || '';
-    const phone = urlParams.get('phone') || '';
 
-    
-
-    // --- 逻辑 B: Botpress 初始化 ---
-    
-    // 注意：如果你希望机器人记住用户，不要每次都 generate randomUserId
-    // 建议：只有当 URL 里没有 firstname 时才清空，或者干脆保留 session
-  if (!firstName) {
-        localStorage.clear(); 
+    if (!firstName) {
+      try { localStorage.clear(); } catch (_) {}
     }
-  
-// 如果不想全删，可以用循环只删 bp 开头的项：
-// Object.keys(localStorage).forEach(key => { if(key.includes('bp')) localStorage.removeItem(key); });
-//  const randomUserId = 'user_' + Math.random().toString(36).substring(2, 11);
-const randomUserId = firstName ? ('user_' + firstName.toLowerCase()) : ('guest_' + Math.random().toString(36).substring(2, 7));
 
-  window.botpress.init({
-  "botId": "271349b4-50c2-4d68-98ab-dc514c18d354",
-  "configuration": {
-    "version": "v2",
-    "botName": "Integrated Retail Support Agent",
-    "botAvatar": "https://files.bpcontent.cloud/2026/01/04/10/20260104100855-WL4YT8WH.png",
-    "botDescription": "",
-    "website": {},
-    "email": {},
-    "phone": {},
-    "termsOfService": {},
-    "privacyPolicy": {},
-    "color": "#044181",
-    "variant": "solid",
-    "headerVariant": "glass",
-    "themeMode": "light",
-    "fontFamily": "inter",
-    "radius": 2,
-    "feedbackEnabled": false,
-    "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
-    "soundEnabled": false,
-    "proactiveMessageEnabled": false,
-    "proactiveBubbleMessage": "Hi! 👋 Need help?",
-    "proactiveBubbleTriggerType": "afterDelay",
-    "proactiveBubbleDelayTime": 10
-  },
-  "clientId": "d0bd4d08-40a0-4fb6-8948-73340f88a84c",
-  "selector": "#webchat"
-});
+    window.botpress.init({
+      "botId": "271349b4-50c2-4d68-98ab-dc514c18d354",
+      "configuration": {
+        "version": "v2",
+        "botName": "Integrated Retail Support Agent",
+        "botAvatar": "https://files.bpcontent.cloud/2026/01/04/10/20260104100855-WL4YT8WH.png",
+        "botDescription": "",
+        "website": {},
+        "email": {},
+        "phone": {},
+        "termsOfService": {},
+        "privacyPolicy": {},
+        "color": "#044181",
+        "variant": "solid",
+        "headerVariant": "glass",
+        "themeMode": "light",
+        "radius": 2,
+        "feedbackEnabled": false,
+        "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+        "soundEnabled": false,
+        "proactiveMessageEnabled": false,
+        "proactiveBubbleMessage": "Hi! 👋 Need help?",
+        "proactiveBubbleTriggerType": "afterDelay",
+        "proactiveBubbleDelayTime": 10
+      },
+      "clientId": "d0bd4d08-40a0-4fb6-8948-73340f88a84c",
+      "selector": "#webchat"
+    });
 
-	 window.botpress.on('webchat:ready', () => {
-        console.log("🤖 Botpress 已就绪，深度监听器启动...");
-        window.botpress.open();
+    window.botpress.on('webchat:ready', () => {
+      console.log("🤖 Botpress 已就绪，深度监听器启动...");
+      window.botpress.open();
 
-        // 【核心修改】深度拦截逻辑
-        window.botpress.on('*', (event) => {
-            console.log("🔍 捕捉事件:", event.type, event.payload);
+      window.botpress.on('*', (event) => {
+        let extractedUrl = null;
+        const p = event.payload;
 
-            let extractedUrl = null;
-            const p = event.payload;
-
-            // 路径 1: 直接在 payload 里 (Open URL 模式)
-            if (p?.url) extractedUrl = p.url;
-            
-            // 路径 2: 嵌套在 payload.payload 里 (Postback 模式)
-            else if (p?.payload) {
-                if (typeof p.payload === 'string' && p.payload.includes('{')) {
-                    try {
-                        const inner = JSON.parse(p.payload);
-                        extractedUrl = inner.url;
-                    } catch (e) { }
-                } 
-                else if (typeof p.payload === 'string' && p.payload.includes('http')) {
-                    extractedUrl = p.payload;
-                }
-                else if (p.payload.url) {
-                    extractedUrl = p.payload.url;
-                }
-            }
-
-            // 路径 3: 暴力扫描
-            if (!extractedUrl && p) {
-                const strPayload = JSON.stringify(p);
-                if (strPayload.includes('integrated')) {
-                    const match = strPayload.match(/https?:\/\/[^\s"']+/);
-                    if (match) extractedUrl = match[0]; 
-                }
-            }
-
-            // 执行跳转
-            if (extractedUrl && extractedUrl.includes('integrated')) {
-                console.log("🎯 成功截获目标 URL:", extractedUrl);
-                safeRedirect(extractedUrl);
-            }
-        });
-
-
-		// 2. 发送触发词（必须和你在 Studio 里写的 'START_MY_WELCOME' 一模一样，注意大小写）
-	    // 建议加 500ms-800ms 延迟，确保 updateUser 已经先一步传到了服务器
-/*	setTimeout(() => {
-    console.log("📡 发送自定义事件信号...");
-    window.botpressWebChat.sendEvent({
-        type: 'custom_event', // 类型必须是 trigger
-        payload: { 
-            action: 'START_MY_WELCOME' // 负载内容
+        if (p?.url) extractedUrl = p.url;
+        else if (p?.payload) {
+          if (typeof p.payload === 'string' && p.payload.includes('{')) {
+            try {
+              const inner = JSON.parse(p.payload);
+              extractedUrl = inner.url;
+            } catch (e) { }
+          } else if (typeof p.payload === 'string' && p.payload.includes('http')) {
+            extractedUrl = p.payload;
+          } else if (p.payload.url) {
+            extractedUrl = p.payload.url;
+          }
         }
-    });
-}, 800);	
-		*/	 
-    });
-  
-  
-// When webchat is ready
-    window.botpress.on('webchat:ready', async() => {
-      console.log('✅ Webchat initialized');
 
-      // STEP 1: Upd2ate User with data
-      await window.botpress.updateUser({
-        data: {
-          firstname:urlParams.get('firstname') || "",
-          page_name: "Homepage",
-          category: "general",
-          timestamp: new Date().toISOString()
+        if (!extractedUrl && p) {
+          const strPayload = JSON.stringify(p);
+          if (strPayload.includes('integrated')) {
+            const match = strPayload.match(/https?:\/\/[^\s"']+/);
+            if (match) extractedUrl = match[0]; 
+          }
+        }
+
+        if (extractedUrl && extractedUrl.includes('integrated')) {
+          safeRedirect(extractedUrl);
         }
       });
-
-
-			setTimeout(() => {
-    console.log("📡 发送自定义事件信号...");
-    window.botpress.sendEvent({
-        type: 'trigger', // 类型必须是 trigger
-        payload: { 
-            action: 'START_MY_WELCOME' // 负载内容
-        }
-    });
-}, 800);
-
     });
 
+    window.botpress.on('webchat:ready', async () => {
+      try {
+        await window.botpress.updateUser({
+          data: {
+            firstname: urlParams.get('firstname') || "",
+            page_name: "Homepage",
+            category: "general",
+            timestamp: new Date().toISOString()
+          }
+        });
+      } catch (err) {}
+
+      setTimeout(() => {
+        try {
+          window.botpress.sendEvent({
+            type: 'trigger',
+            payload: { action: 'START_MY_WELCOME' }
+          });
+        } catch (_) {}
+      }, 800);
+    });
+  } catch (err) {
+    console.warn("Botpress initialization skipped:", err);
+  }
+}
+
+if (window.botpress) {
+  initBotpressSafe();
+} else {
+  window.addEventListener('load', initBotpressSafe);
+}
 </script><script src="../../assets/js/i18n.js"></script>
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/search-index.js"></script>

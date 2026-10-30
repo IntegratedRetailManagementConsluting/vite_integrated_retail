@@ -74,7 +74,7 @@ FOOTER_RE = re.compile(r'<footer class="site-footer">.*?</footer>', re.S)
 
 
 GTAG_RE = re.compile(r'<!-- Google tag \(gtag\.js\) -->.*?</script>\s*(?=\n*</head>)', re.DOTALL)
-BOTPRESS_RE = re.compile(r'<div id="webchat"></div>.*?window\.botpress\.sendEvent\(.*?\}\);\s*</script>\s*', re.DOTALL)
+BOTPRESS_RE = re.compile(r'<div id="webchat"></div>.*?</script>\s*(?=\s*<script[^>]*assets/js/|\s*</body>)', re.DOTALL)
 CHAT_WIDGET_RE = re.compile(r'<div class="chat-widget">.*?<div class="chat-widget-footer-note">.*?</div>\s*</div>\s*</div>', re.DOTALL)
 
 
