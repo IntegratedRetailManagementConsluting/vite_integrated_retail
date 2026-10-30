@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+    xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:wp="http://wordpress.org/export/1.2/"
+>
+<channel>
+    <title>Integrated Retail FAQs</title>
+    <link>https://integratedretail.com</link>
+    <description>Frequently Asked Questions Export</description>
+    <pubDate>2026-10-30 01:47:18</pubDate>
+    <language>en-US</language>
+    <wp:wxr_version>1.2</wp:wxr_version>
+    <wp:category>
+        <wp:term_id>1001</wp:term_id>
+        <wp:category_nicename>general</wp:category_nicename>
+        <wp:category_parent></wp:category_parent>
+        <wp:cat_name><![CDATA[General]]></wp:cat_name>
+    </wp:category>
+    <wp:category>
+        <wp:term_id>1002</wp:term_id>
+        <wp:category_nicename>footfallcam</wp:category_nicename>
+        <wp:category_parent></wp:category_parent>
+        <wp:cat_name><![CDATA[FootfallCam]]></wp:cat_name>
+    </wp:category>
+    <wp:category>
+        <wp:term_id>1003</wp:term_id>
+        <wp:category_nicename>cegid</wp:category_nicename>
+        <wp:category_parent></wp:category_parent>
+        <wp:cat_name><![CDATA[Cegid Retail]]></wp:cat_name>
+    </wp:category>
+    <wp:category>
+        <wp:term_id>1004</wp:term_id>
+        <wp:category_nicename>retailpro</wp:category_nicename>
+        <wp:category_parent></wp:category_parent>
+        <wp:cat_name><![CDATA[Retail Pro Prism]]></wp:cat_name>
+    </wp:category>
+
+    <item>
+        <title><![CDATA[What does Integrated Retail actually do?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>We help retailers connect POS, inventory, CRM, e-commerce, traffic analytics, AI and enterprise systems into one working technology ecosystem &mdash; combining proven, best-of-breed platforms with our own integration and consulting capability, rather than forcing you onto a single vendor's suite.</p>]]></content:encoded>
+        <wp:post_id>20001</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-1]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>1</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="general"><![CDATA[General]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Do I need to replace my existing POS or systems to work with you?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Not necessarily. A lot of our work is integration &mdash; connecting the systems you already run so data moves between them automatically. Where a platform genuinely needs replacing, we'll say so, and recommend from the best-of-breed products we deploy.</p>]]></content:encoded>
+        <wp:post_id>20002</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-2]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>2</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="general"><![CDATA[General]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Which markets do you support?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Our teams are based in Singapore, Indonesia and Thailand, and we support retailers operating across Asia Pacific from those hubs.</p>]]></content:encoded>
+        <wp:post_id>20003</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-3]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>3</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="general"><![CDATA[General]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What industries do you work with?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Fashion &amp; Apparel, Health &amp; Beauty, F&amp;B, Shopping Malls, Luxury Retail, Groceries and Department Stores are the industries we focus on &mdash; see the Industries section for what each one typically needs.</p>]]></content:encoded>
+        <wp:post_id>20004</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-4]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>4</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="general"><![CDATA[General]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What happens after go-live?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Our services team &mdash; Solution Design, Project Delivery, Managed Services, Training and Integration &mdash; stays engaged after go-live with defined SLAs, proactive monitoring and ongoing training, rather than handing off once the contract is signed.</p>]]></content:encoded>
+        <wp:post_id>20005</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-5]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>5</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="general"><![CDATA[General]]></category>
+    </item>
+    <item>
+        <title><![CDATA[How do I get a quote or start a conversation?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Book a free, zero-obligation consultation and our team will follow up within one business day to understand your business and recommend the right combination of products and services.</p>]]></content:encoded>
+        <wp:post_id>20006</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-6]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>6</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="general"><![CDATA[General]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What is FootfallCam?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>FootfallCam is a people-counting solution that measures how many visitors enter your store, how they move through it, and how long they stay. The sensors are installed at entrances and key zones, and the data flows into a central dashboard where you can view traffic by store, by day, or by hour. It turns visitor behaviour into numbers you can act on, rather than guesswork.</p>]]></content:encoded>
+        <wp:post_id>20007</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-7]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>7</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="footfallcam"><![CDATA[FootfallCam]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Why do retailers need people counting when they already have sales data?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Sales data tells you what was bought, but not how many opportunities you missed. Knowing that 500 people entered and 50 purchased gives you a conversion rate, which is a far more useful measure of store performance than sales alone. It also lets you tell the difference between a slow day caused by low traffic and one caused by poor in-store execution.</p>]]></content:encoded>
+        <wp:post_id>20008</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-8]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>8</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="footfallcam"><![CDATA[FootfallCam]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What metrics can we get from the system?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>The core metrics are visitor count, conversion rate, dwell time, peak hours, and repeat visits. Depending on the configuration, you can also measure zone-level traffic, queue length, and staff-to-customer ratios.</p>]]></content:encoded>
+        <wp:post_id>20009</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-9]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>9</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="footfallcam"><![CDATA[FootfallCam]]></category>
+    </item>
+    <item>
+        <title><![CDATA[How accurate is the counting?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>FootfallCam uses 3D stereo vision rather than simple beam-break or Wi-Fi tracking, which means it can distinguish between adults and children, exclude staff, and count people walking side by side as separate visitors. Vendor-published accuracy is above 95% under normal retail conditions. In practice, accuracy depends heavily on correct mounting height and positioning, which is why we handle installation planning as part of the deployment.</p>]]></content:encoded>
+        <wp:post_id>20010</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-10]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>10</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="footfallcam"><![CDATA[FootfallCam]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Does it use facial recognition?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>No. The system counts people as anonymous objects and does not store images or identify individuals. This is an important distinction for compliance, because it means the deployment generally sits outside the scope of personal data collection under Singapore's PDPA, Malaysia's PDPA, Thailand's PDPA, and Indonesia's PDP Law.</p>]]></content:encoded>
+        <wp:post_id>20011</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-11]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>11</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="footfallcam"><![CDATA[FootfallCam]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What do we need on site to run it?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Each device requires power and a network connection, typically over PoE, so a single cable handles both. The data is uploaded to the cloud dashboard, so you need internet access at the store, though the devices buffer data locally if the connection drops and sync once it is restored. No on-premise server is needed.</p>]]></content:encoded>
+        <wp:post_id>20012</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-12]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>12</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="footfallcam"><![CDATA[FootfallCam]]></category>
+    </item>
+    <item>
+        <title><![CDATA[How many devices does a store need?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>It depends on the width of your entrances and whether you want zone-level analytics as well as entrance counting. A single standard entrance is usually covered by one device, while wide or double-door entrances may need more. We do a site assessment from your floor plans before quoting so the count is accurate rather than estimated.</p>]]></content:encoded>
+        <wp:post_id>20013</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-13]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>13</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="footfallcam"><![CDATA[FootfallCam]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Can it integrate with our POS or other systems?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Yes. Integrating POS transaction data is what allows the system to calculate conversion rate automatically, and data can also be exported or pushed to reporting tools your team already uses. The specific integration method depends on your POS platform, so we scope this during pre-sales.</p>]]></content:encoded>
+        <wp:post_id>20014</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-14]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>14</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="footfallcam"><![CDATA[FootfallCam]]></category>
+    </item>
+    <item>
+        <title><![CDATA[How long does installation take, and who does it?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Most single-store installations are completed within a day, including configuration and calibration. Integrated Retail handles the deployment across Singapore, Malaysia, Thailand, and Indonesia, either directly or through our local partners, so you are dealing with one team across your regional footprint rather than coordinating separate vendors per market.</p>]]></content:encoded>
+        <wp:post_id>20015</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-15]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>15</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="footfallcam"><![CDATA[FootfallCam]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What support do we get after installation?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Hardware is covered by a one-year warranty, and the dashboard runs on an annual subscription that includes software updates and platform support. Day-to-day support comes from our regional team rather than an overseas helpdesk, which means local time zones and local languages. We also run a handover session so your store and HQ teams know how to read the reports.</p>]]></content:encoded>
+        <wp:post_id>20016</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-16]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>16</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="footfallcam"><![CDATA[FootfallCam]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What is Cegid Retail?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>A cloud-native POS and unified commerce platform built for specialty retailers, used by over 1,000 retailers worldwide. Integrated Retail delivers and supports it across Asia Pacific.</p>]]></content:encoded>
+        <wp:post_id>20017</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-17]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>17</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="cegid"><![CDATA[Cegid Retail]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What does &ldquo;unified commerce&rdquo; actually mean?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Your stores, e-commerce and mobile channels run on one platform instead of separate systems, so stock, pricing and customer data stay consistent everywhere. That's what makes click-and-collect and ship-from-store work properly.</p>]]></content:encoded>
+        <wp:post_id>20018</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-18]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>18</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="cegid"><![CDATA[Cegid Retail]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What does the platform cover?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Omnichannel customer experience, supply chain and stock management, retail analytics, and store task management, all enhanced by AI. You can start with what you need and add modules later.</p>]]></content:encoded>
+        <wp:post_id>20019</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-19]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>19</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="cegid"><![CDATA[Cegid Retail]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Is Cegid Retail suitable for our size of business?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>It's designed for retail chains rather than single shops, and works well for retailers running multiple stores, brands or countries. It scales as you grow, so you won't outgrow it at the next stage.</p>]]></content:encoded>
+        <wp:post_id>20020</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-20]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>20</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="cegid"><![CDATA[Cegid Retail]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Is it cloud-based, and how is it licensed?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Yes, it's a cloud SaaS platform, so there's no server for you to maintain. Licensing is subscription-based, with implementation quoted separately.</p>]]></content:encoded>
+        <wp:post_id>20021</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-21]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>21</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="cegid"><![CDATA[Cegid Retail]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What if the internet goes down in a store?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>The POS keeps working offline so your cashiers can continue serving customers, and transactions sync once the connection returns.</p>]]></content:encoded>
+        <wp:post_id>20022</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-22]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>22</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="cegid"><![CDATA[Cegid Retail]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Can it handle our operations across different countries?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Yes. It supports multiple currencies, languages and local tax requirements, and we handle the configuration for each market.</p>]]></content:encoded>
+        <wp:post_id>20023</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-23]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>23</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="cegid"><![CDATA[Cegid Retail]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Can it integrate with our e-commerce site, ERP and payment terminals?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Yes, through APIs and integrated payment support. We scope the specific integrations during pre-sales.</p>]]></content:encoded>
+        <wp:post_id>20024</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-24]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>24</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="cegid"><![CDATA[Cegid Retail]]></category>
+    </item>
+    <item>
+        <title><![CDATA[How long does implementation take?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Typically a few weeks to several months, depending on the scale and complexity of the project. From kick-off to first store go-live, covering configuration, data migration, testing and training. We usually start with a pilot store before rolling out.</p>]]></content:encoded>
+        <wp:post_id>20025</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-25]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>25</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="cegid"><![CDATA[Cegid Retail]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Who supports us after go-live?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Integrated Retail is your first line of support across Asia Pacific, with escalation to Cegid where needed. No overseas helpdesk on European hours.</p>]]></content:encoded>
+        <wp:post_id>20026</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-26]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>26</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="cegid"><![CDATA[Cegid Retail]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What is Retail Pro Prism?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>A specialty retail POS and store management platform used by over 9,000 retailers and 54,000 stores in more than 130 countries. Integrated Retail handles implementation, localisation and support across Asia Pacific.</p>]]></content:encoded>
+        <wp:post_id>20027</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-27]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>27</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="retailpro"><![CDATA[Retail Pro Prism]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What does it cover?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Point of sale and checkout, inventory and stock management, replenishment, purchasing, receiving and transfers, plus rules-based pricing and promotions that apply automatically at the till.</p>]]></content:encoded>
+        <wp:post_id>20028</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-28]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>28</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="retailpro"><![CDATA[Retail Pro Prism]]></category>
+    </item>
+    <item>
+        <title><![CDATA[What devices does it run on?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Windows, iOS and Android, so you can run fixed tills and mobile POS on the same system. Staff can check stock or complete a sale from the shop floor.</p>]]></content:encoded>
+        <wp:post_id>20029</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-29]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>29</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="retailpro"><![CDATA[Retail Pro Prism]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Does it work if the store loses connectivity?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Yes. Full POS functionality continues offline, and data syncs back once the connection returns.</p>]]></content:encoded>
+        <wp:post_id>20030</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-30]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>30</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="retailpro"><![CDATA[Retail Pro Prism]]></category>
+    </item>
+    <item>
+        <title><![CDATA[How customisable is it?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Highly. The interface and workflows can be tailored to how your stores actually operate, rather than forcing your processes to fit the software. This is the main reason retailers with unusual requirements choose Prism.</p>]]></content:encoded>
+        <wp:post_id>20031</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-31]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>31</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="retailpro"><![CDATA[Retail Pro Prism]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Can it handle multiple stores and countries?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Yes. It supports multi-store operations with multiple languages, currencies and local requirements, and new stores can be added as you expand.</p>]]></content:encoded>
+        <wp:post_id>20032</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-32]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>32</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="retailpro"><![CDATA[Retail Pro Prism]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Can it integrate with our e-commerce site, ERP and payment terminals?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Yes, through open APIs and a wide ecosystem of available integrations. We scope the specific connections during pre-sales.</p>]]></content:encoded>
+        <wp:post_id>20033</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-33]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>33</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="retailpro"><![CDATA[Retail Pro Prism]]></category>
+    </item>
+    <item>
+        <title><![CDATA[We already run an older version of Retail Pro. Can we move to Prism?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Yes. Prism is designed to work alongside or replace earlier Retail Pro versions, and your existing data can be migrated. We'll assess your current setup before recommending an approach.</p>]]></content:encoded>
+        <wp:post_id>20034</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-34]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>34</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="retailpro"><![CDATA[Retail Pro Prism]]></category>
+    </item>
+    <item>
+        <title><![CDATA[How is it deployed and licensed?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>It can run on your own infrastructure or be hosted, depending on your IT preference.</p>]]></content:encoded>
+        <wp:post_id>20035</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-35]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>35</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="retailpro"><![CDATA[Retail Pro Prism]]></category>
+    </item>
+    <item>
+        <title><![CDATA[Who implements and supports it?]]></title>
+        <pubDate>2026-10-30 01:47:18</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<p>Integrated Retail does both, across Singapore, Malaysia, Thailand and Indonesia. Implementation typically runs a few months to first store go-live, and support afterwards comes from our regional team rather than an overseas helpdesk.</p>]]></content:encoded>
+        <wp:post_id>20036</wp:post_id>
+        <wp:post_date>2026-10-30 01:47:18</wp:post_date>
+        <wp:post_date_gmt>2026-10-30 01:47:18</wp:post_date_gmt>
+        <wp:comment_status>closed</wp:comment_status>
+        <wp:ping_status>closed</wp:ping_status>
+        <wp:post_name><![CDATA[faq-36]]></wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>36</wp:menu_order>
+        <wp:post_type>ufaq</wp:post_type>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="ufaq-category" nicename="retailpro"><![CDATA[Retail Pro Prism]]></category>
+    </item>
+</channel>
+</rss>

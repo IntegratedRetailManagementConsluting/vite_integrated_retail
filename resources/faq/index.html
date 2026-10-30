@@ -452,73 +452,7 @@
     </div>
   </div>
 </footer>
-<script>
-(function(){
-  var items = Array.prototype.slice.call(document.querySelectorAll(".faq-item"));
-  var sections = Array.prototype.slice.call(document.querySelectorAll(".faq-section-title"));
-  var searchInput = document.getElementById("faqSearchInput");
-  var searchClear = document.getElementById("faqSearchClear");
-  var catButtons = Array.prototype.slice.call(document.querySelectorAll(".faq-cat-btn"));
-  var emptyMsg = document.getElementById("faqEmpty");
-  var activeCat = "all";
-
-  function applyFilters(){
-    var query = (searchInput.value || "").trim().toLowerCase();
-    searchClear.classList.toggle("is-visible", query.length > 0);
-
-    var visibleCount = 0;
-    items.forEach(function(item){
-      var matchesCat = activeCat === "all" || item.getAttribute("data-cat") === activeCat;
-      var matchesQuery = !query || item.getAttribute("data-search").indexOf(query) !== -1;
-      var show = matchesCat && matchesQuery;
-      item.hidden = !show;
-      if (show) visibleCount++;
-    });
-
-    // Hide a category's section heading if none of its questions are visible.
-    sections.forEach(function(heading){
-      var section = heading.getAttribute("data-section");
-      var anyVisible = items.some(function(item){
-        return item.getAttribute("data-cat") === section && !item.hidden;
-      });
-      heading.hidden = !anyVisible;
-    });
-
-    emptyMsg.classList.toggle("is-visible", visibleCount === 0);
-  }
-
-  searchInput.addEventListener("input", applyFilters);
-  searchClear.addEventListener("click", function(){
-    searchInput.value = "";
-    searchInput.focus();
-    applyFilters();
-  });
-
-  catButtons.forEach(function(btn){
-    btn.addEventListener("click", function(){
-      catButtons.forEach(function(b){ b.classList.remove("is-active"); });
-      btn.classList.add("is-active");
-      activeCat = btn.getAttribute("data-cat");
-      applyFilters();
-    });
-  });
-
-  // Accordion toggle. Sets max-height inline to the answer's real scrollHeight
-  // so long answers are never clipped, regardless of length.
-  document.querySelectorAll(".faq-q").forEach(function(btn){
-    btn.addEventListener("click", function(){
-      var item = btn.parentElement;
-      var answer = item.querySelector(".faq-a");
-      var open = btn.getAttribute("aria-expanded") === "true";
-      btn.setAttribute("aria-expanded", open ? "false" : "true");
-      item.classList.toggle("is-open", !open);
-      answer.style.maxHeight = open ? "0px" : (answer.scrollHeight + "px");
-    });
-  });
-
-  applyFilters();
-})();
-</script>
+<script src="../../assets/js/faq.js"></script>
 <div class="book-modal-overlay" id="bookModalOverlay">
   <div class="book-modal" role="dialog" aria-modal="true" aria-labelledby="bookModalTitle">
     <button type="button" class="book-modal-close" id="bookModalClose" aria-label="Close">&times;</button>

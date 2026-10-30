@@ -1,0 +1,323 @@
+/**
+ * Cloudflare Pages Function: /api/faq
+ *
+ * Edge Proxy and Fallback for WordPress Ultimate FAQ (ufaq) REST API.
+ * Dynamically fetches FAQs from WordPress (/wp-json/wp/v2/ufaq)
+ * and falls back seamlessly to pre-bundled FAQs if WordPress is unreachable
+ * or has no items published yet.
+ */
+
+const STATIC_FAQS = [
+  {
+    "question": "What does Integrated Retail actually do?",
+    "answer": "<p>We help retailers connect POS, inventory, CRM, e-commerce, traffic analytics, AI and enterprise systems into one working technology ecosystem &mdash; combining proven, best-of-breed platforms with our own integration and consulting capability, rather than forcing you onto a single vendor's suite.</p>",
+    "category": "general",
+    "category_name": "General"
+  },
+  {
+    "question": "Do I need to replace my existing POS or systems to work with you?",
+    "answer": "<p>Not necessarily. A lot of our work is integration &mdash; connecting the systems you already run so data moves between them automatically. Where a platform genuinely needs replacing, we'll say so, and recommend from the best-of-breed products we deploy.</p>",
+    "category": "general",
+    "category_name": "General"
+  },
+  {
+    "question": "Which markets do you support?",
+    "answer": "<p>Our teams are based in Singapore, Indonesia and Thailand, and we support retailers operating across Asia Pacific from those hubs.</p>",
+    "category": "general",
+    "category_name": "General"
+  },
+  {
+    "question": "What industries do you work with?",
+    "answer": "<p>Fashion &amp; Apparel, Health &amp; Beauty, F&amp;B, Shopping Malls, Luxury Retail, Groceries and Department Stores are the industries we focus on &mdash; see the Industries section for what each one typically needs.</p>",
+    "category": "general",
+    "category_name": "General"
+  },
+  {
+    "question": "What happens after go-live?",
+    "answer": "<p>Our services team &mdash; Solution Design, Project Delivery, Managed Services, Training and Integration &mdash; stays engaged after go-live with defined SLAs, proactive monitoring and ongoing training, rather than handing off once the contract is signed.</p>",
+    "category": "general",
+    "category_name": "General"
+  },
+  {
+    "question": "How do I get a quote or start a conversation?",
+    "answer": "<p>Book a free, zero-obligation consultation and our team will follow up within one business day to understand your business and recommend the right combination of products and services.</p>",
+    "category": "general",
+    "category_name": "General"
+  },
+  {
+    "question": "What is FootfallCam?",
+    "answer": "<p>FootfallCam is a people-counting solution that measures how many visitors enter your store, how they move through it, and how long they stay. The sensors are installed at entrances and key zones, and the data flows into a central dashboard where you can view traffic by store, by day, or by hour. It turns visitor behaviour into numbers you can act on, rather than guesswork.</p>",
+    "category": "footfallcam",
+    "category_name": "FootfallCam"
+  },
+  {
+    "question": "Why do retailers need people counting when they already have sales data?",
+    "answer": "<p>Sales data tells you what was bought, but not how many opportunities you missed. Knowing that 500 people entered and 50 purchased gives you a conversion rate, which is a far more useful measure of store performance than sales alone. It also lets you tell the difference between a slow day caused by low traffic and one caused by poor in-store execution.</p>",
+    "category": "footfallcam",
+    "category_name": "FootfallCam"
+  },
+  {
+    "question": "What metrics can we get from the system?",
+    "answer": "<p>The core metrics are visitor count, conversion rate, dwell time, peak hours, and repeat visits. Depending on the configuration, you can also measure zone-level traffic, queue length, and staff-to-customer ratios.</p>",
+    "category": "footfallcam",
+    "category_name": "FootfallCam"
+  },
+  {
+    "question": "How accurate is the counting?",
+    "answer": "<p>FootfallCam uses 3D stereo vision rather than simple beam-break or Wi-Fi tracking, which means it can distinguish between adults and children, exclude staff, and count people walking side by side as separate visitors. Vendor-published accuracy is above 95% under normal retail conditions. In practice, accuracy depends heavily on correct mounting height and positioning, which is why we handle installation planning as part of the deployment.</p>",
+    "category": "footfallcam",
+    "category_name": "FootfallCam"
+  },
+  {
+    "question": "Does it use facial recognition?",
+    "answer": "<p>No. The system counts people as anonymous objects and does not store images or identify individuals. This is an important distinction for compliance, because it means the deployment generally sits outside the scope of personal data collection under Singapore's PDPA, Malaysia's PDPA, Thailand's PDPA, and Indonesia's PDP Law.</p>",
+    "category": "footfallcam",
+    "category_name": "FootfallCam"
+  },
+  {
+    "question": "What do we need on site to run it?",
+    "answer": "<p>Each device requires power and a network connection, typically over PoE, so a single cable handles both. The data is uploaded to the cloud dashboard, so you need internet access at the store, though the devices buffer data locally if the connection drops and sync once it is restored. No on-premise server is needed.</p>",
+    "category": "footfallcam",
+    "category_name": "FootfallCam"
+  },
+  {
+    "question": "How many devices does a store need?",
+    "answer": "<p>It depends on the width of your entrances and whether you want zone-level analytics as well as entrance counting. A single standard entrance is usually covered by one device, while wide or double-door entrances may need more. We do a site assessment from your floor plans before quoting so the count is accurate rather than estimated.</p>",
+    "category": "footfallcam",
+    "category_name": "FootfallCam"
+  },
+  {
+    "question": "Can it integrate with our POS or other systems?",
+    "answer": "<p>Yes. Integrating POS transaction data is what allows the system to calculate conversion rate automatically, and data can also be exported or pushed to reporting tools your team already uses. The specific integration method depends on your POS platform, so we scope this during pre-sales.</p>",
+    "category": "footfallcam",
+    "category_name": "FootfallCam"
+  },
+  {
+    "question": "How long does installation take, and who does it?",
+    "answer": "<p>Most single-store installations are completed within a day, including configuration and calibration. Integrated Retail handles the deployment across Singapore, Malaysia, Thailand, and Indonesia, either directly or through our local partners, so you are dealing with one team across your regional footprint rather than coordinating separate vendors per market.</p>",
+    "category": "footfallcam",
+    "category_name": "FootfallCam"
+  },
+  {
+    "question": "What support do we get after installation?",
+    "answer": "<p>Hardware is covered by a one-year warranty, and the dashboard runs on an annual subscription that includes software updates and platform support. Day-to-day support comes from our regional team rather than an overseas helpdesk, which means local time zones and local languages. We also run a handover session so your store and HQ teams know how to read the reports.</p>",
+    "category": "footfallcam",
+    "category_name": "FootfallCam"
+  },
+  {
+    "question": "What is Cegid Retail?",
+    "answer": "<p>A cloud-native POS and unified commerce platform built for specialty retailers, used by over 1,000 retailers worldwide. Integrated Retail delivers and supports it across Asia Pacific.</p>",
+    "category": "cegid",
+    "category_name": "Cegid Retail"
+  },
+  {
+    "question": "What does &ldquo;unified commerce&rdquo; actually mean?",
+    "answer": "<p>Your stores, e-commerce and mobile channels run on one platform instead of separate systems, so stock, pricing and customer data stay consistent everywhere. That's what makes click-and-collect and ship-from-store work properly.</p>",
+    "category": "cegid",
+    "category_name": "Cegid Retail"
+  },
+  {
+    "question": "What does the platform cover?",
+    "answer": "<p>Omnichannel customer experience, supply chain and stock management, retail analytics, and store task management, all enhanced by AI. You can start with what you need and add modules later.</p>",
+    "category": "cegid",
+    "category_name": "Cegid Retail"
+  },
+  {
+    "question": "Is Cegid Retail suitable for our size of business?",
+    "answer": "<p>It's designed for retail chains rather than single shops, and works well for retailers running multiple stores, brands or countries. It scales as you grow, so you won't outgrow it at the next stage.</p>",
+    "category": "cegid",
+    "category_name": "Cegid Retail"
+  },
+  {
+    "question": "Is it cloud-based, and how is it licensed?",
+    "answer": "<p>Yes, it's a cloud SaaS platform, so there's no server for you to maintain. Licensing is subscription-based, with implementation quoted separately.</p>",
+    "category": "cegid",
+    "category_name": "Cegid Retail"
+  },
+  {
+    "question": "What if the internet goes down in a store?",
+    "answer": "<p>The POS keeps working offline so your cashiers can continue serving customers, and transactions sync once the connection returns.</p>",
+    "category": "cegid",
+    "category_name": "Cegid Retail"
+  },
+  {
+    "question": "Can it handle our operations across different countries?",
+    "answer": "<p>Yes. It supports multiple currencies, languages and local tax requirements, and we handle the configuration for each market.</p>",
+    "category": "cegid",
+    "category_name": "Cegid Retail"
+  },
+  {
+    "question": "Can it integrate with our e-commerce site, ERP and payment terminals?",
+    "answer": "<p>Yes, through APIs and integrated payment support. We scope the specific integrations during pre-sales.</p>",
+    "category": "cegid",
+    "category_name": "Cegid Retail"
+  },
+  {
+    "question": "How long does implementation take?",
+    "answer": "<p>Typically a few weeks to several months, depending on the scale and complexity of the project. From kick-off to first store go-live, covering configuration, data migration, testing and training. We usually start with a pilot store before rolling out.</p>",
+    "category": "cegid",
+    "category_name": "Cegid Retail"
+  },
+  {
+    "question": "Who supports us after go-live?",
+    "answer": "<p>Integrated Retail is your first line of support across Asia Pacific, with escalation to Cegid where needed. No overseas helpdesk on European hours.</p>",
+    "category": "cegid",
+    "category_name": "Cegid Retail"
+  },
+  {
+    "question": "What is Retail Pro Prism?",
+    "answer": "<p>A specialty retail POS and store management platform used by over 9,000 retailers and 54,000 stores in more than 130 countries. Integrated Retail handles implementation, localisation and support across Asia Pacific.</p>",
+    "category": "retailpro",
+    "category_name": "Retail Pro Prism"
+  },
+  {
+    "question": "What does it cover?",
+    "answer": "<p>Point of sale and checkout, inventory and stock management, replenishment, purchasing, receiving and transfers, plus rules-based pricing and promotions that apply automatically at the till.</p>",
+    "category": "retailpro",
+    "category_name": "Retail Pro Prism"
+  },
+  {
+    "question": "What devices does it run on?",
+    "answer": "<p>Windows, iOS and Android, so you can run fixed tills and mobile POS on the same system. Staff can check stock or complete a sale from the shop floor.</p>",
+    "category": "retailpro",
+    "category_name": "Retail Pro Prism"
+  },
+  {
+    "question": "Does it work if the store loses connectivity?",
+    "answer": "<p>Yes. Full POS functionality continues offline, and data syncs back once the connection returns.</p>",
+    "category": "retailpro",
+    "category_name": "Retail Pro Prism"
+  },
+  {
+    "question": "How customisable is it?",
+    "answer": "<p>Highly. The interface and workflows can be tailored to how your stores actually operate, rather than forcing your processes to fit the software. This is the main reason retailers with unusual requirements choose Prism.</p>",
+    "category": "retailpro",
+    "category_name": "Retail Pro Prism"
+  },
+  {
+    "question": "Can it handle multiple stores and countries?",
+    "answer": "<p>Yes. It supports multi-store operations with multiple languages, currencies and local requirements, and new stores can be added as you expand.</p>",
+    "category": "retailpro",
+    "category_name": "Retail Pro Prism"
+  },
+  {
+    "question": "Can it integrate with our e-commerce site, ERP and payment terminals?",
+    "answer": "<p>Yes, through open APIs and a wide ecosystem of available integrations. We scope the specific connections during pre-sales.</p>",
+    "category": "retailpro",
+    "category_name": "Retail Pro Prism"
+  },
+  {
+    "question": "We already run an older version of Retail Pro. Can we move to Prism?",
+    "answer": "<p>Yes. Prism is designed to work alongside or replace earlier Retail Pro versions, and your existing data can be migrated. We'll assess your current setup before recommending an approach.</p>",
+    "category": "retailpro",
+    "category_name": "Retail Pro Prism"
+  },
+  {
+    "question": "How is it deployed and licensed?",
+    "answer": "<p>It can run on your own infrastructure or be hosted, depending on your IT preference.</p>",
+    "category": "retailpro",
+    "category_name": "Retail Pro Prism"
+  },
+  {
+    "question": "Who implements and supports it?",
+    "answer": "<p>Integrated Retail does both, across Singapore, Malaysia, Thailand and Indonesia. Implementation typically runs a few months to first store go-live, and support afterwards comes from our regional team rather than an overseas helpdesk.</p>",
+    "category": "retailpro",
+    "category_name": "Retail Pro Prism"
+  }
+];
+
+export async function onRequestGet({ request, env }) {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=600',
+  };
+
+  const wpOrigin = env.WP_API_ORIGIN || 'https://integratedretail.com';
+
+  try {
+    const [ufaqRes, catRes] = await Promise.all([
+      fetch(`${wpOrigin}/wp-json/wp/v2/ufaq?per_page=100&_embed=true`, {
+        headers: { 'User-Agent': 'CloudflarePages-FAQProxy/1.0' },
+      }).catch(() => null),
+      fetch(`${wpOrigin}/wp-json/wp/v2/ufaq-category?per_page=100`, {
+        headers: { 'User-Agent': 'CloudflarePages-FAQProxy/1.0' },
+      }).catch(() => null),
+    ]);
+
+    if (ufaqRes && ufaqRes.ok) {
+      const ufaqData = await ufaqRes.json();
+      const catData = (catRes && catRes.ok) ? await catRes.json() : [];
+
+      const catMap = {};
+      catData.forEach((c) => {
+        catMap[c.id] = { slug: c.slug, name: c.name };
+      });
+
+      if (Array.isArray(ufaqData) && ufaqData.length > 0) {
+        const items = ufaqData.map((item) => {
+          const itemCatIds = item['ufaq-category'] || [];
+          const firstCat = itemCatIds.length > 0 ? catMap[itemCatIds[0]] : null;
+          return {
+            id: item.id,
+            question: item.title?.rendered || '',
+            answer: item.content?.rendered || '',
+            category: firstCat ? firstCat.slug : 'general',
+            category_name: firstCat ? firstCat.name : 'General',
+          };
+        });
+
+        const counts = {};
+        items.forEach((i) => {
+          counts[i.category] = (counts[i.category] || 0) + 1;
+        });
+
+        const categories = [
+          { slug: 'all', name: 'All Questions', count: items.length },
+          ...catData.map((c) => ({
+            slug: c.slug,
+            name: c.name,
+            count: counts[c.slug] || 0,
+          })),
+        ];
+
+        return new Response(JSON.stringify({ source: 'wordpress', total: items.length, categories, items }), {
+          status: 200,
+          headers,
+        });
+      }
+    }
+  } catch (err) {
+    console.warn('Error fetching WordPress ufaq:', err.message);
+  }
+
+  // Fallback to static pre-bundled FAQs
+  const counts = {};
+  STATIC_FAQS.forEach((i) => {
+    counts[i.category] = (counts[i.category] || 0) + 1;
+  });
+
+  const categories = [
+    { slug: 'all', name: 'All Questions', count: STATIC_FAQS.length },
+    { slug: 'general', name: 'General', count: counts['general'] || 0 },
+    { slug: 'footfallcam', name: 'FootfallCam', count: counts['footfallcam'] || 0 },
+    { slug: 'cegid', name: 'Cegid Retail', count: counts['cegid'] || 0 },
+    { slug: 'retailpro', name: 'Retail Pro Prism', count: counts['retailpro'] || 0 },
+  ];
+
+  return new Response(JSON.stringify({ source: 'fallback', total: STATIC_FAQS.length, categories, items: STATIC_FAQS }), {
+    status: 200,
+    headers,
+  });
+}
+
+export async function onRequestOptions() {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
+}
