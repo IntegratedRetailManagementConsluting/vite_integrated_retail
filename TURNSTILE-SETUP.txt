@@ -1,0 +1,39 @@
+Contact-form captcha (Cloudflare Turnstile) + form submission fix
+=================================================================
+Base: origin/main at 63b8efd.   Files changed: assets/js/main.js, functions/api/contact.js
+
+1) IMPORTANT - form submission code was missing on main
+   Commit 874491e ("update assts", 30 Oct 11:49) replaced assets/js/main.js with an older copy and removed
+   everything that posts forms to /api/contact. Since then:
+     - contact page form, Book-a-Consultation pop-up, Cegid White Paper pop-up and the footer newsletter
+       do not send anything (the pop-up just shows "thank you" and discards the data);
+     - the "Request the White Paper" button (#whitepaper) does nothing.
+   This change restores that code from 7466868 (same behaviour, same payloads, same form_ids 100/91)
+   with two improvements: a failed request now shows an error message instead of a false "thank you",
+   and every form is protected by Turnstile.
+
+2) Turn the captcha on (about 5 minutes)
+   a. Cloudflare dashboard -> Turnstile -> Add widget -> hostname: integratedretail.com (and the
+      *.pages.dev preview domain if you test there). Widget mode: Managed. Copy the Site Key and Secret Key.
+   b. Paste the SITE KEY into assets/js/main.js:   var TURNSTILE_SITE_KEY = '...';
+   c. Cloudflare Pages -> Settings -> Environment variables: add TURNSTILE_SECRET_KEY = <secret key>
+      (Production and Preview). Redeploy.
+   Until both are set the captcha is simply off - safe to deploy first. Once the secret is set the server
+   returns 403 for any submission without a valid token.
+   The widget uses appearance "interaction-only": visitors normally see nothing.
+
+3) SECURITY - secrets are committed in functions/api/contact.js (repo is now public)
+   The code has hard-coded fallbacks for: the Resend API key (re_...), and the WordPress Gravity Forms
+   consumer key/secret (ck_.../cs_...). Anyone can read them. Please:
+     - rotate/revoke all three now (Resend dashboard; WordPress -> Forms -> Settings -> REST API keys);
+     - set the new values only as Cloudflare Pages environment variables (RESEND_API_KEY,
+       GF_CONSUMER_KEY, GF_CONSUMER_SECRET) and delete the fallbacks from the code;
+     - the old values stay in git history, so rotating is required, not optional.
+   Also consider: the default recipient list and a personal Gmail address are hard-coded as fallbacks;
+   Access-Control-Allow-Origin is '*'.
+
+4) Tested
+   Server: no secret -> accepted; secret + no/bad token -> 403; good token -> accepted; honeypot ignored.
+   Browser (Chromium, stubbed Turnstile): contact form, Book pop-up, White Paper pop-up, newsletter all post the
+   right payload (+ token), error shown on 403, clear message if the captcha never completes.
+   Not tested against the real Cloudflare service - do one live test after adding the keys.

@@ -155,13 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && bookOverlay.classList.contains('open')) closeBookModal();
     });
-    if (bookForm) {
-      bookForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        bookForm.hidden = true;
-        if (bookSuccess) bookSuccess.hidden = false;
-      });
-    }
+    // Form submission (with captcha) is handled in the "Website forms" block at the end of this file.
   }
 
   // Scroll-reveal: fade/slide in sections and cards as they enter the viewport
@@ -367,4 +361,256 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+});
+
+/* ==========================================================================
+   Website forms: contact page, "Book a Consultation" pop-up, White Paper
+   pop-up and footer newsletter. They post JSON to /api/contact
+   (functions/api/contact.js) and are protected by Cloudflare Turnstile.
+
+   TURNSTILE: paste the public SITE KEY below. While it is empty the captcha
+   is switched off (the server only checks the token once TURNSTILE_SECRET_KEY
+   is set in the Cloudflare Pages settings), so it is safe to deploy first.
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', function () {
+  var TURNSTILE_SITE_KEY = '';   // e.g. '0x4AAAAAAA...'  (public key, not the secret)
+
+  var TS_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  var tsLoading = null;
+
+  function loadTurnstile(cb) {
+    if (window.turnstile) { cb(); return; }
+    if (!tsLoading) {
+      tsLoading = [];
+      var s = document.createElement('script');
+      s.src = TS_SRC; s.async = true; s.defer = true;
+      document.head.appendChild(s);
+      var tries = 0;
+      var timer = setInterval(function () {
+        tries++;
+        if (window.turnstile) {
+          clearInterval(timer);
+          var q = tsLoading; tsLoading = null; q.forEach(function (f) { f(); });
+        } else if (tries > 100) { clearInterval(timer); tsLoading = null; }
+      }, 100);
+    }
+    tsLoading.push(cb);
+  }
+
+  function showError(form, msg) {
+    var el = form.querySelector('.form-error');
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'form-error';
+      el.setAttribute('role', 'alert');
+      el.style.cssText = 'color:#b91c1c;font-size:0.9rem;margin-top:10px;line-height:1.4;';
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn && btn.parentNode) btn.parentNode.insertBefore(el, btn.nextSibling); else form.appendChild(el);
+    }
+    el.textContent = msg || '';
+    el.hidden = !msg;
+  }
+
+  // One Turnstile widget per form. "interaction-only" means visitors see nothing
+  // unless Cloudflare is not sure they are human.
+  function getCaptcha(form) {
+    if (!TURNSTILE_SITE_KEY) return null;
+    if (form._ircap) return form._ircap;
+    var cap = { token: '', id: null, rendering: false, waiting: null };
+    var slot = document.createElement('div');
+    slot.className = 'ir-turnstile';
+    slot.style.cssText = 'width:100%;margin-top:8px;';
+    var btn = form.querySelector('button[type="submit"]');
+    if (btn && btn.parentNode) btn.parentNode.insertBefore(slot, btn); else form.appendChild(slot);
+    cap.render = function () {
+      if (cap.id !== null || cap.rendering) return;
+      cap.rendering = true;
+      loadTurnstile(function () {
+        cap.id = window.turnstile.render(slot, {
+          sitekey: TURNSTILE_SITE_KEY,
+          appearance: 'interaction-only',
+          callback: function (t) { cap.token = t; if (cap.waiting) { var w = cap.waiting; cap.waiting = null; w(); } },
+          'expired-callback': function () { cap.token = ''; },
+          'error-callback': function () { cap.token = ''; }
+        });
+      });
+    };
+    cap.reset = function () {
+      cap.token = '';
+      if (cap.id !== null && window.turnstile) window.turnstile.reset(cap.id);
+    };
+    form.addEventListener('focusin', cap.render, { once: true });
+    form._ircap = cap;
+    return cap;
+  }
+
+  // Calls go(token) as soon as a captcha token is available (or straight away if captcha is off).
+  function withCaptcha(form, go, fail) {
+    var cap = getCaptcha(form);
+    if (!cap) { go(''); return; }
+    if (cap.token) { go(cap.token); return; }
+    cap.render();
+    var done = false;
+    cap.waiting = function () { if (!done) { done = true; go(cap.token); } };
+    setTimeout(function () {
+      if (!done) { done = true; cap.waiting = null; fail(); }
+    }, 15000);
+  }
+
+  function serializeForm(form) {
+    var data = {};
+    form.querySelectorAll('input, select, textarea').forEach(function (el) {
+      if (el.type === 'checkbox' || el.type === 'radio' && !el.checked) return;
+      var key = el.name;
+      if (!key) {
+        var field = el.closest('.field');
+        var label = field ? field.querySelector('label') : null;
+        if (label) {
+          var txt = label.textContent.replace(/\*/g, '').trim().toLowerCase();
+          if (txt.indexOf('name') !== -1) key = 'name';
+          else if (txt.indexOf('email') !== -1) key = 'email';
+          else if (txt.indexOf('contact') !== -1 || txt.indexOf('number') !== -1 || txt.indexOf('phone') !== -1) key = 'phone';
+          else if (txt.indexOf('country') !== -1) key = 'country';
+          else if (txt.indexOf('interested') !== -1) key = 'interest';
+          else if (txt.indexOf('store') !== -1) key = 'stores';
+          else if (txt.indexOf('industry') !== -1) key = 'industry';
+          else if (txt.indexOf('message') !== -1) key = 'message';
+          else key = txt;
+        }
+      }
+      if (key) data[key] = el.value;
+    });
+    return data;
+  }
+
+  var GENERIC_ERROR = 'Sorry, we could not send your request. Please try again, or email connect@integratedretail.com.';
+
+  // Shared sender: payload (object), form (for button + error text), ok() on success.
+  function post(form, payload, busyText, ok) {
+    var btn = form.querySelector('button[type="submit"]');
+    var orig = btn ? btn.textContent : '';
+    function idle() { if (btn) { btn.disabled = false; btn.textContent = orig; } }
+    showError(form, '');
+    if (btn) { btn.disabled = true; btn.textContent = busyText; }
+    withCaptcha(form, function (token) {
+      if (token) payload.cf_turnstile_token = token;
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (body) { return { ok: res.ok, body: body }; });
+      }).then(function (r) {
+        var cap = form._ircap; if (cap) cap.reset();
+        idle();
+        if (r.ok) ok(); else showError(form, (r.body && r.body.error) || GENERIC_ERROR);
+      }).catch(function (err) {
+        console.error('Form submission error:', err);
+        var cap = form._ircap; if (cap) cap.reset();
+        idle();
+        showError(form, GENERIC_ERROR);
+      });
+    }, function () {
+      idle();
+      showError(form, 'We could not verify that you are human. Please refresh the page and try again.');
+    });
+  }
+
+  function sendForm(form, source, ok) {
+    var payload = serializeForm(form);
+    if (form.dataset && form.dataset.formId) payload.form_id = parseInt(form.dataset.formId, 10);
+    payload.source = source || window.location.pathname;
+    post(form, payload, 'Submitting...', ok);
+  }
+
+  // "Book a Consultation" pop-up (open/close logic lives further up in this file)
+  var bookForm = document.getElementById('bookModalForm');
+  var bookSuccess = document.getElementById('bookModalSuccess');
+  if (bookForm) {
+    bookForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      sendForm(bookForm, 'Book Modal (' + window.location.pathname + ')', function () {
+        bookForm.hidden = true;
+        if (bookSuccess) bookSuccess.hidden = false;
+      });
+    });
+  }
+
+  // Contact page form
+  var contactForm = document.getElementById('contactPageForm');
+  var contactSuccess = document.getElementById('contactSuccess');
+  var contactReset = document.getElementById('contactResetBtn');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      sendForm(contactForm, 'Contact Page', function () {
+        contactForm.hidden = true;
+        if (contactSuccess) contactSuccess.hidden = false;
+      });
+    });
+    if (contactReset) {
+      contactReset.addEventListener('click', function () {
+        contactForm.hidden = false;
+        contactForm.reset();
+        showError(contactForm, '');
+        if (contactSuccess) contactSuccess.hidden = true;
+      });
+    }
+  }
+
+  // White Paper pop-up (Cegid Retail, Gravity Form 91)
+  var wpOverlay = document.getElementById('whitepaperModalOverlay');
+  if (wpOverlay) {
+    var wpForm = document.getElementById('whitepaperModalForm');
+    var wpSuccess = document.getElementById('whitepaperModalSuccess');
+    var wpClose = document.getElementById('whitepaperModalClose');
+    var wpDone = document.getElementById('whitepaperModalDone');
+    var openWp = function () { wpOverlay.classList.add('open'); document.body.classList.add('modal-open'); };
+    var closeWp = function () {
+      wpOverlay.classList.remove('open');
+      document.body.classList.remove('modal-open');
+      if (wpForm) { wpForm.hidden = false; wpForm.reset(); showError(wpForm, ''); }
+      if (wpSuccess) wpSuccess.hidden = true;
+    };
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('.btn-whitepaper, a[href="#whitepaper"]');
+      if (!a) return;
+      e.preventDefault();
+      openWp();
+    });
+    if (wpClose) wpClose.addEventListener('click', closeWp);
+    if (wpDone) wpDone.addEventListener('click', closeWp);
+    wpOverlay.addEventListener('click', function (e) { if (e.target === wpOverlay) closeWp(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && wpOverlay.classList.contains('open')) closeWp(); });
+    if (wpForm) {
+      wpForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        sendForm(wpForm, 'Cegid White Paper Request', function () {
+          wpForm.hidden = true;
+          if (wpSuccess) wpSuccess.hidden = false;
+        });
+      });
+    }
+  }
+
+  // Footer newsletter (Gravity Form 100)
+  var nlForm = document.getElementById('footerNewsletterForm');
+  var nlSuccess = document.getElementById('footerNewsletterSuccess');
+  if (nlForm) {
+    nlForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('footerNewsletterEmail');
+      var consent = document.getElementById('footerNewsletterConsent');
+      if (!email || !email.value || (consent && !consent.checked)) return;
+      post(nlForm, {
+        form_id: 100,
+        email: email.value.trim(),
+        name: email.value.split('@')[0],
+        source: 'Newsletter Footer (' + window.location.pathname + ')'
+      }, 'Subscribing...', function () {
+        nlForm.hidden = true;
+        if (nlSuccess) nlSuccess.hidden = false;
+      });
+    });
+  }
 });

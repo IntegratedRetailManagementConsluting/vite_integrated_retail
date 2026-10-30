@@ -17,6 +17,34 @@ export async function onRequestPost({ request, env }) {
       });
     }
 
+    // Cloudflare Turnstile captcha. Only enforced once TURNSTILE_SECRET_KEY is set
+    // in the Cloudflare Pages environment variables.
+    if (env.TURNSTILE_SECRET_KEY) {
+      let human = false;
+      const token = typeof data.cf_turnstile_token === 'string' ? data.cf_turnstile_token : '';
+      if (token) {
+        try {
+          const verifyBody = new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: token });
+          const ip = request.headers.get('CF-Connecting-IP');
+          if (ip) verifyBody.set('remoteip', ip);
+          const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            body: verifyBody,
+          });
+          const verifyJson = await verifyRes.json();
+          human = verifyJson.success === true;
+        } catch (e) {
+          human = false;
+        }
+      }
+      if (!human) {
+        return new Response(JSON.stringify({ error: 'Captcha verification failed. Please refresh the page and try again.' }), {
+          status: 403,
+          headers,
+        });
+      }
+    }
+
     // Form ID detection
     const gfFormId = parseInt(data.form_id || env.GF_FORM_ID || '1', 10);
 
