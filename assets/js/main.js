@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Close mobile nav when window is resized past mobile breakpoint
   window.addEventListener('resize', function () {
-    if (window.innerWidth > 900 && document.body.classList.contains('nav-open')) {
+    if (window.innerWidth > 1024 && document.body.classList.contains('nav-open')) {
       closeNav();
     }
   });
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Accordion toggle for dropdowns in mobile view
   document.querySelectorAll('.nav-item.has-dropdown > a').forEach(function (link) {
     link.addEventListener('click', function (e) {
-      if (window.innerWidth <= 900) {
+      if (window.innerWidth <= 1024) {
         e.preventDefault();
         e.stopPropagation();
         var parentItem = this.parentElement;
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
     mainNav.querySelectorAll('a').forEach(function (link) {
       if (!link.parentElement.classList.contains('has-dropdown') || link.parentElement.tagName.toLowerCase() !== 'li' || link.closest('.dropdown')) {
         link.addEventListener('click', function () {
-          if (window.innerWidth <= 900 && !this.classList.contains('lang-switcher-trigger')) {
+          if (window.innerWidth <= 1024 && !this.classList.contains('lang-switcher-trigger')) {
             closeNav();
           }
         });

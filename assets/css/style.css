@@ -221,7 +221,7 @@ p { margin: 0 0 1em; }
 .nav-search-result .nsr-section { font-size: 0.76rem; color: var(--accent-600); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 2px; }
 .nav-search-empty, .nav-search-hint { padding: 14px 10px; font-size: 0.85rem; color: var(--slate-500, #5b6b82); }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   /* Header layout on mobile & tablet */
   .site-header {
     transition: background 0.2s ease;

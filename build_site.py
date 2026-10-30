@@ -203,6 +203,14 @@ def build(check_only=False):
             elif "</body>" in new_content and "botpress.cloud" not in new_content:
                 new_content = new_content.replace("</body>", f"{botpress_html}\n</body>", 1)
 
+        # Ensure site search scripts are present before </body>
+        search_scripts = (
+            f'<script src="{root_prefix}assets/js/search-index.js"></script>\n'
+            f'<script src="{root_prefix}assets/js/search.js"></script>'
+        )
+        if "search.js" not in new_content and "</body>" in new_content:
+            new_content = new_content.replace("</body>", f"{search_scripts}\n</body>", 1)
+
         if new_content != content:
             changed.append(rel)
             if not check_only:
