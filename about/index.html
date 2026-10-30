@@ -23,7 +23,7 @@
 <header class="site-header">
   <div class="container">
     <a href="../index.html" class="logo"><img src="../assets/img/logo-header.png" alt="Integrated Retail" height="50"></a>
-    <nav class="main-nav">
+    <nav class="main-nav" id="mainNav">
       <ul>
         <li class="nav-item has-dropdown">
           <a class="nav-link active" href="../about/index.html" data-i18n="nav.about">About</a>
@@ -100,8 +100,12 @@
         <a class="nav-link lang-switcher-trigger" href="#">🌐 <span class="lang-current">EN</span></a>
         <div class="dropdown lang-dropdown"><a href="#" class="lang-option" data-lang="en">🇬🇧 English</a><a href="#" class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</a><a href="#" class="lang-option" data-lang="th">🇹🇭 ไทย</a></div>
       </div>
-      <a href="../contact/index.html" class="btn btn-primary" data-i18n="nav.bookConsultation">Book a Consultation</a>
-      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+      <a href="../contact/index.html" class="btn btn-primary header-desktop-cta" data-i18n="nav.bookConsultation">Book a Consultation</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
     </div>
   </div>
 </header>

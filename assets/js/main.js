@@ -5,20 +5,94 @@
 // Mobile nav toggle + dropdown handling for touch/small screens
 document.addEventListener('DOMContentLoaded', function () {
   var toggle = document.querySelector('.nav-toggle');
+  var mainNav = document.getElementById('mainNav') || document.querySelector('.main-nav');
+  var searchToggle = document.getElementById('navSearchToggle');
+  var searchPanel = document.getElementById('navSearchPanel');
+
+  function openNav() {
+    document.body.classList.add('nav-open');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+    // Close search panel if open
+    if (searchPanel && !searchPanel.hidden) {
+      searchPanel.hidden = true;
+      if (searchToggle) searchToggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  function closeNav() {
+    document.body.classList.remove('nav-open');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+
   if (toggle) {
-    toggle.addEventListener('click', function () {
-      document.body.classList.toggle('nav-open');
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (document.body.classList.contains('nav-open')) {
+        closeNav();
+      } else {
+        openNav();
+      }
     });
   }
 
+  if (searchToggle) {
+    searchToggle.addEventListener('click', function () {
+      closeNav();
+    });
+  }
+
+  // Close nav on Escape key
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Escape' || e.key === 'Esc') && document.body.classList.contains('nav-open')) {
+      closeNav();
+    }
+  });
+
+  // Close mobile nav when window is resized past mobile breakpoint
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 900 && document.body.classList.contains('nav-open')) {
+      closeNav();
+    }
+  });
+
+  // Accordion toggle for dropdowns in mobile view
   document.querySelectorAll('.nav-item.has-dropdown > a').forEach(function (link) {
     link.addEventListener('click', function (e) {
       if (window.innerWidth <= 900) {
         e.preventDefault();
-        this.parentElement.classList.toggle('open');
+        e.stopPropagation();
+        var parentItem = this.parentElement;
+        var wasOpen = parentItem.classList.contains('open');
+
+        // Close other open sibling dropdowns for a clean accordion experience
+        var siblings = parentItem.parentElement.querySelectorAll('.nav-item.has-dropdown.open');
+        siblings.forEach(function (sibling) {
+          if (sibling !== parentItem) {
+            sibling.classList.remove('open');
+          }
+        });
+
+        parentItem.classList.toggle('open', !wasOpen);
       }
     });
   });
+
+  // Close mobile nav when clicking on direct links inside the nav (not dropdown togglers)
+  if (mainNav) {
+    mainNav.querySelectorAll('a').forEach(function (link) {
+      if (!link.parentElement.classList.contains('has-dropdown') || link.parentElement.tagName.toLowerCase() !== 'li' || link.closest('.dropdown')) {
+        link.addEventListener('click', function () {
+          if (window.innerWidth <= 900 && !this.classList.contains('lang-switcher-trigger')) {
+            closeNav();
+          }
+        });
+      }
+    });
+  }
 
   // Simple filter tabs on resources page
   var tabs = document.querySelectorAll('.filter-tabs button');
