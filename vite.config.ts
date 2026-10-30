@@ -1,4 +1,4 @@
-import { defineConfig, type Plugin } from 'vite';
+import { defineConfig, loadEnv, type Plugin } from 'vite';
 import { cpSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -14,7 +14,9 @@ function collectHtmlPages(dir: string, entries: Record<string, string> = {}) {
       name === '.git' ||
       name === 'Claude outputs' ||
       name === '.dyad' ||
-      name === 'partials'
+      name === 'partials' ||
+      name === 'api' ||
+      name === 'data'
     ) continue;
     const full = join(dir, name);
     if (statSync(full).isDirectory()) {
@@ -43,27 +45,62 @@ function copyStaticAssets(): Plugin {
   };
 }
 
-// Dev server proxy plugin for Cloudflare Pages Functions
+// Dev server proxy plugin for local testing of /api/* routes during `npm run dev`
 function devApiProxy(): Plugin {
   return {
     name: 'dev-api-proxy',
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
-        if (!req.url?.startsWith('/api/posts')) return next();
+        if (!req.url?.startsWith('/api/')) return next();
+
         try {
-          const { onRequestGet } = await import('./functions/api/posts.js');
+          const devEnv = {
+            ...process.env,
+            ...loadEnv('production', ROOT, ''),
+            ...loadEnv('development', ROOT, ''),
+          };
+
           const fullUrl = `http://${req.headers.host || 'localhost'}${req.url}`;
+          const method = req.method || 'GET';
+
+          let body: string | undefined = undefined;
+          if (method !== 'GET' && method !== 'HEAD') {
+            body = await new Promise<string>((resolve) => {
+              let data = '';
+              req.on('data', (chunk) => { data += chunk; });
+              req.on('end', () => { resolve(data); });
+            });
+          }
+
           const webReq = new Request(fullUrl, {
-            method: req.method || 'GET',
+            method,
             headers: req.headers as Record<string, string>,
+            body,
           });
-          const response = await onRequestGet({ request: webReq, env: {} });
-          res.statusCode = response.status;
-          response.headers.forEach((v, k) => {
-            res.setHeader(k, v);
-          });
-          const body = await response.text();
-          res.end(body);
+
+          let response: Response | undefined;
+
+          if (req.url.startsWith('/api/posts')) {
+            const { onRequestGet, onRequestOptions } = await import('./functions/api/posts.js');
+            response = method === 'OPTIONS' ? await onRequestOptions() : await onRequestGet({ request: webReq, env: devEnv });
+          } else if (req.url.startsWith('/api/contact')) {
+            const { onRequestPost, onRequestOptions } = await import('./functions/api/contact.js');
+            response = method === 'OPTIONS' ? await onRequestOptions() : await onRequestPost({ request: webReq, env: devEnv });
+          } else if (req.url.startsWith('/api/faq')) {
+            const { onRequestGet, onRequestOptions } = await import('./functions/api/faq.js');
+            response = method === 'OPTIONS' ? await onRequestOptions() : await onRequestGet({ request: webReq, env: devEnv });
+          }
+
+          if (response) {
+            res.statusCode = response.status;
+            response.headers.forEach((v, k) => {
+              res.setHeader(k, v);
+            });
+            const resBody = await response.text();
+            res.end(resBody);
+          } else {
+            next();
+          }
         } catch (err) {
           next(err);
         }
