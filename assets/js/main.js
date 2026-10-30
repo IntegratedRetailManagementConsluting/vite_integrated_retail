@@ -3,7 +3,14 @@
 // this script, in whole or in part, is prohibited.
 //
 // Expose global mobile nav toggler for instant click handling
+var lastNavToggleTime = 0;
 window.toggleMobileNav = function (force) {
+  var now = Date.now();
+  if (typeof force !== 'boolean' && now - lastNavToggleTime < 250) {
+    return;
+  }
+  lastNavToggleTime = now;
+
   var toggle = document.querySelector('.nav-toggle') || document.getElementById('navToggle');
   var searchToggle = document.getElementById('navSearchToggle');
   var searchPanel = document.getElementById('navSearchPanel');
