@@ -119,8 +119,31 @@ def render_header(header_tpl, root_prefix, active_section):
 NEWSLETTER_LINE_RE = re.compile(r'^[ \t]*__NEWSLETTER__[ \t]*\n', re.M)
 
 
-def render_footer(footer_tpl, newsletter_html, root_prefix, is_homepage):
-    out = footer_tpl.replace("__ROOT__", root_prefix)
+def get_build_number():
+    if os.environ.get("BUILD_NUMBER"):
+        return os.environ["BUILD_NUMBER"].strip()
+    commit = os.environ.get("CF_PAGES_COMMIT_SHA")
+    if commit:
+        import datetime
+        now_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d")
+        return f"{now_str}.{commit[:7]}"
+    try:
+        import subprocess
+        out = subprocess.check_output(
+            ["git", "log", "-1", "--format=%cd.%h", "--date=format:%Y%m%d"],
+            cwd=SITE_ROOT,
+            stderr=subprocess.DEVNULL
+        ).decode("utf-8").strip()
+        if out:
+            return out
+    except Exception:
+        pass
+    import datetime
+    return datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d")
+
+
+def render_footer(footer_tpl, newsletter_html, root_prefix, is_homepage, build_number):
+    out = footer_tpl.replace("__ROOT__", root_prefix).replace("__BUILD_NUMBER__", build_number)
     if is_homepage:
         # Splice in the newsletter block in place of its own placeholder
         # line, keeping the block's own indentation intact.
@@ -135,6 +158,7 @@ def render_footer(footer_tpl, newsletter_html, root_prefix, is_homepage):
 def build(check_only=False):
     header_tpl, footer_tpl, newsletter_html, gtag_html, botpress_html = load_partials()
     pages = site_pages()
+    build_num = get_build_number()
 
     changed = []
     unchanged = []
@@ -155,7 +179,7 @@ def build(check_only=False):
         is_homepage = (rel == "index.html")
 
         new_header = render_header(header_tpl, root_prefix, active_section)
-        new_footer = render_footer(footer_tpl, newsletter_html, root_prefix, is_homepage)
+        new_footer = render_footer(footer_tpl, newsletter_html, root_prefix, is_homepage, build_num)
 
         # Using a lambda replacement (rather than a plain string) means
         # re.sub inserts new_header/new_footer literally, with no
