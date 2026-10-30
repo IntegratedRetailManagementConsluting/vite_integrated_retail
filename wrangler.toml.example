@@ -3,10 +3,10 @@ compatibility_date = "2024-09-23"
 pages_build_output_dir = "dist"
 
 [vars]
-RESEND_API_KEY = "re_VbtwkioN_6ffuTywdZqYJrGxFXqu12mgD"
+RESEND_API_KEY = "your_resend_api_key_here"
 CONTACT_RECIPIENT = "connect@integratedretail.com"
 FROM_EMAIL = "Integrated Retail <website@integratedretail.com>"
 WP_API_ORIGIN = "https://integratedretail.com"
 GF_FORM_ID = "1"
-GF_CONSUMER_KEY = "ck_e85bf48d0b0695b26a82c0b2f9535853255e5459"
-GF_CONSUMER_SECRET = "cs_8eed7cce951146dfaccb41945e9f3c26ea33840f"
+GF_CONSUMER_KEY = "your_gravity_forms_consumer_key_here"
+GF_CONSUMER_SECRET = "your_gravity_forms_consumer_secret_here"
