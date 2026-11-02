@@ -12,3 +12,6 @@ wrangler.toml
 # Python
 __pycache__/
 *.pyc
+
+# Local deployment scripts with credentials
+publish_to_mddhosting.py
