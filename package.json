@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "build:partials": "python3 build_site.py",
+    "build:blogs": "python3 precompile_blogs.py",
     "dev": "python3 build_site.py && vite",
-    "build": "python3 build_site.py && vite build",
+    "build": "python3 precompile_blogs.py && python3 build_site.py && vite build",
     "preview": "vite preview",
     "deploy": "python3 build_site.py && vite build && wrangler pages deploy dist --project-name=integratedretail-site --branch=main"
   },

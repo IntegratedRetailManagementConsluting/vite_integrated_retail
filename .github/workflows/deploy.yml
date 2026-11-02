@@ -1,0 +1,54 @@
+name: Build & Deploy to MDDHosting
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    # Optional: Automatically recompile blogs daily at 02:00 UTC
+    # so newly published WordPress posts on cms.integratedretail.com
+    # are built and published without needing manual git commits.
+    - cron: '0 2 * * *'
+
+jobs:
+  build-and-deploy:
+    name: Precompile & Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: 📥 Check out repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 🟢 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install npm dependencies
+        run: npm ci
+
+      - name: ⚙️ Precompile WordPress blogs & Site partials
+        env:
+          WP_API_ORIGIN: https://cms.integratedretail.com
+        run: |
+          npm run build
+
+      - name: 🚀 Deploy to MDDHosting via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT || 21 }}
+          protocol: ftps
+          local-dir: ./dist/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/public_html/' }}
+          dangerous-clean-slate: false

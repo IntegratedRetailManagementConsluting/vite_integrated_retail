@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics for large-format retail: how to modernise without rewiring the store | Integrated Retail</title>
+<meta name="description" content="Large-format retail analytics comes down to three questions for almost every retailer we work with: how many people are in the store, whether the checkout qu...">
+<link rel="canonical" href="https://integratedretail.com/resources/large-format-retail-analytics-architecture/">
+
+<!-- OpenGraph / Social Meta Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Analytics for large-format retail: how to modernise without rewiring the store">
+<meta property="og:description" content="Large-format retail analytics comes down to three questions for almost every retailer we work with: how many people are in the store, whether the checkout qu...">
+<meta property="og:url" content="https://integratedretail.com/resources/large-format-retail-analytics-architecture/">
+<meta property="og:image" content="https://cms.integratedretail.com/wp-content/uploads/2026/10/large-format-retail-store-interior.jpg.jpg">
+<meta property="og:site_name" content="Integrated Retail">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Analytics for large-format retail: how to modernise without rewiring the store">
+<meta name="twitter:description" content="Large-format retail analytics comes down to three questions for almost every retailer we work with: how many people are in the store, whether the checkout qu...">
+<meta name="twitter:image" content="https://cms.integratedretail.com/wp-content/uploads/2026/10/large-format-retail-store-interior.jpg.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1628'/%3E%3Cpolygon points='16,7 25,25 7,25' fill='%23c4181f'/%3E%3C/svg%3E">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-76NWT07QK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-76NWT07QK7');
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../../index.html" class="logo"><img src="../../assets/img/logo-header.png" alt="Integrated Retail" height="50"></a>
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../../about/index.html" data-i18n="nav.about">About</a>
+          <div class="dropdown">
+            <a href="../../about/index.html" data-i18n="nav.aboutCompany">Company</a>
+            <a href="../../about/values/index.html" data-i18n="nav.aboutValues">Values &amp; Culture</a>
+            <a href="../../about/careers/index.html" data-i18n="nav.aboutCareers">Careers</a>
+            <a href="../../about/partners/index.html" data-i18n="nav.aboutPartners">Partners</a>
+          </div>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="../../solutions/index.html" data-i18n="nav.solution">Solution</a></li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../../products/index.html" data-i18n="nav.product">Product</a>
+          <div class="dropdown dropdown-mega">
+            <div class="dropdown-col"><div class="dropdown-group-label">Point of Sale</div><a href="../../product-cegid-retail/index.html">Cegid Retail</a><a href="../../retailpro-prism/index.html">Retail Pro Prism</a><div class="dropdown-group-label">Traffic & Location</div><a href="../../product-footfallcam/index.html">FootfallCam</a></div><div class="dropdown-col"><div class="dropdown-group-label">AI & Merchandising</div><a href="../../iposit/index.html">iPosit</a><a href="../../ioptimo/index.html">iOptimo</a><div class="dropdown-group-label">Warehouse Management</div><a href="../../warewiser/index.html">Warewiser</a></div><div class="dropdown-col"><div class="dropdown-group-label">Unified Commerce & AI</div><a href="../../retaillium/index.html">Retaillium</a><div class="dropdown-group-label">Systems Integration</div><a href="../../globriq/index.html">Globriq</a></div>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../../services/index.html" data-i18n="nav.services">Services</a>
+          <div class="dropdown">
+            <a href="../../services/solution-design/index.html" data-i18n="nav.svcSolutionDesign">Solution Design</a>
+            <a href="../../services/project-delivery/index.html" data-i18n="nav.svcProjectDelivery">Project Delivery</a>
+            <a href="../../services/managed-services/index.html" data-i18n="nav.svcManagedServices">Managed Services</a>
+            <a href="../../services/training/index.html" data-i18n="nav.svcTraining">Training</a>
+            <a href="../../services/integration/index.html" data-i18n="nav.svcIntegration">Integration</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link" href="../../industries/index.html" data-i18n="nav.industries">Industries</a>
+          <div class="dropdown">
+            <a href="../../industries/fashion-apparel/index.html" data-i18n="nav.indFashion">Fashion &amp; Apparel</a>
+            <a href="../../industries/health-beauty/index.html" data-i18n="nav.indHealth">Health &amp; Beauty</a>
+            <a href="../../industries/food-beverage/index.html" data-i18n="nav.indFnb">F&amp;B</a>
+            <a href="../../industries/shopping-malls/index.html" data-i18n="nav.indMalls">Shopping Malls</a>
+            <a href="../../industries/luxury-retail/index.html" data-i18n="nav.indLuxury">Luxury Retail</a>
+            <a href="../../industries/groceries/index.html" data-i18n="nav.indGroceries">Groceries</a>
+            <a href="../../industries/departmental-stores/index.html" data-i18n="nav.indDept">Department Store</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a class="nav-link active" href="../../resources/index.html" data-i18n="nav.resources">Resources</a>
+          <div class="dropdown">
+            <a href="../../clients/index.html" data-i18n="nav.resCaseStudies">Case Studies</a>
+            <a href="../../resources/index.html" data-i18n="nav.resBlog">Blog Post</a>
+            <a href="../../resources/faq/index.html" data-i18n="nav.resFaq">FAQ</a>
+            <a href="https://kb.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.knowledgeHub">Knowledge Hub</a>
+            <a href="https://helpdesk.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.helpdesk">Helpdesk</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown lang-switcher-item mobile-only">
+          <a class="nav-link lang-switcher-trigger" href="#">🌐 <span class="lang-current">EN</span></a>
+          <div class="dropdown lang-dropdown"><a href="#" class="lang-option" data-lang="en">🇬🇧 English</a><a href="#" class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</a><a href="#" class="lang-option" data-lang="th">🇹🇭 ไทย</a></div>
+        </li>
+        <li class="nav-item mobile-cta-item"><a class="nav-link" href="../../contact/index.html" data-i18n="nav.contact">Contact Us</a></li>
+        <li class="nav-item mobile-cta-item"><a class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px;" href="../../contact/index.html" data-i18n="nav.bookConsultation">Book a Consultation</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <div class="nav-search">
+        <button type="button" class="nav-search-toggle" id="navSearchToggle" aria-label="Search the site" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-search-panel" id="navSearchPanel" hidden>
+          <div class="nav-search-field">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input type="text" id="navSearchInput" placeholder="Search products, industries, resources&hellip;" autocomplete="off">
+            <button type="button" class="nav-search-close" id="navSearchClose" aria-label="Close search">&times;</button>
+          </div>
+          <div class="nav-search-results" id="navSearchResults"></div>
+        </div>
+      </div>
+      <script>window.__SITE_ROOT_PREFIX = "../../";</script>
+      <div class="nav-item has-dropdown lang-switcher-item desktop-only">
+        <a class="nav-link lang-switcher-trigger" href="#">🌐 <span class="lang-current">EN</span></a>
+        <div class="dropdown lang-dropdown"><a href="#" class="lang-option" data-lang="en">🇬🇧 English</a><a href="#" class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</a><a href="#" class="lang-option" data-lang="th">🇹🇭 ไทย</a></div>
+      </div>
+      <a href="../../contact/index.html" class="btn btn-primary header-desktop-cta" data-i18n="nav.bookConsultation">Book a Consultation</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Article Header Section -->
+<section class="page-hero article-hero" style="background: linear-gradient(180deg, rgba(8,18,34,0.75), rgba(8,18,34,0.92));">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../../index.html">Home</a> / <a href="../index.html">Resources</a> / <span>Blog</span>
+    </div>
+    
+    <div>
+      <h1 style="margin-top: 14px; max-width: 900px; color: #fff;">Analytics for large-format retail: how to modernise without rewiring the store</h1>
+      <div class="post-meta-bar" style="display:flex; align-items:center; gap:10px; margin-top:16px; flex-wrap:wrap; font-size:0.92rem; color:var(--slate-300,#cbd5e1);">
+        <span class="badge-tag" style="background: var(--accent,#c4181f); color: #fff; padding:3px 10px; border-radius:4px; font-weight:600; font-size:0.8rem;">Blog</span>
+        <span>12 October 2026</span>
+        <span class="post-meta-dot">&bull;</span>
+        <span>Integrated Retail</span>
+        <span class="post-meta-dot">&bull;</span>
+        <span>8 min read</span>
+      </div>
+    </div>
+
+    <div class="article-hero-banner">
+      <img src="https://cms.integratedretail.com/wp-content/uploads/2026/10/large-format-retail-store-interior.jpg.jpg" alt="Interior of a large fashion retail store with clothing displays and mannequins across an open shop floor" loading="eager" decoding="async">
+    </div>
+  </div>
+</section>
+
+<!-- Article Content Section -->
+<section>
+  <div class="container" style="max-width: 820px; padding-top: 40px; padding-bottom: 60px;">
+    <div class="article-body" style="font-size:1.08rem; line-height:1.75; color:var(--slate-800,#1e293b);">
+      <p><span style="font-weight: 400;">Large-format retail analytics comes down to three questions for almost every retailer we work with: how many people are in the store, whether the checkout queue is about to break, and whether the fitting rooms are coping with demand.</span></p>
+<p><span style="font-weight: 400;">Almost none of them want to replace the CCTV to get there.</span></p>
+<p><span style="font-weight: 400;">That tension is where most analytics proposals fall apart. The technology works fine in a demo store. It stops being viable at store number forty, when someone adds up the cabling, the ceiling access, the after-hours installation windows and the sheer number of devices involved.</span></p>
+<p><span style="font-weight: 400;">This is the architecture we deploy instead — built around what&#8217;s already on your ceiling.</span></p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="ez-toc-v2_0_81 counter-hierarchy ez-toc-counter ez-toc-grey ez-toc-container-direction">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title" style="cursor:inherit">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a href="#" class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle" aria-label="Toggle Table of Content"><span class="ez-toc-js-icon-con"><span class=""><span class="eztoc-hide" style="display:none;">Toggle</span><span class="ez-toc-icon-toggle-span"><svg style="fill: #999;color:#999" xmlns="http://www.w3.org/2000/svg" class="list-377408" width="20px" height="20px" viewBox="0 0 24 24" fill="none"><path d="M6 6H4v2h2V6zm14 0H8v2h12V6zM4 11h2v2H4v-2zm16 0H8v2h12v-2zM4 16h2v2H4v-2zm16 0H8v2h12v-2z" fill="currentColor"></path></svg><svg style="fill: #999;color:#999" class="arrow-unsorted-368013" xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" viewBox="0 0 24 24" version="1.2" baseProfile="tiny"><path d="M18.2 9.3l-6.2-6.3-6.2 6.3c-.2.2-.3.4-.3.7s.1.5.3.7c.2.2.4.3.7.3h11c.3 0 .5-.1.7-.3.2-.2.3-.5.3-.7s-.1-.5-.3-.7zM5.8 14.7l6.2 6.3 6.2-6.3c.2-.2.3-.5.3-.7s-.1-.5-.3-.7c-.2-.2-.4-.3-.7-.3h-11c-.3 0-.5.1-.7.3-.2.2-.3.5-.3.7s.1.5.3.7z"/></svg></span></span></span></a></span></div>
+<nav><ul class='ez-toc-list ez-toc-list-level-1 ' ><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-1" href="/resources/large-format-retail-analytics-architecture/#The_estate_you_actually_have/" >The estate you actually have</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-2" href="/resources/large-format-retail-analytics-architecture/#Three_principles_for_large-format_retail_analytics/" >Three principles for large-format retail analytics</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-3" href="/resources/large-format-retail-analytics-architecture/#The_hidden_line_item_cabling_not_hardware/" >The hidden line item: cabling, not hardware</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-4" href="/resources/large-format-retail-analytics-architecture/#Entrances_sized_separately_and_deliberately/" >Entrances: sized separately, and deliberately</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-5" href="/resources/large-format-retail-analytics-architecture/#Checkout_queues_thresholds_not_headcounts/" >Checkout queues: thresholds, not headcounts</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-6" href="/resources/large-format-retail-analytics-architecture/#Fitting_rooms_the_most_under-measured_zone_in_apparel/" >Fitting rooms: the most under-measured zone in apparel</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-7" href="/resources/large-format-retail-analytics-architecture/#One_platform_across_the_estate/" >One platform across the estate</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-8" href="/resources/large-format-retail-analytics-architecture/#Built_to_extend_without_being_rebuilt/" >Built to extend without being rebuilt</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-9" href="/resources/large-format-retail-analytics-architecture/#What_this_delivers_commercially/" >What this delivers commercially</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-10" href="/resources/large-format-retail-analytics-architecture/#Where_we_come_in/" >Where we come in</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="The_estate_you_actually_have"></span><b>The estate you actually have</b><span class="ez-toc-section-end"></span></h2>
+<p><span style="font-weight: 400;">Retail estates are never built to one standard. They accumulate.</span></p>
+<p><span style="font-weight: 400;">A regional apparel chain typically runs analogue CCTV in stores opened a decade ago, modern IP cameras such as AXIS in the newer locations, and half a dozen layout variations between formats and markets. Ceiling heights differ. Entrance widths differ. What&#8217;s permitted around demographic data differs across Singapore, Malaysia, Thailand and Indonesia.</span></p>
+<p><span style="font-weight: 400;">The operational questions, though, are remarkably consistent from store to store:</span></p>
+<ul>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">How many visitors, and how many are in the store right now?</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Are queue conditions approaching the point where we need to open another till?</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Are the fitting rooms at capacity, and when?</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Can we see all of this consistently across the region?</span></li>
+</ul>
+<p><span style="font-weight: 400;">The technical challenge isn&#8217;t answering any one of those questions. It&#8217;s answering all of them the same way in sixty stores that were never built the same way.</span></p>
+<p>&nbsp;</p>
+<div id="attachment_5288-5" style="width: 1034px" class="wp-caption alignnone"><img loading="lazy" loading="lazy" decoding="async" aria-describedby="caption-attachment-5288-5" class="wp-image-5288 size-large" src="https://cms.integratedretail.com/wp-content/uploads/2026/10/retail-analytics-three-layers-1024x640.jpg" alt="Diagram of three retail measurement layers — entrance, checkout queue and fitting room — each showing what it measures" width="1024" height="640" srcset="https://cms.integratedretail.com/wp-content/uploads/2026/10/retail-analytics-three-layers-980x613.jpg 980w, https://cms.integratedretail.com/wp-content/uploads/2026/10/retail-analytics-three-layers-480x300.jpg 480w" sizes="(min-width: 0px) and (max-width: 480px) 480px, (min-width: 481px) and (max-width: 980px) 980px, (min-width: 981px) 1024px, 100vw" /><p id="caption-attachment-5288-5" class="wp-caption-text">Three questions the shop floor actually asks. Most of the answers come from cameras you already own.</p></div>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Three_principles_for_large-format_retail_analytics"></span><b>Three principles for large-format retail analytics</b><span class="ez-toc-section-end"></span></h2>
+<p><b>Reuse existing infrastructure where it&#8217;s genuinely fit for purpose.</b><span style="font-weight: 400;"> Cameras already positioned above queue areas and fitting room entrances are assets, not liabilities. Where the angle and image quality hold up, they can feed analytics without being replaced. Where they don&#8217;t, we&#8217;ll tell you — and we&#8217;d rather tell you during the survey than after the invoice.</span></p>
+<p><b>Add new hardware only where precision is non-negotiable.</b><span style="font-weight: 400;"> That means entrances. Everywhere else, existing cameras do the work.</span></p>
+<p><b>Centralise the processing.</b><span style="font-weight: 400;"> One analytics platform across the estate, not a separate system per store that someone has to log into individually.</span></p>
+<p>&nbsp;</p>
+<div id="attachment_5289-5" style="width: 1034px" class="wp-caption alignnone"><img loading="lazy" loading="lazy" decoding="async" aria-describedby="caption-attachment-5289-5" class="size-large wp-image-5289" src="https://cms.integratedretail.com/wp-content/uploads/2026/10/retail-analytics-architecture-1024x640.jpg" alt="Architecture diagram showing existing analogue CCTV, IP cameras and Pro1 entrance sensors feeding one appliance that reports into a single analytics platform" width="1024" height="640" srcset="https://cms.integratedretail.com/wp-content/uploads/2026/10/retail-analytics-architecture-980x613.jpg 980w, https://cms.integratedretail.com/wp-content/uploads/2026/10/retail-analytics-architecture-480x300.jpg 480w" sizes="(min-width: 0px) and (max-width: 480px) 480px, (min-width: 481px) and (max-width: 980px) 980px, (min-width: 981px) 1024px, 100vw" /><p id="caption-attachment-5289-5" class="wp-caption-text">Sixteen streams in any combination — cameras and entrance sensors share the same budget.</p></div>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="The_hidden_line_item_cabling_not_hardware"></span><b>The hidden line item: cabling, not hardware</b><span class="ez-toc-section-end"></span></h2>
+<p><span style="font-weight: 400;">Here&#8217;s the number that decides most large rollouts, and it&#8217;s rarely the one in the vendor comparison.</span></p>
+<p><span style="font-weight: 400;">On multi-site retail deployments, installation and cabling frequently cost more than the hardware itself. Ceiling access in a trading store, after-hours labour, containment, making good — it adds up faster than the device count suggests, and it&#8217;s the part that stretches a rollout schedule from months into quarters.</span></p>
+<p><span style="font-weight: 400;">This is why the processing tier matters more than the sensor tier. A single appliance that ingests your existing camera streams lets you keep the CCTV you already have as an analytics source, bring newer cameras onto the same platform progressively, and introduce analytics without large-scale recabling.</span></p>
+<p><span style="font-weight: 400;">Everything shares the same channel budget on that appliance — analogue cameras, IP cameras and the entrance sensors alike. A store running ten IP cameras, two entrance sensors and four analogue cameras is one deployment of sixteen streams, not three separate systems. Nothing needs replacing in order to be counted.</span></p>
+<p><span style="font-weight: 400;">The relevant number isn&#8217;t cost per device. It&#8217;s cost per camera you&#8217;ve brought into the platform, and consolidating a whole store onto one appliance is the cheapest version of that we can quote.</span></p>
+<p><span style="font-weight: 400;">The estate then modernises in stages, at the pace your capex cycle allows, rather than as one disruptive replacement programme.</span></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Entrances_sized_separately_and_deliberately"></span><b>Entrances: sized separately, and deliberately</b><span class="ez-toc-section-end"></span></h2>
+<p><span style="font-weight: 400;">Entrances are the one place we don&#8217;t compromise, because every other metric is calibrated against them. They&#8217;re also the one place we use a dedicated sensor rather than an existing camera — an existing camera at a doorway is almost never mounted where accurate counting requires.</span></p>
+<p><span style="font-weight: 400;">For large-format deployments that means a </span><b>Pro1</b><span style="font-weight: 400;"> above each entrance, connected into the same appliance as everything else. It takes one stream, like any camera would. One brain does the analytics for the whole store, so entrance counts and zone data arrive as a single dataset rather than two systems someone has to reconcile.</span></p>
+<p><span style="font-weight: 400;">The traditional approach lines several narrow-field counters across a wide entrance and stitches the results together. It works, but it multiplies devices, mounting points and failure modes across every store in the estate. Wide-area, top-down sensing does the same job with far fewer units, delivering:</span></p>
+<ul>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Visitor counts and bidirectional flow</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Real-time occupancy</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Group size detection</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Demographic trends, where local privacy law permits</span></li>
+</ul>
+<p><span style="font-weight: 400;">Where a site has unusual entrance geometry, or where a store is small enough not to warrant a store-wide deployment at all, the specification changes — we cover the entrance-only options in a separate post: </span><a href="/resources/footfallcam-pro2-2025-vs-pro3//"><i><span style="font-weight: 400;">Pro2 (2025) vs Pro3</span></i></a><span style="font-weight: 400;">.</span></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Checkout_queues_thresholds_not_headcounts"></span><b>Checkout queues: thresholds, not headcounts</b><span class="ez-toc-section-end"></span></h2>
+<p><span style="font-weight: 400;">This is where a lot of analytics projects overreach.</span></p>
+<p><span style="font-weight: 400;">Airport-style queue analytics track individuals through complex structures. Retail rarely needs that. When we ask store operations teams what they&#8217;d actually do with a precise per-lane headcount, the honest answer is usually &#8220;nothing different.&#8221;</span></p>
+<p><span style="font-weight: 400;">What changes behaviour is a threshold. Is the queue short, moderate, or heading toward an unacceptable wait? That&#8217;s the trigger for opening another till or pulling someone off the floor.</span></p>
+<p><span style="font-weight: 400;">So the model we deploy uses existing cameras positioned above structured queue areas to analyse customer density and progression across predefined milestone zones, and reports queue build-up against operational thresholds. Alerts go to the people who can act on them.</span></p>
+<p><span style="font-weight: 400;">No additional cameras in most stores. No overengineering of a problem that resolves into three states.</span></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Fitting_rooms_the_most_under-measured_zone_in_apparel"></span><b>Fitting rooms: the most under-measured zone in apparel</b><span class="ez-toc-section-end"></span></h2>
+<p><span style="font-weight: 400;">For fashion retail, the fitting room is arguably the highest-intent space in the store. A customer who enters one is deep in the purchase decision — and a customer who walks away from a queue at the fitting room entrance is a conversion you&#8217;ve already paid to acquire and then lost at the last step.</span></p>
+<p><span style="font-weight: 400;">Using cameras at fitting room entrances, virtual line-crossing and occupancy estimation give you:</span></p>
+<ul>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Entries and exits</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Live occupancy against capacity</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Utilisation trends and peak periods</span></li>
+</ul>
+<p><span style="font-weight: 400;">Nothing is installed inside the changing areas themselves — the measurement happens at the entrance line only. That distinction matters both for customer comfort and for how the deployment is assessed under regional privacy law.</span></p>
+<p><span style="font-weight: 400;">Operationally, this is what tells you whether your fitting room staffing matches your fitting room demand, which is a question most apparel retailers currently answer by intuition.</span></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="One_platform_across_the_estate"></span><b>One platform across the estate</b><span class="ez-toc-section-end"></span></h2>
+<p><span style="font-weight: 400;">Store-level data that lives in store-level systems doesn&#8217;t change regional decisions.</span></p>
+<p><span style="font-weight: 400;">All outputs consolidate into a single platform covering individual stores, regional operations and group-wide reporting, with dashboards, API access, exportable datasets and role-based permissions. A regional manager compares like with like. A store manager sees their own numbers. Finance and IT get the access model their policies require.</span></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Built_to_extend_without_being_rebuilt"></span><b>Built to extend without being rebuilt</b><span class="ez-toc-section-end"></span></h2>
+<p><span style="font-weight: 400;">The initial deployment covers entrances, queues and fitting rooms. The architecture is designed so the next capabilities don&#8217;t require replacing what you&#8217;ve just installed:</span></p>
+<ul>
+<li style="font-weight: 400;" aria-level="1"><b>Zone flow analytics</b><span style="font-weight: 400;"> — customer movement between departments, using BLE-assisted flow analysis</span></li>
+<li style="font-weight: 400;" aria-level="1"><b>Product engagement analytics</b><span style="font-weight: 400;"> — Vision Language Models assessing interaction with products and displays</span></li>
+<li style="font-weight: 400;" aria-level="1"><b>Behavioural intelligence</b><span style="font-weight: 400;"> — unusual movement or dwell patterns flagged for operational attention</span></li>
+</ul>
+<p><span style="font-weight: 400;">Because these run on the same centralised platform and shared data layer, they&#8217;re introduced as business requirements evolve rather than as a new project each time.</span></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="What_this_delivers_commercially"></span><b>What this delivers commercially</b><span class="ez-toc-section-end"></span></h2>
+<ul>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">A smaller hardware footprint per store</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Materially lower installation and recabling cost</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Consistent metrics across formats and markets</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Faster rollout — fewer devices means shorter install windows</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Insight tied to decisions store teams actually make</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Infrastructure that extends rather than expires</span></li>
+</ul>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Where_we_come_in"></span><b>Where we come in</b><span class="ez-toc-section-end"></span></h2>
+<p><span style="font-weight: 400;">Architecture is the easy part to write about. Delivery across a regional estate is where projects succeed or stall, and that&#8217;s the part we own:</span></p>
+<ul>
+<li style="font-weight: 400;" aria-level="1"><b>Camera suitability audit.</b><span style="font-weight: 400;"> Before anything is quoted, we assess which of your existing cameras can realistically carry analytics — mounting position and angle, field of view, resolution, lighting consistency, compression, and whether the mounting is stable enough for reliable line-crossing. Some cameras will pass. Some won&#8217;t. You get a per-store list either way.</span></li>
+<li style="font-weight: 400;" aria-level="1"><b>Site surveys across formats.</b><span style="font-weight: 400;"> Ceiling heights, entrance widths and layout variants documented per store, so the sensor plan reflects your estate rather than a reference design.</span></li>
+<li style="font-weight: 400;" aria-level="1"><b>Stream counting before hardware counting.</b><span style="font-weight: 400;"> We total the cameras worth analysing in each store first, then specify the appliance — so you aren&#8217;t paying for channels nobody will ever connect.</span></li>
+<li style="font-weight: 400;" aria-level="1"><b>Phased rollout planning.</b><span style="font-weight: 400;"> Pilot stores, then flagships, then the tail — sequenced around trading hours and your capex cycle.</span></li>
+<li style="font-weight: 400;" aria-level="1"><b>POS and business-system integration.</b><span style="font-weight: 400;"> Traffic, queue and fitting room data become useful when they sit alongside transactions.</span></li>
+<li style="font-weight: 400;" aria-level="1"><b>Regional privacy compliance.</b><span style="font-weight: 400;"> Demographic and occupancy analytics are treated differently under Singapore&#8217;s PDPA, Malaysia&#8217;s PDPA, Thailand&#8217;s PDPA and Indonesia&#8217;s PDP Law. We configure what&#8217;s collected on a per-market basis and document it, rather than deploying one configuration everywhere and hoping.</span></li>
+<li style="font-weight: 400;" aria-level="1"><b>First-line support across four markets.</b><span style="font-weight: 400;"> You contract with us. One point of contact, one escalation path, in your time zone.</span></li>
+</ul>
+<p>&nbsp;</p>
+<hr />
+<p><b>Running a multi-format estate and wondering what&#8217;s actually reusable?</b><span style="font-weight: 400;"> Send us your store list and a sample of your existing camera positions. We&#8217;ll come back with a suitability assessment, a sensor plan, and a phased rollout costing — including which stores need nothing new at all.</span></p>
+<p><i><span style="font-weight: 400;">Adapted with permission from FootfallCam&#8217;s original article. Full version: <a href="https://www.footfallcam.com/BlogPost/Post/rethinking-customer-analytics-for-large-format-retail">Read here</a></span></i></p>
+
+    </div>
+
+    <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border,#e2e8f0); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="../index.html" class="card-link" style="font-size: 0.95rem; font-weight: 600;">&larr; Back to all resources</a>
+      <button type="button" class="btn btn-outline" onclick="window.scrollTo({top:0, behavior:'smooth'})" style="padding: 8px 16px; font-size: 0.85rem;">Back to Top &uarr;</button>
+    </div>
+  </div>
+</section>
+
+<!-- Call to action band -->
+<section class="tight alt-bg">
+  <div class="container">
+    <div class="cta-band" style="background: linear-gradient(120deg, var(--navy-950,#050b14), var(--navy-700,#0f2744));">
+      <div>
+        <h2>Ready to modernize your retail technology?</h2>
+        <p>Book a zero-obligation consultation with our regional retail systems experts.</p>
+      </div>
+      <a href="../../contact/index.html" class="btn btn-primary">Book a Consultation</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <span class="footer-logo-badge"><img src="../../assets/img/logo.png" alt="Integrated Retail" height="72"></span>
+        <p style="max-width:300px;font-size:0.92rem;" data-i18n="footer.tagline">Integrated Retail &mdash; advanced, unified retail systems for fashion, lifestyle, F&amp;B and CPG businesses across Asia Pacific, from a partner who integrates and builds: POS, CRM, e-commerce, inventory, analytics and AI, as one.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="../../index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="../../about/index.html" data-i18n="nav.about">About Us</a></li>
+          <li><a href="../../solutions/index.html" data-i18n="nav.solution">Solution</a></li>
+          <li><a href="../../products/index.html" data-i18n="nav.product">Product</a></li>
+          <li><a href="../../industries/index.html" data-i18n="nav.industries">Industries</a></li>
+          <li><a href="../../services/index.html" data-i18n="nav.services">Services</a></li>
+          <li><a class="is-current" aria-current="page" href="../../resources/index.html" data-i18n="nav.resources">Resources</a></li>
+          <li><a href="../../contact/index.html" data-i18n="nav.contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.resources">Resources</h4>
+        <ul>
+          <li><a href="../../clients/index.html" data-i18n="nav.resCaseStudies">Case Studies</a></li>
+          <li><a class="is-current" aria-current="page" href="../../resources/index.html" data-i18n="nav.resBlog">Blog Post</a></li>
+          <li><a href="../../resources/faq/index.html" data-i18n="nav.resFaq">FAQ</a></li>
+          <li><a href="https://kb.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.knowledgeHub">Knowledge Hub</a></li>
+          <li><a href="https://helpdesk.integratedretail.com/" target="_blank" rel="noopener" data-i18n="nav.helpdesk">Helpdesk</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.products">Products</h4>
+        <ul>
+          <li><a href="../../product-cegid-retail/index.html">Cegid Retail</a></li><li><a href="../../retailpro-prism/index.html">Retail Pro Prism</a></li><li><a href="../../product-footfallcam/index.html">FootfallCam</a></li><li><a href="../../iposit/index.html">iPosit</a></li><li><a href="../../ioptimo/index.html">iOptimo</a></li><li><a href="../../warewiser/index.html">Warewiser</a></li><li><a href="../../retaillium/index.html">Retaillium</a></li><li><a href="../../globriq/index.html">Globriq</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.offices">Offices</h4>
+        <ul class="offices-list">
+          <li><svg class="flag-icon" viewBox="0 0 30 20" width="20" height="14" aria-hidden="true"><rect width="30" height="10" fill="#ED2939"/><rect y="10" width="30" height="10" fill="#fff"/><circle cx="8" cy="5" r="3.6" fill="#fff"/><circle cx="9.6" cy="4.3" r="2.9" fill="#ED2939"/><g fill="#fff"><circle cx="12.5" cy="3.2" r="0.55"/><circle cx="14.3" cy="4.6" r="0.55"/><circle cx="13.7" cy="6.7" r="0.55"/><circle cx="11.3" cy="6.7" r="0.55"/><circle cx="10.7" cy="4.6" r="0.55"/></g></svg><span><span data-i18n="footer.singapore">Singapore</span> &mdash; <a href="tel:+6589692150">+65 8969 2150</a></span></li>
+          <li><svg class="flag-icon" viewBox="0 0 30 20" width="20" height="14" aria-hidden="true"><rect width="30" height="10" fill="#CE1126"/><rect y="10" width="30" height="10" fill="#fff"/></svg><span><span data-i18n="footer.indonesia">Indonesia</span> &mdash; <a href="tel:+6287777790575">+62 877 7779 0575</a></span></li>
+          <li><svg class="flag-icon" viewBox="0 0 30 20" width="20" height="14" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect width="30" height="3" fill="#A51931"/><rect y="17" width="30" height="3" fill="#A51931"/><rect y="3" width="30" height="3" fill="#fff"/><rect y="14" width="30" height="3" fill="#fff"/><rect y="6" width="30" height="8" fill="#241D4F"/></svg><span><span data-i18n="footer.thailand">Thailand</span> &mdash; <a href="tel:+66867893013">+66 86 789 3013</a></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.rights">&copy; 2026 Integrated Retail Management Consulting Pte. Ltd. All rights reserved.</span>
+      <span class="footer-build">Build 20261030.f9a51f2</span>
+      <a href="mailto:connect@integratedretail.com">connect@integratedretail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>window.__SITE_ROOT_PREFIX = "../../";</script>
+<script src="../../assets/js/i18n.js"></script>
+<script src="../../assets/js/main.js"></script>
+<div id="webchat"></div>
+<script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
+<script src="https://cdn.botpress.cloud/webchat/v2.2/shareable.js"></script>
+<script src="https://files.bpcontent.cloud/2024/07/02/10/20240702103328-76YQ662I.js"></script>
+<script>
+function initBotpressSafe() {
+  if (!window.botpress) return;
+  try {
+    function safeRedirect(targetUrl) {
+      if (!targetUrl || targetUrl === '#' || targetUrl.startsWith('javascript')) return;
+
+      try {
+        let cleanUrl = targetUrl.replace(/\\/g, '');
+        const urlMatch = cleanUrl.match(/https?:\/\/[^\s"“'”’\}）\]]+/); 
+        if (urlMatch) {
+          cleanUrl = urlMatch[0];
+        }
+
+        const currentParams = new URLSearchParams(window.location.search);
+        const newUrl = new URL(cleanUrl);
+
+        currentParams.forEach((value, key) => {
+          newUrl.searchParams.set(key, value);
+        });
+
+        console.log("🚀 最终跳转地址:", newUrl.toString());
+        window.top.location.href = newUrl.toString();
+      } catch (e) {
+        console.error("Redirect Error:", e);
+        window.top.location.href = targetUrl.replace(/[^\x21-\x7E]+/g, '').split(/[算法"'}）]/)[0];
+      }
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const firstName = urlParams.get('firstname') || '';
+
+    if (!firstName) {
+      try { localStorage.clear(); } catch (_) {}
+    }
+
+    window.botpress.init({
+      "botId": "271349b4-50c2-4d68-98ab-dc514c18d354",
+      "configuration": {
+        "version": "v2",
+        "botName": "Integrated Retail Support Agent",
+        "botAvatar": "https://files.bpcontent.cloud/2026/01/04/10/20260104100855-WL4YT8WH.png",
+        "botDescription": "",
+        "website": {},
+        "email": {},
+        "phone": {},
+        "termsOfService": {},
+        "privacyPolicy": {},
+        "color": "#044181",
+        "variant": "solid",
+        "headerVariant": "glass",
+        "themeMode": "light",
+        "radius": 2,
+        "feedbackEnabled": false,
+        "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+        "soundEnabled": false,
+        "proactiveMessageEnabled": false,
+        "proactiveBubbleMessage": "Hi! 👋 Need help?",
+        "proactiveBubbleTriggerType": "afterDelay",
+        "proactiveBubbleDelayTime": 10
+      },
+      "clientId": "d0bd4d08-40a0-4fb6-8948-73340f88a84c",
+      "selector": "#webchat"
+    });
+
+    window.botpress.on('webchat:ready', () => {
+      console.log("🤖 Botpress 已就绪，深度监听器启动...");
+      window.botpress.open();
+
+      window.botpress.on('*', (event) => {
+        let extractedUrl = null;
+        const p = event.payload;
+
+        if (p?.url) extractedUrl = p.url;
+        else if (p?.payload) {
+          if (typeof p.payload === 'string' && p.payload.includes('{')) {
+            try {
+              const inner = JSON.parse(p.payload);
+              extractedUrl = inner.url;
+            } catch (e) { }
+          } else if (typeof p.payload === 'string' && p.payload.includes('http')) {
+            extractedUrl = p.payload;
+          } else if (p.payload.url) {
+            extractedUrl = p.payload.url;
+          }
+        }
+
+        if (!extractedUrl && p) {
+          const strPayload = JSON.stringify(p);
+          if (strPayload.includes('integrated')) {
+            const match = strPayload.match(/https?:\/\/[^\s"']+/);
+            if (match) extractedUrl = match[0]; 
+          }
+        }
+
+        if (extractedUrl && extractedUrl.includes('integrated')) {
+          safeRedirect(extractedUrl);
+        }
+      });
+    });
+
+    window.botpress.on('webchat:ready', async () => {
+      try {
+        await window.botpress.updateUser({
+          data: {
+            firstname: urlParams.get('firstname') || "",
+            page_name: "Homepage",
+            category: "general",
+            timestamp: new Date().toISOString()
+          }
+        });
+      } catch (err) {}
+
+      setTimeout(() => {
+        try {
+          window.botpress.sendEvent({
+            type: 'trigger',
+            payload: { action: 'START_MY_WELCOME' }
+          });
+        } catch (_) {}
+      }, 800);
+    });
+  } catch (err) {
+    console.warn("Botpress initialization skipped:", err);
+  }
+}
+
+if (window.botpress) {
+  initBotpressSafe();
+} else {
+  window.addEventListener('load', initBotpressSafe);
+}
+</script>
+<script src="../../assets/js/search-index.js"></script>
+<script src="../../assets/js/search.js"></script>
+</body>
+</html>

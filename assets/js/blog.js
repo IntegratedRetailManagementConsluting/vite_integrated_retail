@@ -1,5 +1,5 @@
 // © 2026 Integrated Retail Management Consulting Pte. Ltd. All rights reserved.
-// Dynamic Blog / Resources Loader for WordPress REST API via Cloudflare Pages Function.
+// Dynamic Blog / Resources Loader for Precompiled Static Posts and WordPress REST API.
 
 (function () {
   'use strict';
@@ -11,6 +11,8 @@
   var loadMoreBtn = document.getElementById('loadMoreBtn');
   var loadMoreStatus = document.getElementById('loadMoreStatus');
   var filterTabs = document.querySelectorAll('.filter-tabs button');
+
+  var allStaticPosts = null;
 
   var state = {
     page: 1,
@@ -71,13 +73,14 @@
       cleanExcerpt = cleanExcerpt.substring(0, 147) + '...';
     }
 
-    var primaryCat = (post.categories && post.categories[0] && post.categories[0].name) || 'Retail Insights';
-    var isThai = post.categories && post.categories.some(function (c) { return c.slug === 'th'; });
-    var isIndo = post.categories && post.categories.some(function (c) { return c.slug === 'id'; });
+    var primaryCat = post.primary_category || (post.categories && post.categories[0] && post.categories[0].name) || 'Retail Insights';
+    var isThai = post.lang === 'th' || (post.categories && post.categories.some(function (c) { return c.slug === 'th'; }));
+    var isIndo = post.lang === 'id' || (post.categories && post.categories.some(function (c) { return c.slug === 'id'; }));
     var langBadge = isThai ? '<span class="badge-tag badge-lang">🇹🇭 TH</span>' : isIndo ? '<span class="badge-tag badge-lang">🇮🇩 ID</span>' : '';
 
-    var dateStr = formatDate(post.date);
-    var targetUrl = 'post.html?slug=' + encodeURIComponent(post.slug);
+    var dateStr = post.date_display || formatDate(post.date);
+    var rootPrefix = window.__SITE_ROOT_PREFIX || '../';
+    var targetUrl = post.url ? (rootPrefix + post.url.replace(/^\//, '')) : (rootPrefix + 'resources/' + encodeURIComponent(post.slug) + '/');
 
     var thumbHtml;
     if (post.featured_image) {
@@ -140,6 +143,41 @@
     }
   }
 
+  function filterPostsByLang(posts, lang) {
+    if (!posts) return [];
+    if (lang === 'th') {
+      return posts.filter(function (p) {
+        return p.lang === 'th' || (p.categories && p.categories.some(function (c) { return c.slug === 'th' || c.id === 239; }));
+      });
+    } else if (lang === 'id') {
+      return posts.filter(function (p) {
+        return p.lang === 'id' || (p.categories && p.categories.some(function (c) { return c.slug === 'id' || c.id === 238; }));
+      });
+    } else {
+      // Default / English: exclude TH and ID posts
+      return posts.filter(function (p) {
+        var isTh = p.lang === 'th' || (p.categories && p.categories.some(function (c) { return c.slug === 'th' || c.id === 239; }));
+        var isId = p.lang === 'id' || (p.categories && p.categories.some(function (c) { return c.slug === 'id' || c.id === 238; }));
+        return !isTh && !isId;
+      });
+    }
+  }
+
+  async function loadPostsData() {
+    if (allStaticPosts) return allStaticPosts;
+    var rootPrefix = window.__SITE_ROOT_PREFIX || '../';
+    var staticUrl = rootPrefix + 'assets/data/posts.json';
+    try {
+      var res = await fetch(staticUrl);
+      if (res.ok) {
+        var data = await res.json();
+        allStaticPosts = data.posts || [];
+        return allStaticPosts;
+      }
+    } catch (_) {}
+    return null;
+  }
+
   async function fetchPosts(page) {
     if (state.loading) return;
     state.loading = true;
@@ -159,28 +197,45 @@
     }
 
     try {
-      var langParam = state.lang ? '&lang=' + encodeURIComponent(state.lang) : '';
-      var res = await fetch('/api/posts?page=' + page + '&per_page=' + state.perPage + langParam);
-      if (!res.ok) {
-        throw new Error('Server returned HTTP ' + res.status);
+      var postsToDisplay = [];
+      var totalPostsCount = 0;
+      var totalPagesCount = 1;
+
+      // 1. Try static precompiled JSON first (fastest and 100% works on MDDHosting)
+      var staticData = await loadPostsData();
+      if (staticData && staticData.length > 0) {
+        var filtered = filterPostsByLang(staticData, state.lang);
+        totalPostsCount = filtered.length;
+        totalPagesCount = Math.max(1, Math.ceil(totalPostsCount / state.perPage));
+        var startIndex = (page - 1) * state.perPage;
+        postsToDisplay = filtered.slice(startIndex, startIndex + state.perPage);
+      } else {
+        // 2. Fallback to API if available
+        var langParam = state.lang ? '&lang=' + encodeURIComponent(state.lang) : '';
+        var res = await fetch('/api/posts?page=' + page + '&per_page=' + state.perPage + langParam);
+        if (!res.ok) {
+          throw new Error('Server returned HTTP ' + res.status);
+        }
+        var data = await res.json();
+        postsToDisplay = data.posts || [];
+        totalPostsCount = data.total || 0;
+        totalPagesCount = data.totalPages || 1;
       }
-      var data = await res.json();
 
       // Remove skeletons on first page
       var skeletonsEl = document.getElementById('blogSkeletons');
       if (skeletonsEl) skeletonsEl.remove();
 
-      state.totalPages = data.totalPages || 1;
-      state.totalPosts = data.total || 0;
+      state.totalPages = totalPagesCount;
+      state.totalPosts = totalPostsCount;
       state.page = page;
 
-      var posts = data.posts || [];
-      state.loadedPosts = state.loadedPosts.concat(posts);
+      state.loadedPosts = state.loadedPosts.concat(postsToDisplay);
 
       // Find where to insert (before event cards, or append)
       var firstEventCard = blogGrid.querySelector('[data-type="event"]');
 
-      posts.forEach(function (post) {
+      postsToDisplay.forEach(function (post) {
         var card = createPostCard(post);
         if (firstEventCard) {
           blogGrid.insertBefore(card, firstEventCard);

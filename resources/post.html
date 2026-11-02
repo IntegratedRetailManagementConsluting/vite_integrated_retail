@@ -231,7 +231,7 @@
     </div>
     <div class="footer-bottom">
       <span data-i18n="footer.rights">&copy; 2026 Integrated Retail Management Consulting Pte. Ltd. All rights reserved.</span>
-      <span class="footer-build">Build 20261030.c966e88</span>
+      <span class="footer-build">Build 20261030.f9a51f2</span>
       <a href="mailto:connect@integratedretail.com">connect@integratedretail.com</a>
     </div>
   </div>
@@ -471,62 +471,15 @@ if (window.botpress) {
     return minutes + ' min read';
   }
 
-  if (!slug) {
-    heroSkeleton.style.display = 'none';
-    articleSkeleton.style.display = 'none';
-    articleError.style.display = 'block';
+  if (slug) {
+    // Instant redirect to precompiled static article folder
+    window.location.replace('../resources/' + encodeURIComponent(slug) + '/');
     return;
   }
 
-  fetch('/api/posts?slug=' + encodeURIComponent(slug))
-    .then(function (res) {
-      if (!res.ok) throw new Error('Post not found');
-      return res.json();
-    })
-    .then(function (data) {
-      var post = data.post;
-      if (!post) throw new Error('Empty post data');
-
-      var decodedTitle = decodeHtml(post.title || 'Untitled Article');
-      document.title = decodedTitle + ' | Integrated Retail';
-
-      var cleanExcerpt = stripHtml(decodeHtml(post.excerpt || ''));
-      var metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc && cleanExcerpt) {
-        metaDesc.setAttribute('content', cleanExcerpt);
-      }
-
-      var primaryCategory = (post.categories && post.categories[0] && post.categories[0].name) || 'Retail Tech';
-      postCategoryBreadcrumb.textContent = primaryCategory;
-      postCategoryBadge.textContent = primaryCategory;
-
-      postTitle.textContent = decodedTitle;
-      postDate.textContent = formatDate(post.date);
-      if (post.author) postAuthor.textContent = post.author;
-
-      var textContent = stripHtml(post.content || '');
-      postReadTime.textContent = calculateReadingTime(textContent);
-
-      if (post.featured_image) {
-        postBannerImg.src = post.featured_image;
-        postBannerImg.alt = post.featured_image_alt || decodedTitle;
-        postBannerWrap.style.display = 'block';
-      }
-
-      postContent.innerHTML = post.content || '<p>No content available for this post.</p>';
-
-      // Reveal content, hide skeletons
-      heroSkeleton.style.display = 'none';
-      articleSkeleton.style.display = 'none';
-      heroContent.style.display = 'block';
-      postContent.style.display = 'block';
-    })
-    .catch(function (err) {
-      console.error('Error fetching post:', err);
-      heroSkeleton.style.display = 'none';
-      articleSkeleton.style.display = 'none';
-      articleError.style.display = 'block';
-    });
+  heroSkeleton.style.display = 'none';
+  articleSkeleton.style.display = 'none';
+  articleError.style.display = 'block';
 })();
 </script>
 <script src="../assets/js/search-index.js"></script>
