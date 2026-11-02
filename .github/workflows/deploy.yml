@@ -106,8 +106,8 @@ jobs:
 
           # 3. Trigger extraction via web request
           echo "Extracting site bundle on server..."
-          RESPONSE=\$(curl -s "https://integratedretail.com/deploy_extract.php?token=${DEPLOY_SECRET}")
-          echo "Server response: \$RESPONSE"
+          RESPONSE=$(curl -s "https://integratedretail.com/deploy_extract.php?token=${DEPLOY_SECRET}")
+          echo "Server response: $RESPONSE"
 
           # 4. Clean up any leftover extractor script on server
           curl -k --ssl-reqd -u "$FTP_USERNAME:$FTP_PASSWORD" -Q 'DELE deploy_extract.php' "ftp://$FTP_HOST/" 2>/dev/null || true
@@ -116,8 +116,8 @@ jobs:
           rm -f site_bundle.zip deploy_extract.php
 
           # 6. Verify result
-          if [[ "\$RESPONSE" != *"success"* ]]; then
-            echo "::error::Deployment extraction failed: \$RESPONSE"
+          if [[ "$RESPONSE" != *"success"* ]]; then
+            echo "::error::Deployment extraction failed: $RESPONSE"
             exit 1
           fi
 
