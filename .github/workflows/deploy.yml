@@ -6,7 +6,7 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    # Optional: Automatically recompile blogs daily at 02:00 UTC
+    # Automatically recompile blogs daily at 02:00 UTC
     # so newly published WordPress posts on cms.integratedretail.com
     # are built and published without needing manual git commits.
     - cron: '0 2 * * *'
@@ -15,7 +15,7 @@ jobs:
   build-and-deploy:
     name: Precompile & Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 15
 
     steps:
       - name: 📥 Check out repository
@@ -41,14 +41,84 @@ jobs:
         run: |
           npm run build
 
-      - name: 🚀 Deploy to MDDHosting via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT || 21 }}
-          protocol: ftps
-          local-dir: ./dist/
-          server-dir: ${{ secrets.FTP_SERVER_DIR || '/' }}
-          dangerous-clean-slate: false
+      - name: 📦 Bundle site into zip
+        run: |
+          cd dist
+          zip -r -q ../site_bundle.zip .
+          cd ..
+          ls -lh site_bundle.zip
+
+      - name: 🚀 Deploy to MDDHosting & Extract via PHP
+        env:
+          FTP_SERVER_INPUT: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET || 'ir_deploy_2026_secret_key_8899' }}
+        run: |
+          # Use 173.248.187.40 if FTP_SERVER is empty or still pointing to Turbify
+          FTP_HOST="${FTP_SERVER_INPUT:-173.248.187.40}"
+          if [ "$FTP_HOST" = "ftp.integratedretail.com" ]; then
+            echo "Notice: ftp.integratedretail.com resolves to Turbify; routing directly to MDDHosting IP 173.248.187.40"
+            FTP_HOST="173.248.187.40"
+          fi
+
+          echo "Target server: $FTP_HOST"
+          echo "Target user: $FTP_USERNAME"
+
+          # 1. Generate secure one-time extractor PHP script
+          cat << EOF > deploy_extract.php
+          <?php
+          \$token = \$_GET['token'] ?? '';
+          if (empty(\$token) || \$token !== '${DEPLOY_SECRET}') {
+              http_response_code(403);
+              die('Unauthorized');
+          }
+          \$zipFile = __DIR__ . '/site_bundle.zip';
+          if (!file_exists(\$zipFile)) {
+              http_response_code(404);
+              die('site_bundle.zip not found');
+          }
+          \$zip = new ZipArchive;
+          if (\$zip->open(\$zipFile) === TRUE) {
+              \$zip->extractTo(__DIR__ . '/');
+              \$zip->close();
+              @unlink(\$zipFile);
+              @unlink(__FILE__);
+              echo json_encode(['success' => true, 'message' => 'Site bundle extracted successfully']);
+          } else {
+              http_response_code(500);
+              echo json_encode(['success' => false, 'error' => 'Zip open failed']);
+          }
+          EOF
+
+          # 2. Upload site_bundle.zip and extractor via FTPS
+          echo "Uploading site_bundle.zip (~28MB)..."
+          curl -k --ssl-reqd --connect-timeout 20 --max-time 300 \
+            -u "$FTP_USERNAME:$FTP_PASSWORD" \
+            -T site_bundle.zip \
+            "ftp://$FTP_HOST/site_bundle.zip"
+
+          echo "Uploading deploy_extract.php..."
+          curl -k --ssl-reqd --connect-timeout 10 --max-time 60 \
+            -u "$FTP_USERNAME:$FTP_PASSWORD" \
+            -T deploy_extract.php \
+            "ftp://$FTP_HOST/deploy_extract.php"
+
+          # 3. Trigger extraction via web request
+          echo "Extracting site bundle on server..."
+          RESPONSE=\$(curl -s "https://integratedretail.com/deploy_extract.php?token=${DEPLOY_SECRET}")
+          echo "Server response: \$RESPONSE"
+
+          # 4. Clean up any leftover extractor script on server
+          curl -k --ssl-reqd -u "$FTP_USERNAME:$FTP_PASSWORD" -Q 'DELE deploy_extract.php' "ftp://$FTP_HOST/" 2>/dev/null || true
+
+          # 5. Clean up local files
+          rm -f site_bundle.zip deploy_extract.php
+
+          # 6. Verify result
+          if [[ "\$RESPONSE" != *"success"* ]]; then
+            echo "::error::Deployment extraction failed: \$RESPONSE"
+            exit 1
+          fi
+
+          echo "✨ Site successfully deployed and extracted on MDDHosting!"
