@@ -41,70 +41,83 @@ function copyStaticAssets(): Plugin {
       if (existsSync(join(ROOT, 'robots.txt'))) {
         cpSync(join(ROOT, 'robots.txt'), join(ROOT, 'dist', 'robots.txt'));
       }
+      if (existsSync(join(ROOT, '.htaccess'))) {
+        cpSync(join(ROOT, '.htaccess'), join(ROOT, 'dist', '.htaccess'));
+      }
+      if (existsSync(join(ROOT, 'api'))) {
+        cpSync(join(ROOT, 'api'), join(ROOT, 'dist', 'api'), { recursive: true });
+      }
     },
   };
 }
 
-// Dev server proxy plugin for local testing of /api/* routes during `npm run dev`
+// Dev & Preview server proxy middleware for testing /api/* routes locally
+function createApiMiddleware() {
+  return async (req: any, res: any, next: any) => {
+    if (!req.url?.startsWith('/api/')) return next();
+
+    try {
+      const devEnv = {
+        ...process.env,
+        ...loadEnv('production', ROOT, ''),
+        ...loadEnv('development', ROOT, ''),
+      };
+
+      const fullUrl = `http://${req.headers.host || 'localhost'}${req.url}`;
+      const method = req.method || 'GET';
+
+      let body: string | undefined = undefined;
+      if (method !== 'GET' && method !== 'HEAD') {
+        body = await new Promise<string>((resolve) => {
+          let data = '';
+          req.on('data', (chunk: any) => { data += chunk; });
+          req.on('end', () => { resolve(data); });
+        });
+      }
+
+      const webReq = new Request(fullUrl, {
+        method,
+        headers: req.headers as Record<string, string>,
+        body,
+      });
+
+      let response: Response | undefined;
+
+      if (req.url.startsWith('/api/posts')) {
+        const { onRequestGet, onRequestOptions } = await import('./functions/api/posts.js');
+        response = method === 'OPTIONS' ? await onRequestOptions() : await onRequestGet({ request: webReq, env: devEnv });
+      } else if (req.url.startsWith('/api/contact')) {
+        const { onRequestPost, onRequestOptions } = await import('./functions/api/contact.js');
+        response = method === 'OPTIONS' ? await onRequestOptions() : await onRequestPost({ request: webReq, env: devEnv });
+      } else if (req.url.startsWith('/api/faq')) {
+        const { onRequestGet, onRequestOptions } = await import('./functions/api/faq.js');
+        response = method === 'OPTIONS' ? await onRequestOptions() : await onRequestGet({ request: webReq, env: devEnv });
+      }
+
+      if (response) {
+        res.statusCode = response.status;
+        response.headers.forEach((v: string, k: string) => {
+          res.setHeader(k, v);
+        });
+        const resBody = await response.text();
+        res.end(resBody);
+      } else {
+        next();
+      }
+    } catch (err) {
+      next(err);
+    }
+  };
+}
+
 function devApiProxy(): Plugin {
   return {
     name: 'dev-api-proxy',
     configureServer(server) {
-      server.middlewares.use(async (req, res, next) => {
-        if (!req.url?.startsWith('/api/')) return next();
-
-        try {
-          const devEnv = {
-            ...process.env,
-            ...loadEnv('production', ROOT, ''),
-            ...loadEnv('development', ROOT, ''),
-          };
-
-          const fullUrl = `http://${req.headers.host || 'localhost'}${req.url}`;
-          const method = req.method || 'GET';
-
-          let body: string | undefined = undefined;
-          if (method !== 'GET' && method !== 'HEAD') {
-            body = await new Promise<string>((resolve) => {
-              let data = '';
-              req.on('data', (chunk) => { data += chunk; });
-              req.on('end', () => { resolve(data); });
-            });
-          }
-
-          const webReq = new Request(fullUrl, {
-            method,
-            headers: req.headers as Record<string, string>,
-            body,
-          });
-
-          let response: Response | undefined;
-
-          if (req.url.startsWith('/api/posts')) {
-            const { onRequestGet, onRequestOptions } = await import('./functions/api/posts.js');
-            response = method === 'OPTIONS' ? await onRequestOptions() : await onRequestGet({ request: webReq, env: devEnv });
-          } else if (req.url.startsWith('/api/contact')) {
-            const { onRequestPost, onRequestOptions } = await import('./functions/api/contact.js');
-            response = method === 'OPTIONS' ? await onRequestOptions() : await onRequestPost({ request: webReq, env: devEnv });
-          } else if (req.url.startsWith('/api/faq')) {
-            const { onRequestGet, onRequestOptions } = await import('./functions/api/faq.js');
-            response = method === 'OPTIONS' ? await onRequestOptions() : await onRequestGet({ request: webReq, env: devEnv });
-          }
-
-          if (response) {
-            res.statusCode = response.status;
-            response.headers.forEach((v, k) => {
-              res.setHeader(k, v);
-            });
-            const resBody = await response.text();
-            res.end(resBody);
-          } else {
-            next();
-          }
-        } catch (err) {
-          next(err);
-        }
-      });
+      server.middlewares.use(createApiMiddleware());
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use(createApiMiddleware());
     },
   };
 }

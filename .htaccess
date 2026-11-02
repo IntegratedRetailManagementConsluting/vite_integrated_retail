@@ -1,0 +1,15 @@
+# Apache / LiteSpeed Rewrite Rules for Integrated Retail
+RewriteEngine On
+RewriteBase /
+
+# Route API endpoints to PHP handlers
+RewriteRule ^api/contact/?$ api/contact.php [L,QSA]
+
+# Clean URL handling: serve index.html for directories
+DirectoryIndex index.html
+
+# Security & CORS
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

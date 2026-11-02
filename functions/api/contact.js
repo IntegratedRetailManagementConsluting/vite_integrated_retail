@@ -62,7 +62,7 @@ export async function onRequestPost({ request, env }) {
       });
     }
 
-    const wpOrigin = env.WP_API_ORIGIN || 'https://integratedretail.com';
+    const wpOrigin = env.WP_API_ORIGIN || 'https://cms.integratedretail.com';
     const gfKey = env.GF_CONSUMER_KEY || 'ck_e85bf48d0b0695b26a82c0b2f9535853255e5459';
     const gfSecret = env.GF_CONSUMER_SECRET || 'cs_8eed7cce951146dfaccb41945e9f3c26ea33840f';
 
@@ -142,7 +142,7 @@ export async function onRequestPost({ request, env }) {
     }
 
     // 2. Email Notification via Resend (high-deliverability direct send)
-    const resendApiKey = env.RESEND_API_KEY || 're_VbtwkioN_6ffuTywdZqYJrGxFXqu12mgD';
+    const resendApiKey = env.RESEND_API_KEY;
     const fromAddress = env.FROM_EMAIL || 'Integrated Retail <website@integratedretail.com>';
     
     // Designated team recipients from Gravity Forms notification setup
