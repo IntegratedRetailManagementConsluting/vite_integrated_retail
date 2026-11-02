@@ -55,11 +55,17 @@ if ($gfFormId !== 100 && empty($name)) {
     exit;
 }
 
-$wpOrigin = 'https://cms.integratedretail.com';
-$gfKey = 'ck_e85bf48d0b0695b26a82c0b2f9535853255e5459';
-$gfSecret = 'cs_8eed7cce951146dfaccb41945e9f3c26ea33840f';
-$resendApiKey = getenv('RESEND_API_KEY') ?: '';
-if (!$resendApiKey) {
+// Load API credentials from config.php (generated from GitHub Secrets) or environment
+if (file_exists(__DIR__ . '/config.php')) {
+    require_once __DIR__ . '/config.php';
+}
+
+$wpOrigin = defined('WP_API_ORIGIN') ? WP_API_ORIGIN : (getenv('WP_API_ORIGIN') ?: 'https://cms.integratedretail.com');
+$gfKey = defined('GF_KEY') ? GF_KEY : (getenv('GF_KEY') ?: '');
+$gfSecret = defined('GF_SECRET') ? GF_SECRET : (getenv('GF_SECRET') ?: '');
+$resendApiKey = defined('RESEND_API_KEY') ? RESEND_API_KEY : (getenv('RESEND_API_KEY') ?: '');
+
+if (!$resendApiKey || !$gfKey || !$gfSecret) {
     foreach ([__DIR__ . '/../.env', __DIR__ . '/../.env.production'] as $envPath) {
         if (file_exists($envPath)) {
             $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -67,10 +73,11 @@ if (!$resendApiKey) {
                 if (strpos(trim($line), '#') === 0) continue;
                 if (strpos($line, '=') !== false) {
                     list($k, $v) = explode('=', $line, 2);
-                    if (trim($k) === 'RESEND_API_KEY') {
-                        $resendApiKey = trim($v, " \t\n\r\0\x0B\"'");
-                        break 2;
-                    }
+                    $k = trim($k);
+                    $v = trim($v, " \t\n\r\0\x0B\"'");
+                    if ($k === 'RESEND_API_KEY' && !$resendApiKey) $resendApiKey = $v;
+                    if ($k === 'GF_KEY' && !$gfKey) $gfKey = $v;
+                    if ($k === 'GF_SECRET' && !$gfSecret) $gfSecret = $v;
                 }
             }
         }

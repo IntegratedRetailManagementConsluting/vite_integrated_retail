@@ -63,8 +63,8 @@ export async function onRequestPost({ request, env }) {
     }
 
     const wpOrigin = env.WP_API_ORIGIN || 'https://cms.integratedretail.com';
-    const gfKey = env.GF_CONSUMER_KEY || 'ck_e85bf48d0b0695b26a82c0b2f9535853255e5459';
-    const gfSecret = env.GF_CONSUMER_SECRET || 'cs_8eed7cce951146dfaccb41945e9f3c26ea33840f';
+    const gfKey = env.GF_CONSUMER_KEY || env.GF_KEY || '';
+    const gfSecret = env.GF_CONSUMER_SECRET || env.GF_SECRET || '';
 
     let gfSuccess = false;
     let gfEntryId = null;

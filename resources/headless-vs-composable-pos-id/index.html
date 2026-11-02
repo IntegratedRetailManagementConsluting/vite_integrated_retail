@@ -350,7 +350,7 @@
     </div>
     <div class="footer-bottom">
       <span data-i18n="footer.rights">&copy; 2026 Integrated Retail Management Consulting Pte. Ltd. All rights reserved.</span>
-      <span class="footer-build">Build 20261102.7d6ad5a</span>
+      <span class="footer-build">Build 20261102.08f2ca2</span>
       <a href="mailto:connect@integratedretail.com">connect@integratedretail.com</a>
     </div>
   </div>
@@ -362,139 +362,139 @@
 <div id="webchat"></div>
 <script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
 <script src="https://cdn.botpress.cloud/webchat/v2.2/shareable.js"></script>
-<script src="https://files.bpcontent.cloud/2024/07/02/10/20240702103328-76YQ662I.js"></script>
+<!-- <script src="https://files.bpcontent.cloud/2024/07/02/10/20240702103328-76YQ662I.js"></script> -->
 <script>
-function initBotpressSafe() {
-  if (!window.botpress) return;
-  try {
-    function safeRedirect(targetUrl) {
-      if (!targetUrl || targetUrl === '#' || targetUrl.startsWith('javascript')) return;
+  function initBotpressSafe() {
+    if (!window.botpress) return;
+    try {
+      function safeRedirect(targetUrl) {
+        if (!targetUrl || targetUrl === '#' || targetUrl.startsWith('javascript')) return;
 
-      try {
-        let cleanUrl = targetUrl.replace(/\\/g, '');
-        const urlMatch = cleanUrl.match(/https?:\/\/[^\s"“'”’\}）\]]+/); 
-        if (urlMatch) {
-          cleanUrl = urlMatch[0];
-        }
-
-        const currentParams = new URLSearchParams(window.location.search);
-        const newUrl = new URL(cleanUrl);
-
-        currentParams.forEach((value, key) => {
-          newUrl.searchParams.set(key, value);
-        });
-
-        console.log("🚀 最终跳转地址:", newUrl.toString());
-        window.top.location.href = newUrl.toString();
-      } catch (e) {
-        console.error("Redirect Error:", e);
-        window.top.location.href = targetUrl.replace(/[^\x21-\x7E]+/g, '').split(/[算法"'}）]/)[0];
-      }
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const firstName = urlParams.get('firstname') || '';
-
-    if (!firstName) {
-      try { localStorage.clear(); } catch (_) {}
-    }
-
-    window.botpress.init({
-      "botId": "271349b4-50c2-4d68-98ab-dc514c18d354",
-      "configuration": {
-        "version": "v2",
-        "botName": "Integrated Retail Support Agent",
-        "botAvatar": "https://files.bpcontent.cloud/2026/01/04/10/20260104100855-WL4YT8WH.png",
-        "botDescription": "",
-        "website": {},
-        "email": {},
-        "phone": {},
-        "termsOfService": {},
-        "privacyPolicy": {},
-        "color": "#044181",
-        "variant": "solid",
-        "headerVariant": "glass",
-        "themeMode": "light",
-        "radius": 2,
-        "feedbackEnabled": false,
-        "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
-        "soundEnabled": false,
-        "proactiveMessageEnabled": false,
-        "proactiveBubbleMessage": "Hi! 👋 Need help?",
-        "proactiveBubbleTriggerType": "afterDelay",
-        "proactiveBubbleDelayTime": 10
-      },
-      "clientId": "d0bd4d08-40a0-4fb6-8948-73340f88a84c",
-      "selector": "#webchat"
-    });
-
-    window.botpress.on('webchat:ready', () => {
-      console.log("🤖 Botpress 已就绪，深度监听器启动...");
-      window.botpress.open();
-
-      window.botpress.on('*', (event) => {
-        let extractedUrl = null;
-        const p = event.payload;
-
-        if (p?.url) extractedUrl = p.url;
-        else if (p?.payload) {
-          if (typeof p.payload === 'string' && p.payload.includes('{')) {
-            try {
-              const inner = JSON.parse(p.payload);
-              extractedUrl = inner.url;
-            } catch (e) { }
-          } else if (typeof p.payload === 'string' && p.payload.includes('http')) {
-            extractedUrl = p.payload;
-          } else if (p.payload.url) {
-            extractedUrl = p.payload.url;
-          }
-        }
-
-        if (!extractedUrl && p) {
-          const strPayload = JSON.stringify(p);
-          if (strPayload.includes('integrated')) {
-            const match = strPayload.match(/https?:\/\/[^\s"']+/);
-            if (match) extractedUrl = match[0]; 
-          }
-        }
-
-        if (extractedUrl && extractedUrl.includes('integrated')) {
-          safeRedirect(extractedUrl);
-        }
-      });
-    });
-
-    window.botpress.on('webchat:ready', async () => {
-      try {
-        await window.botpress.updateUser({
-          data: {
-            firstname: urlParams.get('firstname') || "",
-            page_name: "Homepage",
-            category: "general",
-            timestamp: new Date().toISOString()
-          }
-        });
-      } catch (err) {}
-
-      setTimeout(() => {
         try {
-          window.botpress.sendEvent({
-            type: 'trigger',
-            payload: { action: 'START_MY_WELCOME' }
-          });
-        } catch (_) {}
-      }, 800);
-    });
-  } catch (err) {
-    console.warn("Botpress initialization skipped:", err);
-  }
-}
+          let cleanUrl = targetUrl.replace(/\\/g, '');
+          const urlMatch = cleanUrl.match(/https?:\/\/[^\s"“'”’\}）\]]+/);
+          if (urlMatch) {
+            cleanUrl = urlMatch[0];
+          }
 
-if (window.botpress) {
-  initBotpressSafe();
-} else {
-  window.addEventListener('load', initBotpressSafe);
-}
+          const currentParams = new URLSearchParams(window.location.search);
+          const newUrl = new URL(cleanUrl);
+
+          currentParams.forEach((value, key) => {
+            newUrl.searchParams.set(key, value);
+          });
+
+          console.log("🚀 最终跳转地址:", newUrl.toString());
+          window.top.location.href = newUrl.toString();
+        } catch (e) {
+          console.error("Redirect Error:", e);
+          window.top.location.href = targetUrl.replace(/[^\x21-\x7E]+/g, '').split(/[算法"'}）]/)[0];
+        }
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const firstName = urlParams.get('firstname') || '';
+
+      if (!firstName) {
+        try { localStorage.clear(); } catch (_) { }
+      }
+
+      window.botpress.init({
+        "botId": "271349b4-50c2-4d68-98ab-dc514c18d354",
+        "configuration": {
+          "version": "v2",
+          "botName": "Integrated Retail Support Agent",
+          "botAvatar": "https://files.bpcontent.cloud/2026/01/04/10/20260104100855-WL4YT8WH.png",
+          "botDescription": "",
+          "website": {},
+          "email": {},
+          "phone": {},
+          "termsOfService": {},
+          "privacyPolicy": {},
+          "color": "#044181",
+          "variant": "solid",
+          "headerVariant": "glass",
+          "themeMode": "light",
+          "radius": 2,
+          "feedbackEnabled": false,
+          "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+          "soundEnabled": false,
+          "proactiveMessageEnabled": false,
+          "proactiveBubbleMessage": "Hi! 👋 Need help?",
+          "proactiveBubbleTriggerType": "afterDelay",
+          "proactiveBubbleDelayTime": 10
+        },
+        "clientId": "d0bd4d08-40a0-4fb6-8948-73340f88a84c",
+        "selector": "#webchat"
+      });
+
+      window.botpress.on('webchat:ready', () => {
+        console.log("🤖 Botpress 已就绪，深度监听器启动...");
+        window.botpress.open();
+
+        window.botpress.on('*', (event) => {
+          let extractedUrl = null;
+          const p = event.payload;
+
+          if (p?.url) extractedUrl = p.url;
+          else if (p?.payload) {
+            if (typeof p.payload === 'string' && p.payload.includes('{')) {
+              try {
+                const inner = JSON.parse(p.payload);
+                extractedUrl = inner.url;
+              } catch (e) { }
+            } else if (typeof p.payload === 'string' && p.payload.includes('http')) {
+              extractedUrl = p.payload;
+            } else if (p.payload.url) {
+              extractedUrl = p.payload.url;
+            }
+          }
+
+          if (!extractedUrl && p) {
+            const strPayload = JSON.stringify(p);
+            if (strPayload.includes('integrated')) {
+              const match = strPayload.match(/https?:\/\/[^\s"']+/);
+              if (match) extractedUrl = match[0];
+            }
+          }
+
+          if (extractedUrl && extractedUrl.includes('integrated')) {
+            safeRedirect(extractedUrl);
+          }
+        });
+      });
+
+      window.botpress.on('webchat:ready', async () => {
+        try {
+          await window.botpress.updateUser({
+            data: {
+              firstname: urlParams.get('firstname') || "",
+              page_name: "Homepage",
+              category: "general",
+              timestamp: new Date().toISOString()
+            }
+          });
+        } catch (err) { }
+
+        setTimeout(() => {
+          try {
+            window.botpress.sendEvent({
+              type: 'trigger',
+              payload: { action: 'START_MY_WELCOME' }
+            });
+          } catch (_) { }
+        }, 800);
+      });
+    } catch (err) {
+      console.warn("Botpress initialization skipped:", err);
+    }
+  }
+
+  if (window.botpress) {
+    initBotpressSafe();
+  } else {
+    window.addEventListener('load', initBotpressSafe);
+  }
 </script>
 <script src="../../assets/js/search-index.js"></script>
 <script src="../../assets/js/search.js"></script>

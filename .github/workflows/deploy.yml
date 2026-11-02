@@ -40,6 +40,21 @@ jobs:
       - name: 📦 Install npm dependencies
         run: npm ci
 
+      - name: 🔐 Configure API credentials from GitHub Secrets
+        env:
+          GF_KEY: ${{ secrets.GF_KEY }}
+          GF_SECRET: ${{ secrets.GF_SECRET }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: |
+          mkdir -p api
+          cat << EOF > api/config.php
+          <?php
+          // Generated from GitHub Secrets during build
+          if (!defined('GF_KEY')) define('GF_KEY', '${GF_KEY}');
+          if (!defined('GF_SECRET')) define('GF_SECRET', '${GF_SECRET}');
+          if (!defined('RESEND_API_KEY')) define('RESEND_API_KEY', '${RESEND_API_KEY}');
+          EOF
+
       - name: ⚙️ Precompile WordPress blogs & Site partials
         env:
           WP_API_ORIGIN: https://cms.integratedretail.com
