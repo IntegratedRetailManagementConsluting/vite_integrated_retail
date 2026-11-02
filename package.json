@@ -6,6 +6,7 @@
   "scripts": {
     "build:partials": "python3 build_site.py",
     "build:blogs": "python3 precompile_blogs.py",
+    "build:cached": "python3 precompile_blogs.py --cache && python3 build_site.py && vite build",
     "dev": "python3 build_site.py && vite",
     "build": "python3 precompile_blogs.py && python3 build_site.py && vite build",
     "preview": "vite preview",
