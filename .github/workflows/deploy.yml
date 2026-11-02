@@ -5,6 +5,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+  repository_dispatch:
+    types:
+      - wordpress_update
+      - post_updated
+      - all
   schedule:
     # Automatically recompile blogs daily at 02:00 UTC
     # so newly published WordPress posts on cms.integratedretail.com
