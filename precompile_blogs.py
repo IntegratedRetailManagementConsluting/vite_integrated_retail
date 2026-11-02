@@ -123,16 +123,35 @@ def calculate_reading_time(text):
 
 
 def sanitize_content(raw_content):
-    """Rewrite any internal cms.integratedretail.com URLs to public site."""
+    """Rewrite any internal cms.integratedretail.com URLs to public site and fix anchor links."""
     if not raw_content:
         return ""
     content = raw_content
+
+    def _replace_cms_link(match):
+        target = (match.group(1) or "").strip()
+        fragment = ""
+        if "#" in target:
+            target, fragment = target.split("#", 1)
+            fragment = fragment.rstrip("/")
+
+        target = target.strip("/")
+        path = f"/resources/{target}/" if target else "/"
+
+        if fragment:
+            return f'href="{path}#{fragment}"'
+        return f'href="{path}"'
+
     # Replace links pointing to cms.integratedretail.com
     content = re.sub(
-        r'href=["\']https?://cms\.integratedretail\.com/([^"\']+)["\']',
-        r'href="/resources/\1/"',
+        r'href=["\']https?://cms\.integratedretail\.com(?:/([^"\']*))?["\']',
+        _replace_cms_link,
         content
     )
+
+    # In case any in-page anchor had a trailing slash e.g. href="...#anchor/" or href="#anchor/"
+    content = re.sub(r'(href=["\'][^"\']*#[^"\']+?)/+(["\'])', r'\1\2', content)
+
     # Ensure images have lazy loading
     content = re.sub(r"<img\s+(?![^>]*loading=)", '<img loading="lazy" decoding="async" ', content)
     return content

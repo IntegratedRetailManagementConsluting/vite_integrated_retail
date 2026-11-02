@@ -34,7 +34,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+:target, [id] { scroll-margin-top: 90px; }
 
 body {
   margin: 0;
