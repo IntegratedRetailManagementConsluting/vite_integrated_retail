@@ -159,14 +159,13 @@ try {
     // Continue to send email even if GF logging fails
 }
 
-// 2. Send email via Resend
-$recipients = [
-    'kamal.lahria@integratedretail.com',
-    'bikash.kumar@integratedretail.com',
-    'somchai.singh@integratedretail.com',
-    'sneha.varma@integratedretail.com',
-    'anupama.singal@integratedretail.com',
-];
+// 2. Email recipients
+$recipientSetting = defined('CONTACT_RECIPIENT') ? CONTACT_RECIPIENT : (getenv('CONTACT_RECIPIENT') ?: '');
+if (!empty($recipientSetting)) {
+    $recipients = array_values(array_filter(array_map('trim', explode(',', $recipientSetting))));
+} else {
+    $recipients = ['connect@integratedretail.com'];
+}
 
 $subject = "New Website Inquiry: " . ($name ?: $email) . " (" . ($data['interest'] ?? 'Consultation') . ")";
 $formTitle = "New Consultation Request";
@@ -242,6 +241,15 @@ curl_close($chResend);
 
 // Fallback to onboarding domain if domain not yet verified in Resend
 if ($resendHttpCode < 200 || $resendHttpCode >= 300) {
+    // Attempt local PHP mail delivery on MDDHosting server directly to connect@integratedretail.com
+    $headers = "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $headers .= "From: Integrated Retail <website@integratedretail.com>\r\n";
+    $headers .= "Reply-To: $email\r\n";
+    foreach ($recipients as $toEmail) {
+        @mail($toEmail, $subject, $emailHtml, $headers);
+    }
+
     $resendPayload['from'] = 'Integrated Retail Website <onboarding@resend.dev>';
     $resendPayload['to'] = ['yithanglee@gmail.com'];
     $chRetry = curl_init('https://api.resend.com/emails');
